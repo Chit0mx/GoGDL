@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    width: 100%;
+    height: 100%;
+    
+}
+agm-map {
+    height: 300px;
+  }
+  .numero_par{
+      background-color:aliceblue;
+      color:blue;
+
+  }
+
+.Logo{
+    height: 50px;
+}
+
+.inicio-articulos {
+    height: 500px;
+}
+
+.dropdown-toggle::after {
+    content: none;
+}
+
