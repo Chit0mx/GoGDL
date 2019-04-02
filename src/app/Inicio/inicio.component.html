@@ -7,6 +7,7 @@
     ></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -40,24 +41,80 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <h1 class="text-center">Articulos</h1>
-      </div>
-      <div class="col-md-6">
-        <div class="container p-3">
-          <!-- Mapa -->
-          <agm-map [latitude]="lat" [longitude]="lng">
-            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-          </agm-map>
-          <!-- Mapa -->
-        </div>
-      </div>
+  <br />
+</div>
+<!-- Articulos-->
+<div class="card-deck">
+  <div class="card">
+    <img
+      class="card-img-top"
+      src="../../assets/centrocad.jpg"
+      width="362"
+      height="280"
+    />
+    <div class="card-body">
+      <h5 class="card-title">Centro</h5>
+      <p class="card-text">
+        Saber que aquí se concentran más de 470 años de historia puede dar una
+        idea del potencial cultural, recreativo y de servicios que ofrece esta
+        zona de la ciudad.
+      </p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted"
+        >Principales atracciones: Museos, Plazas y Puestos</small
+      >
     </div>
   </div>
-  <hr />
+  <div class="card">
+    <img
+      class="card-img-top"
+      src="../../assets/chapu.jpg"
+      width="362"
+      height="280"
+    />
+    <div class="card-body">
+      <h5 class="card-title">Chapultepec</h5>
+      <p class="card-text">
+        Alberga muchas de las calles más vibrantes y eclécticas de la ciudad, y
+        es hogar de ciclistas, bohemios y jóvenes que se manifiestan a través de
+        distintas expresiones artísticas.
+      </p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Principales atracciones: Antros y Bares</small>
+    </div>
+  </div>
+  <div class="card">
+    <img
+      class="card-img-top"
+      src="../../assets/parian.jpg"
+      width="362"
+      height="280"
+    />
+    <div class="card-body">
+      <h5 class="card-title">Tlaquepaque y Tonala</h5>
+      <p class="card-text">
+        El núcleo de esta antigua villa artesanal es una oda al arte y el
+        talento regional. Si de alojamiento se trata, su colección de hoteles
+        boutique es tan amplia como singular.
+      </p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted"
+        >Principales atracciones: Restaurantes y Plazas</small
+      >
+    </div>
+  </div>
 </div>
+<br />
+<!-- Articulos-->
+<!-- Mapa -->
+<agm-map [latitude]="lat" [longitude]="lng">
+  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+</agm-map>
+<!-- Mapa -->
+<hr />
 <!-- Footer -->
 <footer
   class="page-footer font-small pt-4 text-white"
