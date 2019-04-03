@@ -28,6 +28,7 @@ import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule }    from '@angular/common/http';
 import { AutorizacionService } from './services/autorizacion.service';
+import { GuardiaService } from './services/guardia.service';
 
 const appRoutes: Routes = [
     {
@@ -93,7 +94,7 @@ const appRoutes: Routes = [
         NgbModule.forRoot(),
         HttpClientModule
     ],
-    providers: [LugaresService, AutorizacionService],
+    providers: [LugaresService, AutorizacionService, GuardiaService],
     bootstrap: [AppComponent]
 })
 export class AppModule {}
