@@ -29,6 +29,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule }    from '@angular/common/http';
 import { AutorizacionService } from './services/autorizacion.service';
 import { GuardiaService } from './services/guardia.service';
+import { RegistroComponent } from './registro/registro.component';
 
 const appRoutes: Routes = [
     {
@@ -62,6 +63,10 @@ const appRoutes: Routes = [
     {
         path: 'inicio-sesion',
         component: InicioSesionComponent
+    },
+    {
+        path: 'registro',
+        component: RegistroComponent
     }
 
 ];
@@ -76,7 +81,8 @@ const appRoutes: Routes = [
         CrearComponent,
         InicioComponent,
         DestacadosComponent,
-        InicioSesionComponent
+        InicioSesionComponent,
+        RegistroComponent
     ],
     imports: [
         BrowserModule,

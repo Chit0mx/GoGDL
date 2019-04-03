@@ -1,13 +1,18 @@
-<div class="p-5">
-  <div class="container">
-    <label>Usuario</label>
-    <input type="text" class="form-control" />
-    <br />
-    <label>Correo</label>
-    <input type="password" class="form-control" />
-    <br />
-    <hr />
-    <a class="btn btn-primary">Enviar</a>
-    <a class="btn btn-default" routerLink="/inicio">Cancelar</a>
+<div class="inicio-sesion">
+  <div class="login-box">
+      <img class="avatar" src="../../assets/Logo.png" alt="Logo Go GDL">
+      <h1>Inicia Sesión</h1>
+      <form >
+          <!-- Usuario -->
+        <label for="Usuario">Usuario</label>
+        <input type="text" name="usuario" placeholder="Nombre de Usuario">
+        
+        <!-- Contraseña -->
+        <label for="username">Contraseña</label>
+        <input type="password" name="password" placeholder="Contraseña">
+        
+        <input type="submit" value="Log in">
+        <a routerLink="/registro">No tienes una cuenta?</a>
+      </form>
   </div>
 </div>
