@@ -58,7 +58,8 @@ const appRoutes: Routes = [
     },
     {
         path: 'crear',
-        component: CrearComponent
+        component: CrearComponent,
+        canActivate:[GuardiaService]
     },
     {
         path: 'inicio-sesion',

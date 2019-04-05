@@ -24,7 +24,6 @@ public buscarlugar(id){
     this.afDB.database.ref('lugares/' + lugar.id).set(lugar);
   }
   public obtenerGeoData(direccion){
-    //http://maps.google.com/maps/api/geocode/json?address=78-43+diagonal+70f,+Bogota,Colombia
     return this.http.get('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAt_e0228SLA3GJe3XFha1CuLOmlLVrvxc&address=' + direccion);
   }
 }

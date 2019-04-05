@@ -89,7 +89,7 @@ agm-map {
     color:#fff;
     font-size: 16px;
 }
-.login-box input[type="submit"]{
+.botonLS {
     border: none;
     outline: none;
     height: 40px;
@@ -98,13 +98,13 @@ agm-map {
     font-size: 18px;
     border-radius: 20px;
 }
-.login-box a{
+.lnkRegistro{
     text-decoration: none;
     font-size: 12px;
     line-height: 20px;
     color:darkgrey;
 }
-.login-box a:hover{
+.lnkRegistro:hover{
     color:#fff;
 }
 
