@@ -40,6 +40,10 @@ export class AutorizacionService {
         console.log(error);
       })
   }
+  public obtenerUsuario() {
+    const $id = this.angularFireAuth.auth.currentUser.uid;
+    return this.afDB.object("users/" + $id);
+  }
   public isLogged() {
     return this.angularFireAuth.authState;
   };
@@ -47,5 +51,8 @@ export class AutorizacionService {
     this.angularFireAuth.auth.signOut();
     alert("Sesión Cerrada");
     this.router.navigate(['inicio']);
+  }
+  public getUser() {
+    return this.angularFireAuth.auth;
   }
 }

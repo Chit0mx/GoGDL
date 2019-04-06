@@ -1,5 +1,6 @@
 import { Component, ElementRef, HostListener } from '@angular/core';
 import { AutorizacionService } from './services/autorizacion.service';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +9,21 @@ import { AutorizacionService } from './services/autorizacion.service';
 })
 export class AppComponent {
   loggedIn = false;
-  constructor(private autorizacionService:AutorizacionService){
+  loggedUser:any = null;
+  usuarioDB:any = {};
+  constructor(private autorizacionService:AutorizacionService, private afDB: AngularFireDatabase){
     this.autorizacionService.isLogged()
     .subscribe((result) => {
       if(result && result.uid){
         this.loggedIn = true;
+        setTimeout(() => {
+          this.loggedUser = this.autorizacionService.getUser().currentUser.uid;
+          this.autorizacionService.obtenerUsuario()
+          .valueChanges().
+          subscribe(usuarioDB => {
+            this.usuarioDB = usuarioDB;
+          });
+        }, 500);
       } else {
         this.loggedIn = false;
       }
