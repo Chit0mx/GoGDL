@@ -63,7 +63,7 @@
     <!--Sing in - Log in-->
     <ul class="nav navbar-nav navbar-right" *ngIf="loggedIn">
       <li class="nav-item">
-          <a class="nav-link" routerLink="/registro">{{usuarioDB.Nombre}}</a>
+        <a class="nav-link" routerLink="/registro">{{ usuarioDB.Nombre }}</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" (click)="logout()">Cerrar sesión</a>
