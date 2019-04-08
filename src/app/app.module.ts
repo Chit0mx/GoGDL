@@ -58,7 +58,7 @@ const appRoutes: Routes = [
     component: ContactoComponent
   },
   {
-    path: "crear",
+    path: "crear/:id",
     component: CrearComponent,
     canActivate: [GuardiaService]
   },

@@ -2,6 +2,7 @@
     <a routerLink="/lugares">Lugares</a> /{{lugar.nombre}}
 </div>
 <div class="container">
+    <a routerLink="/crear/{{lugar.id}}" class="botonLS btn btn-primary">Editar</a>
     <h1>{{lugar.nombre}}</h1>
     <hr/>
     <small>{{lugar.distancia}}
@@ -19,3 +20,4 @@
 <agm-map [latitude]="lugar.lat" [longitude]="lugar.lng">
     <agm-marker [latitude]="lugar.lat" [longitude]="lugar.lng"></agm-marker>
 </agm-map>
+
