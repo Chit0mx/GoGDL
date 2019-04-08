@@ -7,9 +7,7 @@ import {LugaresService} from "../services/lugares.service";
 })
 export class CrearComponent {
   lugar:any = {};
-  constructor(private lugaresService: LugaresService){
-
-  }
+  constructor(private lugaresService: LugaresService){}
   guardarLugar(){
     var direccion = this.lugar.calle + ',' + this.lugar.ciudad + ',' + this.lugar.pais;
     this.lugaresService.obtenerGeoData(direccion)
