@@ -1,12 +1,18 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-8">
-            <h2>Destacados</h2>
-            <ul class="list-group">
-                <ng-container *ngFor="let lugar of lugares">
-                        <a routerLink="/detalle/{{lugar.id}}"[queryParams]="{ action2:'edit',refer:'google'}" ><li  class="list-group-item">{{lugar.nombre}} </li></a>
-                </ng-container>
-            </ul>
-        </div>
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Destacados</h2>
+      <ul class="list-group">
+        <ng-container *ngFor="let lugar of lugares">
+          <a
+            routerLink="/detalle/{{ lugar.id }}"
+            [queryParams]="{ action2: 'edit', refer: 'google' }"
+            ><li class="list-group-item">{{ lugar.nombre }}</li></a
+          >
+        </ng-container>
+      </ul>
     </div>
+  </div>
 </div>
+<br />
+<app-footer></app-footer>

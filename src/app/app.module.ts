@@ -17,6 +17,7 @@ import { ContactoComponent } from "./contacto/contacto.component";
 import { AboutComponent } from "./about/about.component";
 import { CrearComponent } from "./crear/crear.component";
 import { InicioComponent } from "./inicio/inicio.component";
+import { FooterComponent } from "./footer/footer.component";
 
 import { environment } from "../environments/environment";
 import { AngularFireModule } from "angularfire2";
@@ -73,6 +74,10 @@ const appRoutes: Routes = [
   {
     path: "about",
     component: AboutComponent
+  },
+  {
+    path: "footer",
+    component: AboutComponent
   }
 ];
 @NgModule({
@@ -88,7 +93,8 @@ const appRoutes: Routes = [
     InicioComponent,
     DestacadosComponent,
     InicioSesionComponent,
-    RegistroComponent
+    RegistroComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
