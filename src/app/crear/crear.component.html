@@ -2,20 +2,96 @@
     <a routerLink="/lugares">Lugares</a> / Crear nueva atraccion
 </div>
 <div class="container">
+    <br/>
+    <h3>Datos de la atracción</h3>
+    Imagen de atracción
+    <div class="input-group mb-3">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="AvatarA" accept="image/png, image/jpeg">
+                <label class="custom-file-label" for="AvatarA">Elegir imagen</label>
+            </div>
+    </div>
+    <br/>   
     <label>Nombre</label>
     <input type="text" class="form-control" [(ngModel)]="lugar.nombre"/>
     <br/>
-    <label>Distancia</label>
-    <input type="number" class="form-control"[(ngModel)]="lugar.distancia"/>
-    <br/>
-    <label>Cercania</label>
-    <input type="number" class="form-control"[(ngModel)]="lugar.cercania"/>
-    <br/>
     <label>Descripcion</label>
     <textarea class="form-control"[(ngModel)]="lugar.descripcion"></textarea>
-    <hr/>
-    <label>Plan</label>
-    <input type="text" class="form-control"[(ngModel)]="lugar.plan"/>
+    <br/>
+    <div class="form-row align-items-center">
+            <div class="col-auto my-1">
+              <label class="mr-sm-2" for="inlineFormCustomSelect">Rango de precios</label>
+              <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                <option selected>Más o menos</option>
+                <option value="1">$ - de 1 a 50MXN</option>
+                <option value="2">$$ - de 51 a 100MXN</option>
+                <option value="3">$$$ - de 101 a 300MXN</option>
+                <option value="4">$$$$ - de 301 a 500MXN</option>
+                <option value="5">$$$$$ - 501MXN o más</option>
+              </select>
+        </div>
+    </div>
+    <br/>
+    <h3>Amenidades</h3>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" [(ngModel)]="lugar.amenidades1"/> <label class="form-check-label">Estacionamiento</label>
+        <br/>
+        <input class="form-check-input" type="checkbox" [(ngModel)]="lugar.amenidades2"/> <label class="form-check-label">Wifi</label>
+        <br/>
+        <input class="form-check-input" type="checkbox" [(ngModel)]="lugar.amenidades3"/> <label class="form-check-label">Aire acondicionado</label>
+        <br/>
+        <input class="form-check-input" type="checkbox" [(ngModel)]="lugar.amenidades4"/> <label class="form-check-label">Servicio a domicilio</label>
+        <br/>
+        <input class="form-check-input" type="checkbox" [(ngModel)]="lugar.amenidades5"/> <label class="form-check-label">Pago con tarjeta</label>
+        <br/>
+        <input class="form-check-input" type="checkbox" [(ngModel)]="lugar.amenidades6"/> <label class="form-check-label">Reservaciones</label>
+      </div>
+    <br/>
+    <h3>Horario</h3>
+    <ul class="list-group">
+            <li class="list-group-item">
+                <label for="appt">Lunes de : </label>
+                <input class="form-control" type="time" id="appt" name="appt" required>
+                <label for="appt">a :</label>
+                <input class="form-control" type="time" id="appt" name="appt" required>
+            </li>
+            <li class="list-group-item">
+                    <label for="appt">Martes de : </label>
+                    <input class="form-control" type="time" id="appt" name="appt" required>
+                    <label for="appt">a :</label>
+                    <input class="form-control" type="time" id="appt" name="appt" required>
+            </li>
+            <li class="list-group-item">
+                    <label for="appt">Miercoles de : </label>
+                    <input class="form-control" type="time" id="appt" name="appt" required>
+                    <label for="appt">a :</label>
+                    <input class="form-control" type="time" id="appt" name="appt" required>
+            </li>
+            <li class="list-group-item">
+                    <label for="appt">Jueves de : </label>
+                    <input class="form-control" type="time" id="appt" name="appt" required>
+                    <label for="appt">a :</label>
+                    <input class="form-control" type="time" id="appt" name="appt" required>
+            </li>
+            <li class="list-group-item">
+                    <label for="appt">Viernes de : </label>
+                    <input class="form-control" type="time" id="appt" name="appt" required>
+                    <label for="appt">a :</label>
+                    <input class="form-control" type="time" id="appt" name="appt" required>
+            </li>
+            <li class="list-group-item">
+                    <label for="appt">Sabado de : </label>
+                    <input class="form-control" type="time" id="appt" name="appt" required>
+                    <label for="appt">a :</label>
+                    <input class="form-control" type="time" id="appt" name="appt" required>
+            </li>
+            <li class="list-group-item">
+                    <label for="appt">Domingo de : </label>
+                    <input class="form-control" type="time" id="appt" name="appt" required>
+                    <label for="appt">a :</label>
+                    <input class="form-control" type="time" id="appt" name="appt" required>
+            </li>
+    </ul>
     <br/>
     <h3>Datos de direccion</h3>
     <label>Calle y número</label>
