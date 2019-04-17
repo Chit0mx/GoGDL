@@ -18,7 +18,7 @@ public buscarlugar(id){
     this.afDB.database.ref('lugares/' + lugar.id).set(lugar);
   }
   public obtenerGeoData(direccion){
-    return this.http.get('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAt_e0228SLA3GJe3XFha1CuLOmlLVrvxc&address='+ direccion);
+    return this.http.get('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyB2JEN5BecGIXzKVY697OXtB90xvoeGfuE&address='+ direccion);
   }
   public getLugar(id) {
     return this.afDB.object('lugares/' + id);

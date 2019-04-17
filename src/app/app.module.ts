@@ -21,7 +21,6 @@ import { FooterComponent } from "./footer/footer.component";
 
 import { environment } from "../environments/environment";
 import { AngularFireModule } from "angularfire2";
-import { AngularFirestoreModule } from "angularfire2/firestore";
 import { AngularFireAuthModule } from "angularfire2/auth";
 import { AngularFireStorageModule } from "angularfire2/storage";
 import { AngularFireDatabaseModule } from "angularfire2/database";
@@ -101,12 +100,12 @@ const appRoutes: Routes = [
     AppRoutingModule,
     FormsModule,
     AngularFireModule,
-    AngularFirestoreModule,
+    AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AgmCoreModule.forRoot({
-      apiKey: "AIzaSyAt_e0228SLA3GJe3XFha1CuLOmlLVrvxc"
+      apiKey: "AIzaSyB2JEN5BecGIXzKVY697OXtB90xvoeGfuE"
     }),
     RouterModule.forRoot(appRoutes),
     NgbModule.forRoot(),
