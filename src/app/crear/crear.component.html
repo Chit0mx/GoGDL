@@ -1,15 +1,12 @@
-<div class="container-fluid">
-    <a routerLink="/lugares">Lugares</a> / Crear nueva atraccion
-</div>
 <div class="container">
     <br/>
     <h3>Datos de la atracción</h3>
-    Imagen de atracción
+    <p>Imagen de atracción</p>
     <div class="input-group mb-3">
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="AvatarA" accept="image/png, image/jpeg">
-                <label class="custom-file-label" for="AvatarA">Elegir imagen</label>
-            </div>
+      <div class="custom-file">
+          <input type="file" class="custom-file-input" id="AvatarA" accept="image/png, image/jpeg">
+          <label class="custom-file-label" for="AvatarA">Elegir imagen</label>
+      </div>
     </div>
     <br/>   
     <label>Nombre</label>
@@ -19,77 +16,94 @@
     <textarea class="form-control"[(ngModel)]="lugar.descripcion"></textarea>
     <br/>
     <div class="form-row align-items-center">
-            <div class="col-auto my-1">
-              <label class="mr-sm-2" for="inlineFormCustomSelect">Rango de precios</label>
-              <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                <option selected>Más o menos</option>
-                <option value="1">$ - de 1 a 50MXN</option>
-                <option value="2">$$ - de 51 a 100MXN</option>
-                <option value="3">$$$ - de 101 a 300MXN</option>
-                <option value="4">$$$$ - de 301 a 500MXN</option>
-                <option value="5">$$$$$ - 501MXN o más</option>
-              </select>
-        </div>
+      <div class="col-auto my-1">
+        <label class="mr-sm-2" for="inlineFormCustomSelect">Categoria</label>
+        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+          <option selected>Tipo de atracción</option>
+          <option [(ngModel)]="lugar.categoria" value="antros">Antros</option>
+          <option [(ngModel)]="lugar.categoria" value="bares">Bares</option>
+          <option [(ngModel)]="lugar.categoria" value="restaurantes">Restaurantes</option>
+          <option [(ngModel)]="lugar.categoria" value="museos">Museos</option>
+          <option [(ngModel)]="lugar.categoria" value="parques">Parques</option>
+          <option [(ngModel)]="lugar.categoria" value="puestos">Puestos</option>
+          <option [(ngModel)]="lugar.categoria" value="centro">Centro</option>
+          <option [(ngModel)]="lugar.categoria" value="plazas">Plazas</option>
+        </select>
+      </div>
+    </div>
+    <br/>
+    <div class="form-row align-items-center">
+      <div class="col-auto my-1">
+        <label class="mr-sm-2" for="inlineFormCustomSelect">Rango de precios</label>
+        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+          <option selected>Más o menos</option>
+          <option [(ngModel)]="lugar.precio" value="1">$ - de 1 a 50MXN</option>
+          <option [(ngModel)]="lugar.precio" value="2">$$ - de 51 a 100MXN</option>
+          <option [(ngModel)]="lugar.precio" value="3">$$$ - de 101 a 300MXN</option>
+          <option [(ngModel)]="lugar.precio" value="4">$$$$ - de 301 a 500MXN</option>
+          <option [(ngModel)]="lugar.precio" value="5">$$$$$ - 501MXN o más</option>
+        </select>
+      </div>
     </div>
     <br/>
     <h3>Amenidades</h3>
     <div class="form-check">
-        <input class="form-check-input" type="checkbox" [(ngModel)]="lugar.amenidades1"/> <label class="form-check-label">Estacionamiento</label>
+        <input class="form-check-input" type="checkbox" value="true" [(ngModel)]="lugar.estacionamiento"/> <label class="form-check-label">Estacionamiento</label>
         <br/>
-        <input class="form-check-input" type="checkbox" [(ngModel)]="lugar.amenidades2"/> <label class="form-check-label">Wifi</label>
+        <input class="form-check-input" type="checkbox" value="true" [(ngModel)]="lugar.wifi"/> <label class="form-check-label">Wifi</label>
         <br/>
-        <input class="form-check-input" type="checkbox" [(ngModel)]="lugar.amenidades3"/> <label class="form-check-label">Aire acondicionado</label>
+        <input class="form-check-input" type="checkbox" value="true" [(ngModel)]="lugar.ac"/> <label class="form-check-label">Aire acondicionado</label>
         <br/>
-        <input class="form-check-input" type="checkbox" [(ngModel)]="lugar.amenidades4"/> <label class="form-check-label">Servicio a domicilio</label>
+        <input class="form-check-input" type="checkbox" value="true" [(ngModel)]="lugar.sd"/> <label class="form-check-label">Servicio a domicilio</label>
         <br/>
-        <input class="form-check-input" type="checkbox" [(ngModel)]="lugar.amenidades5"/> <label class="form-check-label">Pago con tarjeta</label>
+        <input class="form-check-input" type="checkbox" value="true" [(ngModel)]="lugar.tarjeta"/> <label class="form-check-label">Pago con tarjeta</label>
         <br/>
-        <input class="form-check-input" type="checkbox" [(ngModel)]="lugar.amenidades6"/> <label class="form-check-label">Reservaciones</label>
+        <input class="form-check-input" type="checkbox" value="true" [(ngModel)]="lugar.reservaciones"/> <label class="form-check-label">Reservaciones</label>
       </div>
     <br/>
     <h3>Horario</h3>
     <ul class="list-group">
             <li class="list-group-item">
                 <label for="appt">Lunes de : </label>
-                <input class="form-control" type="time" id="appt" name="appt" required>
+                <input class="form-control" type="time" id="appt" name="appt" required [(ngModel)]="lugar.lunesabrir"/>
                 <label for="appt">a :</label>
-                <input class="form-control" type="time" id="appt" name="appt" required>
+                <input class="form-control" type="time" id="appt" name="appt" required [(ngModel)]="lugar.lunescerrar"/>
             </li>
             <li class="list-group-item">
                     <label for="appt">Martes de : </label>
-                    <input class="form-control" type="time" id="appt" name="appt" required>
+                    <input class="form-control" type="time" id="appt" name="appt" required [(ngModel)]="lugar.martesabrir">
                     <label for="appt">a :</label>
-                    <input class="form-control" type="time" id="appt" name="appt" required>
+                    <input class="form-control" type="time" id="appt" name="appt" required [(ngModel)]="lugar.martescerrar">
             </li>
             <li class="list-group-item">
                     <label for="appt">Miercoles de : </label>
-                    <input class="form-control" type="time" id="appt" name="appt" required>
+                    <input class="form-control" type="time" id="appt" name="appt" required [(ngModel)]="lugar.miercolesabrir">
                     <label for="appt">a :</label>
-                    <input class="form-control" type="time" id="appt" name="appt" required>
+                    <input class="form-control" type="time" id="appt" name="appt" required [(ngModel)]="lugar.miercolescerrar">
             </li>
             <li class="list-group-item">
                     <label for="appt">Jueves de : </label>
-                    <input class="form-control" type="time" id="appt" name="appt" required>
+                    <input class="form-control" type="time" id="appt" name="appt" required [(ngModel)]="lugar.juevesabrir">
                     <label for="appt">a :</label>
-                    <input class="form-control" type="time" id="appt" name="appt" required>
+                    <input class="form-control" type="time" id="appt" name="appt" required [(ngModel)]="lugar.juevescerrar">
             </li>
             <li class="list-group-item">
                     <label for="appt">Viernes de : </label>
-                    <input class="form-control" type="time" id="appt" name="appt" required>
+                    <input class="form-control" type="time" id="appt" name="appt" required [(ngModel)]="lugar.viernesabrir">
                     <label for="appt">a :</label>
-                    <input class="form-control" type="time" id="appt" name="appt" required>
+                    <input class="form-control" type="time" id="appt" name="appt" required [(ngModel)]="lugar.viernescerrar">
             </li>
             <li class="list-group-item">
                     <label for="appt">Sabado de : </label>
-                    <input class="form-control" type="time" id="appt" name="appt" required>
+                    <input class="form-control" type="time" id="appt" name="appt" required [(ngModel)]="lugar.sabadoabrir">
                     <label for="appt">a :</label>
-                    <input class="form-control" type="time" id="appt" name="appt" required>
+                    <input class="form-control" type="time" id="appt" name="appt" required [(ngModel)]="lugar.sabadocerrar">
             </li>
             <li class="list-group-item">
                     <label for="appt">Domingo de : </label>
-                    <input class="form-control" type="time" id="appt" name="appt" required>
+                    <input class="form-control" type="time" id="appt" name="appt" required [(ngModel)]="lugar.domingoabrir">
                     <label for="appt">a :</label>
-                    <input class="form-control" type="time" id="appt" name="appt" required>
+                    <input class="form-control" type="time" id="appt" name="appt" required [(ngModel)]="lugar.domingocerrar">
             </li>
     </ul>
     <br/>
