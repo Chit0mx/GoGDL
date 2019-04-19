@@ -1,23 +1,81 @@
-<div class="container-fluid">
-    <a routerLink="/lugares">Lugares</a> /{{lugar.nombre}}
-</div>
 <div class="container">
-    <a routerLink="/crear/{{lugar.id}}" class="botonLS btn btn-primary">Editar</a>
-    <h1>{{lugar.nombre}}</h1>
-    <hr/>
-    <small>{{lugar.distancia}}
-        km</small>
-    <br/>
+    <h1 class="m-4">{{lugar.nombre}}</h1>
     <div class="card card-body bg-light">
-        <p>
+        <img [src]="profileUrl | async" width="100%" height="auto"/>
+        <br/>
+        <h4>
             {{lugar.descripcion}}
-        </p>
-        <b>Plan:
-            {{lugar.plan}}</b>
+        </h4>
+        <hr/>
+        <h5>Categoria</h5> 
+         <b>{{lugar.categoria}}</b>
+        <br/>
+        <!--<ng-container *ngFor="let lugar of +lugar.precio">
+            <b>$</b>   
+        </ng-container>-->
+        <ul class="list-group">
+            <li class="list-group-item" style="background-color: #b80f22">Amenidades</li>
+            <li class="list-group-item" *ngIf="lugar.estacionamiento">Estacionamiento</li>
+            <li class="list-group-item" *ngIf="lugar.wifi">Wifi</li>
+            <li class="list-group-item" *ngIf="lugar.ac">Aire acondicionado</li>
+            <li class="list-group-item" *ngIf="lugar.sd">Servicio a domicilio</li>
+            <li class="list-group-item" *ngIf="lugar.tarjeta">Pago con tarjeta</li>
+            <li class="list-group-item" *ngIf="lugar.reservaciones">Reservaciones</li>
+        </ul>
+        <br/>
+        <table class="table" >
+            <thead style="background-color: #b80f22">
+            <tr>
+                <th scope="col">Dia</th>
+                <th scope="col">Apertura</th>
+                <th scope="col">Cierre</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">Lunes</th>
+                <td>{{lugar.lunesabrir}}</td>
+                <td>{{lugar.lunescerrar}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Martes</th>
+                <td>{{lugar.martesabrir}}</td>
+                <td>{{lugar.martescerrar}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Miercoles</th>
+                <td>{{lugar.miercolesabrir}}</td>
+                <td>{{lugar.miercolescerrar}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Jueves</th>
+                <td>{{lugar.juevesabrir}}</td>
+                <td>{{lugar.juevescerrar}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Viernes</th>
+                <td>{{lugar.viernesabrir}}</td>
+                <td>{{lugar.viernescerrar}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Sabado</th>
+                <td>{{lugar.sabadoabrir}}</td>
+                <td>{{lugar.sabadocerrar}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Domingo</th>
+                <td>{{lugar.domingoabrir}}</td>
+                <td>{{lugar.domingocerrar}}</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
+    <agm-map [latitude]="lugar.lat" [longitude]="lugar.lng">
+    <agm-marker [latitude]="lugar.lat" [longitude]="lugar.lng"></agm-marker>
+    </agm-map>
+    <br/>
+    <a routerLink="/crear/{{lugar.id}}" class="botonLS btn btn-primary">Editar</a>
 </div>
 
-<agm-map [latitude]="lugar.lat" [longitude]="lugar.lng">
-    <agm-marker [latitude]="lugar.lat" [longitude]="lugar.lng"></agm-marker>
-</agm-map>
+
 

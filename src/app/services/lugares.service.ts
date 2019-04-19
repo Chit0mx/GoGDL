@@ -1,14 +1,16 @@
 import {Injectable} from "@angular/core";
 import { AngularFireDatabase} from  "angularfire2/database";
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class LugaresService{
-constructor (private afDB: AngularFireDatabase, private http: HttpClient){}
-public getLugares(){
-    return this.afDB.list('lugares/');
-}
-public buscarlugar(id){
+  profileUrl: Observable<string | null>;
+  constructor (private afDB: AngularFireDatabase, private http: HttpClient){}
+  public getLugares(){
+      return this.afDB.list('lugares/');
+  }
+  public buscarlugar(id){
     return this.afDB.object('lugares/'+ id);
   }
   public guardarLugar(lugar){
