@@ -1,14 +1,12 @@
-import {Injectable} from "@angular/core";
+import {Injectable, DebugElement} from "@angular/core";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Router } from '@angular/router';
 
 @Injectable()
 export class AutorizacionService {
-  private $id:any;
   constructor(private angularFireAuth: AngularFireAuth, private afDB: AngularFireDatabase, private router:Router) {
     this.isLogged();
-    this.$id = this.angularFireAuth.auth.currentUser.uid;
   };
   public login = (email, password) => {
     this.angularFireAuth.auth.signInWithEmailAndPassword(email, password)
@@ -27,9 +25,11 @@ export class AutorizacionService {
       .then((response) => {
         alert('Usuario registrado con exito');
         console.log(response);    
-        this.afDB.database.ref('/users').child(this.$id).set({
+        const $id = this.angularFireAuth.auth.currentUser.uid;
+        this.afDB.database.ref('/users').child($id).set({
           Nombre: nombre,
-          Apellido: apellido
+          Apellido: apellido,
+          Empresario: false
         });
         this.router.navigate(['inicio']);
       })
@@ -57,8 +57,14 @@ export class AutorizacionService {
     return this.angularFireAuth.auth;
   }
   public hacerEmpresario() {
-    this.afDB.database.ref('/users').child(this.$id).set({
+    const $id = this.angularFireAuth.auth.currentUser.uid;
+    let usuario = this.afDB.object('/users/' + $id)
+    debugger;
+    usuario.update({
       Empresario: true
     });
+    debugger;
+    alert("Ahora es un empresario");
+    this.router.navigate(['crear/new']);
   }
 }
