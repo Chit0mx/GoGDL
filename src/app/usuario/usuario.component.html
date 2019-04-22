@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h2>{{usuarioDB.Nombre}}  {{usuarioDB.Apellido}}</h2>
+      <br/>
+      <a class="botonLS p-2" routerLink="crear">Convertirme en empresario</a>
+      <br/>
+      <br/>
+      <h2>Mis lugares</h2>
+      <ul class="list-group">
+        <ng-container *ngFor="let lugar of lugares">
+          <a routerLink="/detalle/{{ lugar.id }}" [queryParams]="{ action2: 'edit', refer: 'google' }"><li class="list-group-item">{{ lugar.nombre }}</li></a>
+        </ng-container>
+      </ul>
+      <br/>
+      <h2>Lugares favoritos</h2>
+      <ul class="list-group">
+        <ng-container *ngFor="let lugar of lugares">
+          <a routerLink="/detalle/{{ lugar.id }}" [queryParams]="{ action2: 'edit', refer: 'google' }"><li class="list-group-item">{{ lugar.nombre }}</li></a>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+</div>
+<br />
+<app-footer></app-footer>

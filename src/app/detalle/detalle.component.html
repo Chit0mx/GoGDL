@@ -8,7 +8,11 @@
         </h4>
         <hr/>
         <h5>Categoria</h5> 
-         <b>{{lugar.categoria}}</b>
+        <b>{{lugar.categoria}}</b>
+        <br/>
+        <h5>Precio</h5> 
+        De un rango de 1 a 5 siendo 5 más costoso 
+        <b>{{lugar.precio}}</b>
         <br/>
         <!--<ng-container *ngFor="let lugar of +lugar.precio">
             <b>$</b>   
@@ -76,6 +80,7 @@
     <br/>
     <a routerLink="/crear/{{lugar.id}}" class="botonLS btn btn-primary">Editar</a>
 </div>
-
+<br/>
+<app-footer></app-footer>
 
 

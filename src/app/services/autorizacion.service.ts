@@ -5,8 +5,10 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AutorizacionService {
+  private $id:any;
   constructor(private angularFireAuth: AngularFireAuth, private afDB: AngularFireDatabase, private router:Router) {
     this.isLogged();
+    this.$id = this.angularFireAuth.auth.currentUser.uid;
   };
   public login = (email, password) => {
     this.angularFireAuth.auth.signInWithEmailAndPassword(email, password)
@@ -24,9 +26,8 @@ export class AutorizacionService {
     this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((response) => {
         alert('Usuario registrado con exito');
-        console.log(response);
-        const $id = this.angularFireAuth.auth.currentUser.uid;
-        this.afDB.database.ref('/users').child($id).set({
+        console.log(response);    
+        this.afDB.database.ref('/users').child(this.$id).set({
           Nombre: nombre,
           Apellido: apellido
         });
@@ -54,5 +55,10 @@ export class AutorizacionService {
   }
   public getUser() {
     return this.angularFireAuth.auth;
+  }
+  public hacerEmpresario() {
+    this.afDB.database.ref('/users').child(this.$id).set({
+      Empresario: true
+    });
   }
 }

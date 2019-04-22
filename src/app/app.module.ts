@@ -31,6 +31,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { AutorizacionService } from "./services/autorizacion.service";
 import { GuardiaService } from "./services/guardia.service";
 import { RegistroComponent } from "./registro/registro.component";
+import { UsuarioComponent } from './usuario/usuario.component';
 
 const appRoutes: Routes = [
   {
@@ -77,6 +78,11 @@ const appRoutes: Routes = [
   {
     path: "footer",
     component: AboutComponent
+  },
+  {
+    path: "usuario",
+    component: UsuarioComponent,
+    canActivate: [GuardiaService]
   }
 ];
 @NgModule({
@@ -93,7 +99,8 @@ const appRoutes: Routes = [
     DestacadosComponent,
     InicioSesionComponent,
     RegistroComponent,
-    FooterComponent
+    FooterComponent,
+    UsuarioComponent
   ],
   imports: [
     BrowserModule,
