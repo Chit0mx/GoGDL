@@ -32,6 +32,7 @@ import { AutorizacionService } from "./services/autorizacion.service";
 import { GuardiaService } from "./services/guardia.service";
 import { RegistroComponent } from "./registro/registro.component";
 import { UsuarioComponent } from './usuario/usuario.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 const appRoutes: Routes = [
   {
@@ -100,7 +101,8 @@ const appRoutes: Routes = [
     InicioSesionComponent,
     RegistroComponent,
     FooterComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

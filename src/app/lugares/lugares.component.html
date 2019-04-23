@@ -5,15 +5,26 @@
     [longitude]="lugar.lng"
   ></agm-marker>
 </agm-map>
-
 <br />
 <div class="container">
   <div class="row">
     <div class="col-md-12">
       <h2>Lugares Cercanos</h2>
-      <a class="btn btn-primary" routerLink="/crear/new">Crear Nueva Atraccion</a>
+      <br />
+      <input
+        class="form-control mr-sm-2"
+        type="search"
+        name="filterLugar"
+        placeholder="Buscar"
+        aria-label="Search"
+        [(ngModel)]="filterLugar"
+      />
+      <br />
+      <a class="btn btn-primary" routerLink="/crear/new"
+        >Crear Nueva Atraccion</a
+      >
       <ul class="list-group">
-        <ng-container *ngFor="let lugar of lugares">
+        <ng-container *ngFor="let lugar of (lugares | filter: filterLugar)">
           <a
             routerLink="/detalle/{{ lugar.id }}"
             [queryParams]="{ action2: 'edit', refer: 'google' }"
