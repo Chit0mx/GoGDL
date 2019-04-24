@@ -78,7 +78,7 @@
     <agm-marker [latitude]="lugar.lat" [longitude]="lugar.lng"></agm-marker>
     </agm-map>
     <br/>
-    <a routerLink="/crear/{{lugar.id}}" class="botonLS btn btn-primary">Editar</a>
+    <a routerLink="/crear/{{lugar.id}}" class="botonLS btn btn-primary" *ngIf="(lugar.propietario == loggedUser)">Editar</a>
 </div>
 <br/>
 <app-footer></app-footer>

@@ -2,9 +2,12 @@
   <div class="row">
     <div class="col-md-8">
       <h2>{{usuarioDB.Nombre}}  {{usuarioDB.Apellido}}</h2>
-      <br/>
+      <hr/>
       <div *ngIf="!usuarioDB.Empresario">
-        <a class="botonLS p-2" (click)="hacerEmpresario()">Convertirme en empresario</a>
+        <a  style="cursor: pointer" class="botonLS p-2" (click)="hacerEmpresario()">Convertirme en empresario</a>
+      </div>
+      <div *ngIf="usuarioDB.Empresario">
+          <b>Empresario</b>
       </div>
       <br/>
       <h2>Mis lugares</h2>
