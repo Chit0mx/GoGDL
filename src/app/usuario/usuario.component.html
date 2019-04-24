@@ -10,14 +10,14 @@
           <b>Empresario</b>
       </div>
       <br/>
-      <h2>Mis lugares</h2>
+      <h2>Mis atracciones</h2>
       <ul class="list-group">
         <ng-container *ngFor="let lugar of lugares">
-          <a routerLink="/detalle/{{ lugar.id }}" [queryParams]="{ action2: 'edit', refer: 'google' }"><li class="list-group-item">{{ lugar.nombre }}</li></a>
+          <a routerLink="/detalle/{{ lugar.id }}" [queryParams]="{ action2: 'edit', refer: 'google' }" *ngIf="(lugar.propietario == loggedUser)"><li class="list-group-item">{{ lugar.nombre }}</li></a>
         </ng-container>
       </ul>
       <br/>
-      <h2>Lugares favoritos</h2>
+      <h2>Atracciones favoritas</h2>
       <ul class="list-group">
         <ng-container *ngFor="let lugar of lugares">
           <a routerLink="/detalle/{{ lugar.id }}" [queryParams]="{ action2: 'edit', refer: 'google' }"><li class="list-group-item">{{ lugar.nombre }}</li></a>
