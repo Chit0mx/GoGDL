@@ -9,7 +9,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h2>Lugares Cercanos</h2>
+      <h2>Puestos</h2>
       <br />
       <input
         class="form-control mr-sm-2"
@@ -28,7 +28,7 @@
           <a
             routerLink="/detalle/{{ lugar.id }}"
             [queryParams]="{ action2: 'edit', refer: 'google' }"
-            ><li class="list-group-item">
+            ><li class="list-group-item" *ngIf="lugar.categoria === 'Puestos'">
               {{ lugar.nombre }}
             </li></a
           >

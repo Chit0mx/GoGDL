@@ -12,6 +12,14 @@ import { LugaresService } from "./services/lugares.service";
 
 //Componentes
 import { LugaresComponent } from "./lugares/lugares.component";
+import { AntrosComponent } from "./antros/antros.component";
+import { BaresComponent } from "./bares/bares.component";
+import { RestaurantesComponent } from "./restaurantes/restaurantes.component";
+import { MuseosComponent } from "./museos/museos.component";
+import { ParquesComponent } from "./parques/parques.component";
+import { PuestosComponent } from "./puestos/puestos.component";
+import { CentroComponent } from "./centro/centro.component";
+import { PlazasComponent } from "./plazas/plazas.component";
 import { DetalleComponent } from "./detalle/detalle.component";
 import { ContactoComponent } from "./contacto/contacto.component";
 import { AboutComponent } from "./about/about.component";
@@ -31,8 +39,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { AutorizacionService } from "./services/autorizacion.service";
 import { GuardiaService } from "./services/guardia.service";
 import { RegistroComponent } from "./registro/registro.component";
-import { UsuarioComponent } from './usuario/usuario.component';
-import { FilterPipe } from './pipes/filter.pipe';
+import { UsuarioComponent } from "./usuario/usuario.component";
+import { FilterPipe } from "./pipes/filter.pipe";
 
 const appRoutes: Routes = [
   {
@@ -50,6 +58,38 @@ const appRoutes: Routes = [
   {
     path: "lugares",
     component: LugaresComponent
+  },
+  {
+    path: "antros",
+    component: AntrosComponent
+  },
+  {
+    path: "bares",
+    component: BaresComponent
+  },
+  {
+    path: "restaurantes",
+    component: RestaurantesComponent
+  },
+  {
+    path: "museos",
+    component: MuseosComponent
+  },
+  {
+    path: "parques",
+    component: ParquesComponent
+  },
+  {
+    path: "puestos",
+    component: PuestosComponent
+  },
+  {
+    path: "centro",
+    component: CentroComponent
+  },
+  {
+    path: "plazas",
+    component: PlazasComponent
   },
   {
     path: "detalle/:id",
@@ -93,6 +133,14 @@ const appRoutes: Routes = [
     ContarClicksDirective,
     DetalleComponent,
     LugaresComponent,
+    AntrosComponent,
+    BaresComponent,
+    RestaurantesComponent,
+    MuseosComponent,
+    ParquesComponent,
+    PuestosComponent,
+    CentroComponent,
+    PlazasComponent,
     ContactoComponent,
     AboutComponent,
     CrearComponent,
