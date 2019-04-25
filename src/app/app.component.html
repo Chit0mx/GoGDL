@@ -40,14 +40,14 @@
           >Categorias</a
         >
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" routerLink="/lugares">Antros</a>
-          <a class="dropdown-item" routerLink="/destacados">Bares</a>
-          <a class="dropdown-item" routerLink="/contacto">Restaurantes</a>
-          <a class="dropdown-item" routerLink="/lugares">Museos</a>
-          <a class="dropdown-item" routerLink="/destacados">Parques</a>
-          <a class="dropdown-item" routerLink="/contacto">Puestos</a>
-          <a class="dropdown-item" routerLink="/contacto">Centro</a>
-          <a class="dropdown-item" routerLink="/contacto">Plazas</a>
+          <a class="dropdown-item" routerLink="/antros">Antros</a>
+          <a class="dropdown-item" routerLink="/bares">Bares</a>
+          <a class="dropdown-item" routerLink="/restaurantes">Restaurantes</a>
+          <a class="dropdown-item" routerLink="/museos">Museos</a>
+          <a class="dropdown-item" routerLink="/parques">Parques</a>
+          <a class="dropdown-item" routerLink="/puestos">Puestos</a>
+          <a class="dropdown-item" routerLink="/centro">Centro</a>
+          <a class="dropdown-item" routerLink="/plazas">Plazas</a>
         </div>
       </li>
     </ul>
@@ -69,18 +69,6 @@
         <a class="nav-link" (click)="logout()">Cerrar sesión</a>
       </li>
     </ul>
-    <!--Barra de busqueda-->
-    <form class="form-inline my-2 my-lg-0">
-      <input
-        class="form-control mr-sm-2"
-        type="search"
-        placeholder="Buscar"
-        aria-label="Search"
-      />
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-        Search
-      </button>
-    </form>
   </div>
 </nav>
 <router-outlet></router-outlet>

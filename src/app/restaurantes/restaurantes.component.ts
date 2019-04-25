@@ -1,10 +1,10 @@
 import { Component } from "@angular/core";
 import { LugaresService } from "../services/lugares.service";
 @Component({
-  selector: "app-destacados",
-  templateUrl: "./destacados.component.html"
+  selector: "app-restaurantes",
+  templateUrl: "./restaurantes.component.html"
 })
-export class DestacadosComponent {
+export class RestaurantesComponent {
   title = "GoGdl";
 
   lat: number = 20.6430428;

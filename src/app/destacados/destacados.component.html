@@ -2,8 +2,18 @@
   <div class="row">
     <div class="col-md-8">
       <h2>Destacados</h2>
+      <br />
+      <input
+        class="form-control mr-sm-2"
+        type="search"
+        name="filterLugar"
+        placeholder="Buscar"
+        aria-label="Search"
+        [(ngModel)]="filterLugar"
+      />
+      <br />
       <ul class="list-group">
-        <ng-container *ngFor="let lugar of lugares">
+        <ng-container *ngFor="let lugar of (lugares | filter: filterLugar)">
           <a
             routerLink="/detalle/{{ lugar.id }}"
             [queryParams]="{ action2: 'edit', refer: 'google' }"

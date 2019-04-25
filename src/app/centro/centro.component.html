@@ -9,7 +9,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h2>Lugares Cercanos</h2>
+      <h2>Centro</h2>
       <br />
       <input
         class="form-control mr-sm-2"
@@ -20,13 +20,15 @@
         [(ngModel)]="filterLugar"
       />
       <br />
-      <a class="btn btn-primary" routerLink="/crear/new" *ngIf="usuario.Empresario">Crear Nueva Atraccion</a>
+      <a class="btn btn-primary" routerLink="/crear/new"
+        >Crear Nueva Atraccion</a
+      >
       <ul class="list-group">
         <ng-container *ngFor="let lugar of (lugares | filter: filterLugar)">
           <a
             routerLink="/detalle/{{ lugar.id }}"
             [queryParams]="{ action2: 'edit', refer: 'google' }"
-            ><li class="list-group-item">
+            ><li class="list-group-item" *ngIf="lugar.categoria === 'Centro'">
               {{ lugar.nombre }}
             </li></a
           >

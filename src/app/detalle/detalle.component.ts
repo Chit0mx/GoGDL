@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import{LugaresService}from "../services/lugares.service";
+import { LugaresService } from "../services/lugares.service";
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { AutorizacionService } from '../services/autorizacion.service';
 
 @Component({
-  selector: 'app-detalle',
-  templateUrl: './detalle.component.html'
+  selector: "app-detalle",
+  templateUrl: "./detalle.component.html"
 })
 export class DetalleComponent {
-  id=null;
-  lugar:any={};
+  id = null;
+  lugar: any = {};
   nombre = null;
   profileUrl: Observable<string | null>;
   precio:any;
