@@ -59,11 +59,9 @@ export class AutorizacionService {
   public hacerEmpresario() {
     const $id = this.angularFireAuth.auth.currentUser.uid;
     let usuario = this.afDB.object('/users/' + $id)
-    debugger;
     usuario.update({
       Empresario: true
     });
-    debugger;
     alert("Ahora es un empresario");
     this.router.navigate(['crear/new']);
   }

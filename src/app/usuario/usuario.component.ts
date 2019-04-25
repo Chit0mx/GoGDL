@@ -14,6 +14,7 @@ export class UsuarioComponent {
   lugares =null;
   loggedUser:any = null;
   usuarioDB:any = {};
+  ubicacion:any = {};
   constructor(private afDB: AngularFireDatabase, private angularFireAuth: AngularFireAuth, private lugaresService: LugaresService, private autorizacionService:AutorizacionService) {
     lugaresService.getLugares().
     valueChanges().
@@ -28,7 +29,9 @@ export class UsuarioComponent {
         this.usuarioDB = usuarioDB;
       });
     }, 500)
-    
+    this.lugaresService.obtenerUbicacionUsuario().subscribe((ubicacion) => {
+      this.ubicacion = ubicacion;
+    });
   }
 
   public hacerEmpresario() {

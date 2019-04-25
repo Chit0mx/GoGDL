@@ -1,6 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8">
+      <agm-map [latitude]="ubicacion.location.lat" [longitude]="ubicacion.location.lng">
+        <agm-marker [latitude]="ubicacion.location.lat" [longitude]="ubicacion.location.lng"></agm-marker>
+      </agm-map>
+      <h6>{{ubicacion.accuracy}}</h6>
       <h2>{{usuarioDB.Nombre}}  {{usuarioDB.Apellido}}</h2>
       <hr/>
       <div *ngIf="!usuarioDB.Empresario">
