@@ -23,9 +23,6 @@ export class LugaresService{
   public obtenerGeoData(direccion){
     return this.http.get('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyB2JEN5BecGIXzKVY697OXtB90xvoeGfuE&address='+ direccion);
   }
-  public obtenerUbicacionUsuario(){
-    return this.http.post('https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyB2JEN5BecGIXzKVY697OXtB90xvoeGfuE', {"considerIp": "true", "radioType": "gsm"});
-  }
   public getLugar(id) {
     return this.afDB.object('lugares/' + id);
   }

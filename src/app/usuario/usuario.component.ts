@@ -14,7 +14,8 @@ export class UsuarioComponent {
   lugares =null;
   loggedUser:any = null;
   usuarioDB:any = {};
-  ubicacion:any = {};
+  lat:any;
+  lng:any;
   constructor(private afDB: AngularFireDatabase, private angularFireAuth: AngularFireAuth, private lugaresService: LugaresService, private autorizacionService:AutorizacionService) {
     lugaresService.getLugares().
     valueChanges().
@@ -29,9 +30,12 @@ export class UsuarioComponent {
         this.usuarioDB = usuarioDB;
       });
     }, 500)
-    this.lugaresService.obtenerUbicacionUsuario().subscribe((ubicacion) => {
-      this.ubicacion = ubicacion;
-    });
+    navigator.geolocation.getCurrentPosition(this.mostrar);
+  }
+
+  public mostrar(pos) {
+    this.lat = pos.coords.latitude;
+    this.lng = pos.coords.longitude;
   }
 
   public hacerEmpresario() {

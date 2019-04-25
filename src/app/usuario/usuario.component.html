@@ -1,10 +1,6 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8">
-      <agm-map [latitude]="ubicacion.location.lat" [longitude]="ubicacion.location.lng">
-        <agm-marker [latitude]="ubicacion.location.lat" [longitude]="ubicacion.location.lng"></agm-marker>
-      </agm-map>
-      <h6>{{ubicacion.accuracy}}</h6>
       <h2>{{usuarioDB.Nombre}}  {{usuarioDB.Apellido}}</h2>
       <hr/>
       <div *ngIf="!usuarioDB.Empresario">
@@ -27,6 +23,13 @@
           <a routerLink="/detalle/{{ lugar.id }}" [queryParams]="{ action2: 'edit', refer: 'google' }"><li class="list-group-item">{{ lugar.nombre }}</li></a>
         </ng-container>
       </ul>
+      <br/>
+      <h2>Ubicación actual</h2>
+      <br/>
+      <agm-map [latitude]="lat" [longitude]="lng">
+        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+      </agm-map>
+      <br/>
     </div>
   </div>
 </div>
