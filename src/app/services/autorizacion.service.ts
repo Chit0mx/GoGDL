@@ -56,6 +56,7 @@ export class AutorizacionService {
   public getUser() {
     return this.angularFireAuth.auth;
   }
+
   public hacerEmpresario() {
     const $id = this.angularFireAuth.auth.currentUser.uid;
     let usuario = this.afDB.object('/users/' + $id)

@@ -75,10 +75,12 @@
         </table>
     </div>
     <agm-map [latitude]="lugar.lat" [longitude]="lugar.lng">
-    <agm-marker [latitude]="lugar.lat" [longitude]="lugar.lng"></agm-marker>
+        <agm-marker [latitude]="lugar.lat" [longitude]="lugar.lng"></agm-marker>
+        <agm-marker [latitude]="usuariolat" [longitude]="usuariolng"></agm-marker>
     </agm-map>
     <br/>
     <a routerLink="/crear/{{lugar.id}}" class="botonLS btn btn-primary" *ngIf="(lugar.propietario == loggedUser)">Editar</a>
+    <a routerLink="/inicio" class="botonLS btn btn-primary" *ngIf="loggedIn && (this.usuariolat <= this.lugar.lat + .0003 && this.usuariolat >= this.lugar.lat - .0003 && this.usuariolng <= this.lugar.lng + .0003 && this.usuariolng >= this.lugar.lng - .0003)">Estoy Aqui</a>
 </div>
 <br/>
 <app-footer></app-footer>

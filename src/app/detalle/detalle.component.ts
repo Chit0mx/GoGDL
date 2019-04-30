@@ -14,10 +14,10 @@ export class DetalleComponent {
   lugar: any = {};
   nombre = null;
   profileUrl: Observable<string | null>;
-  precio:any;
-  editar = false;
   loggedUser:any = null;
-  usuarioDB:any = {};
+  usuariolat:any;
+  usuariolng:any;
+  loggedIn = false;
   constructor (private autorizacionService:AutorizacionService, private storage: AngularFireStorage, private route:ActivatedRoute, private lugaresService:LugaresService){
     this.id = this.route.snapshot.params['id'];
     this.lugaresService.buscarlugar(this.id).
@@ -27,9 +27,24 @@ export class DetalleComponent {
     });
     const ref = this.storage.ref('atracciones/' + this.id);
     this.profileUrl = ref.getDownloadURL();
+    this.autorizacionService.isLogged()
+    .subscribe((result) => {
+      if(result && result.uid){
+        this.loggedIn = true;
+        setTimeout(() => {
+          this.loggedUser = this.autorizacionService.getUser().currentUser.uid;
+        }, 500);
+      } else {
+        this.loggedIn = false;
+      }
+    }, (error) => {
+      this.loggedIn = false;
+    })
+    navigator.geolocation.getCurrentPosition(this.mostrar);
+  }
 
-    setTimeout(() => {
-      this.loggedUser = this.autorizacionService.getUser().currentUser.uid;
-    }, 500)
+  public mostrar(pos) {
+    this.usuariolat = pos.coords.latitude;
+    this.usuariolng = pos.coords.longitude;
   }
 }

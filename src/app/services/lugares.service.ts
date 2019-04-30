@@ -11,6 +11,9 @@ export class LugaresService{
   public getLugares(){
       return this.afDB.list('lugares/');
   }
+  public getLugar(id){
+    return this.afDB.list('lugares/' + id);
+}
   public buscarlugar(id){
     return this.afDB.object('lugares/'+ id);
   }
@@ -22,9 +25,6 @@ export class LugaresService{
   }
   public obtenerGeoData(direccion){
     return this.http.get('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyB2JEN5BecGIXzKVY697OXtB90xvoeGfuE&address='+ direccion);
-  }
-  public getLugar(id) {
-    return this.afDB.object('lugares/' + id);
   }
 }
 
