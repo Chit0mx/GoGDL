@@ -10,8 +10,8 @@
           <b>Empresario</b>
       </div>
       <br/>
-      <h2>Mis atracciones</h2>
-      <ul class="list-group">
+      <h2 *ngIf="!usuarioDB.Empresario" >Mis atracciones</h2>
+      <ul class="list-group" *ngIf="!usuarioDB.Empresario">
         <ng-container *ngFor="let lugar of lugares">
           <a routerLink="/detalle/{{ lugar.id }}" [queryParams]="{ action2: 'edit', refer: 'google' }" *ngIf="(lugar.propietario == loggedUser)"><li class="list-group-item">{{ lugar.nombre }}</li></a>
         </ng-container>

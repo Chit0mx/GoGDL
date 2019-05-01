@@ -80,6 +80,7 @@
     </agm-map>
     <br/>
     <a routerLink="/crear/{{lugar.id}}" class="botonLS btn btn-primary" *ngIf="(lugar.propietario == loggedUser)">Editar</a>
+    <a routerLink="/crearArticulo/{{lugar.id}}" class="botonLS btn btn-primary mx-3" *ngIf="(lugar.propietario == loggedUser)">Crear Articulo</a>
     <a routerLink="/inicio" class="botonLS btn btn-primary" *ngIf="loggedIn && (this.usuariolat <= this.lugar.lat + .0003 && this.usuariolat >= this.lugar.lat - .0003 && this.usuariolng <= this.lugar.lng + .0003 && this.usuariolng >= this.lugar.lng - .0003)">Estoy Aqui</a>
 </div>
 <br/>
