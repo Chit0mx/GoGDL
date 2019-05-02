@@ -1,0 +1,36 @@
+<div class="container">
+    <br/>
+    <h3>Eventos/Promociones de la atracción</h3>
+    <p>
+      Los Eventos/Promociones de la atracción son secciones que se mostraran en la pagina de la misma,
+      en estos se puede publicar, ya sea una promocion, un evento de cualquier tipo en la atracción, una noticia sobre la atraccion o cualquier
+      cosa que se quiera transmitir al usuario.
+    </p>
+    <hr/>
+    <div class="input-group mb-3">
+        <div class="form-group">
+            <label for="AvatarA">Imagen del Eventos/Promociones</label>
+            <input type="file" class="form-control-file" id="AvatarA" aria-describedby="fileHelp" accept="image/png, image/jpeg" (change)="uploadFile($event)">
+            <small id="fileHelp" class="form-text text-muted">Seleccione la imagen que representara el Eventos/Promociones</small>
+        </div>
+    </div>
+    <br/>   
+    <label>Titulo del Eventos/Promociones</label>
+    <input type="text" class="form-control" [(ngModel)]="articulo.titulo"/>
+    <br/>
+    <label>Descripcion</label>
+    <textarea class="form-control"[(ngModel)]="articulo.descripcion"></textarea>
+    <br/>
+    <h3>Duración</h3>
+    <ul class="list-group">
+            <li class="list-group-item">
+                <label for="empieza">Empieza: </label>
+                <input class="form-control" type="date" id="empieza" name="empieza" required [(ngModel)]="articulo.empieza"/>
+                <label for="termina">Termina:</label>
+                <input class="form-control" type="date" id="termina" name="termina" required [(ngModel)]="articulo.termina"/>
+            </li>
+    </ul>
+    <br/>
+    <a class="btn btn-primary"(click)="guardarLugar()">Enviar</a>
+    <a class="btn btn-default" routerLink="/detalle/{{this.id}}">Cancelar</a>
+</div>

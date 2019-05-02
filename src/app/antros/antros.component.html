@@ -25,13 +25,9 @@
       >
       <ul class="list-group">
         <ng-container *ngFor="let lugar of (lugares | filter: filterLugar)">
-          <a
-            routerLink="/detalle/{{ lugar.id }}"
-            [queryParams]="{ action2: 'edit', refer: 'google' }"
-            ><li class="list-group-item" *ngIf="lugar.categoria === 'Antros'">
+          <a routerLink="/detalle/{{ lugar.id }}"><li class="list-group-item" *ngIf="lugar.categoria === 'Antros'">
               {{ lugar.nombre }}
-            </li></a
-          >
+            </li></a>
         </ng-container>
       </ul>
     </div>

@@ -27,7 +27,6 @@
         <ng-container *ngFor="let lugar of (lugares | filter: filterLugar)">
           <a
             routerLink="/detalle/{{ lugar.id }}"
-            [queryParams]="{ action2: 'edit', refer: 'google' }"
             ><li class="list-group-item" *ngIf="lugar.categoria === 'Museos'">
               {{ lugar.nombre }}
             </li></a

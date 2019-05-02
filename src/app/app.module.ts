@@ -41,6 +41,8 @@ import { GuardiaService } from "./services/guardia.service";
 import { RegistroComponent } from "./registro/registro.component";
 import { UsuarioComponent } from "./usuario/usuario.component";
 import { FilterPipe } from "./pipes/filter.pipe";
+import { CrearArticulosComponent } from "./articulos.crear/articulos.crear.component";
+import { ArticulosService } from './services/articulos.service';
 
 const appRoutes: Routes = [
   {
@@ -105,6 +107,11 @@ const appRoutes: Routes = [
     canActivate: [GuardiaService]
   },
   {
+    path: "crearArticulos/:id",
+    component: CrearArticulosComponent,
+    canActivate: [GuardiaService]
+  },
+  {
     path: "inicio-sesion",
     component: InicioSesionComponent
   },
@@ -150,7 +157,8 @@ const appRoutes: Routes = [
     RegistroComponent,
     FooterComponent,
     UsuarioComponent,
-    FilterPipe
+    FilterPipe,
+    CrearArticulosComponent
   ],
   imports: [
     BrowserModule,
@@ -168,7 +176,7 @@ const appRoutes: Routes = [
     NgbModule.forRoot(),
     HttpClientModule
   ],
-  providers: [LugaresService, AutorizacionService, GuardiaService],
+  providers: [LugaresService, AutorizacionService, GuardiaService, ArticulosService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
