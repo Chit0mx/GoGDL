@@ -14,6 +14,7 @@ lng: number = -103.3703034;
 lugares = null;
 loggedUser:any = null;
 usuario:any = {};
+loggedIn = false;
 
   constructor(private lugaresService: LugaresService, private autorizacionService:AutorizacionService) {
     lugaresService.getLugares().
@@ -27,6 +28,19 @@ usuario:any = {};
       .valueChanges().
       subscribe(usuario => {
         this.usuario = usuario;
+      });
+      this.autorizacionService.isLogged()
+      .subscribe((result) => {
+        if(result && result.uid){
+          this.loggedIn = true;
+          setTimeout(() => {
+            this.loggedUser = this.autorizacionService.getUser().currentUser.uid;
+          }, 500);
+        } else {
+          this.loggedIn = false;
+        }
+      }, (error) => {
+        this.loggedIn = false;
       });
     }, 500)
   }
