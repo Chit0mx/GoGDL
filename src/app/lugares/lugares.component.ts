@@ -22,27 +22,6 @@ loggedIn = false;
     subscribe(lugares => {
       this.lugares = lugares;
     });
-    setTimeout(() => {
-      this.loggedUser = this.autorizacionService.getUser().currentUser.uid;
-      this.autorizacionService.obtenerUsuario()
-      .valueChanges().
-      subscribe(usuario => {
-        this.usuario = usuario;
-      });
-      this.autorizacionService.isLogged()
-      .subscribe((result) => {
-        if(result && result.uid){
-          this.loggedIn = true;
-          setTimeout(() => {
-            this.loggedUser = this.autorizacionService.getUser().currentUser.uid;
-          }, 500);
-        } else {
-          this.loggedIn = false;
-        }
-      }, (error) => {
-        this.loggedIn = false;
-      });
-    }, 500)
   }
   filterLugar = "";
 }

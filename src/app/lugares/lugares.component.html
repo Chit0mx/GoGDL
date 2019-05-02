@@ -20,7 +20,6 @@
         [(ngModel)]="filterLugar"
       />
       <br />
-      <a class="btn btn-primary" routerLink="/crear/new" *ngIf="usuario.Empresario && loggedIn">Crear Nueva Atraccion</a>
       <ul class="list-group">
         <ng-container *ngFor="let lugar of (lugares | filter: filterLugar)">
           <a routerLink="/detalle/{{ lugar.id }}"><li class="list-group-item">{{ lugar.nombre }}</li></a>
