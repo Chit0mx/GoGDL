@@ -7,6 +7,11 @@
             {{lugar.descripcion}}
         </h4>
         <hr/>
+        <div>
+          <a class="botonLS btn btn-primary" (click)="favorita()" *ngIf="loggedUser && (favorito.favorito != lugar.id)">Agregar a Favoritos</a>
+          <a class="botonLS btn btn-primary" (click)="noFavorita()" *ngIf="loggedUser && (favorito.favorito == lugar.id)">Quitar de Favoritos</a>
+        </div>
+        <br/>
         <h5>Categoria</h5> 
         <b>{{lugar.categoria}}</b>
         <br/>

@@ -64,6 +64,36 @@ export class AutorizacionService {
       Empresario: true
     });
     alert("Ahora es un empresario");
-    this.router.navigate(['crear/new']);
+    this.router.navigate(['/crear/new']);
+  }
+
+  public agregarFavorito(idA) {
+    const $id = this.angularFireAuth.auth.currentUser.uid;
+    let usuario = this.afDB.object('/users/' + $id + '/favoritos/' + idA)
+    usuario.update({
+      favorito: idA
+    });
+    alert("Ahora es una atracción favorita");
+    this.router.navigate(['/detalle/' + idA]);
+  }
+
+  public quitarFavorito(idA) {
+    const $id = this.angularFireAuth.auth.currentUser.uid;
+    let usuario = this.afDB.object('/users/' + $id + '/favoritos/' + idA)
+    usuario.update({
+      favorito: 0
+    });
+    alert("Ya no es una atracción favorita");
+    this.router.navigate(['/detalle/' + idA]);
+  }
+
+  public obtenerFavorito(idA) {
+    const $id = this.angularFireAuth.auth.currentUser.uid;
+    return this.afDB.object('/users/' + $id + '/favoritos/' + idA);
+  }
+
+  public obtenerFavoritos() {
+    const $id = this.angularFireAuth.auth.currentUser.uid;
+    return this.afDB.list('/users/' + $id + '/favoritos');
   }
 }

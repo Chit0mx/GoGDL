@@ -21,6 +21,8 @@ export class DetalleComponent {
   usuariolng:any;
   loggedIn = false;
   imgsArt:any = {};
+  usuarioDB:any = {};
+  favorito:any = {};
   constructor (private autorizacionService:AutorizacionService, private storage: AngularFireStorage, private route:ActivatedRoute, private lugaresService:LugaresService, private articuloService:ArticulosService){
     this.id = this.route.snapshot.params['id'];
     const ref = this.storage.ref('atracciones/' + this.id);
@@ -41,6 +43,20 @@ export class DetalleComponent {
         this.loggedIn = true;
         setTimeout(() => {
           this.loggedUser = this.autorizacionService.getUser().currentUser.uid;
+          this.autorizacionService.obtenerUsuario()
+          .valueChanges().
+          subscribe(usuarioDB => {
+            this.usuarioDB = usuarioDB;
+          });
+          this.autorizacionService.obtenerFavorito(this.id)
+          .valueChanges().
+          subscribe((favorito) => {
+            if (favorito != null) {
+              this.favorito = favorito;
+            } else {
+              this.favorito = {favorito: false};
+            }
+          });
         }, 500);
       } else {
         this.loggedIn = false;
@@ -54,5 +70,13 @@ export class DetalleComponent {
   public mostrar(pos) {
     this.usuariolat = pos.coords.latitude;
     this.usuariolng = pos.coords.longitude;
+  }
+
+  public favorita(){
+    this.autorizacionService.agregarFavorito(this.id);
+  }
+
+  public noFavorita() {
+    this.autorizacionService.quitarFavorito(this.id);
   }
 }
