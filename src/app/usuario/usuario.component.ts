@@ -19,9 +19,10 @@ export class UsuarioComponent {
   lat:any;
   lng:any;
   constructor(private afDB: AngularFireDatabase, private angularFireAuth: AngularFireAuth, private lugaresService: LugaresService, private autorizacionService:AutorizacionService) {
-    lugaresService.getLugares().
-    valueChanges().
-    subscribe(lugares => {
+    lugaresService
+    .getLugares()
+    .valueChanges()
+    .subscribe(lugares => {
       this.lugares = lugares;
     });
 

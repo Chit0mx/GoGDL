@@ -5,6 +5,9 @@ import { Observable } from 'rxjs';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { AutorizacionService } from '../services/autorizacion.service';
 import { ArticulosService } from '../services/articulos.service';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: "app-detalle",
@@ -23,7 +26,11 @@ export class DetalleComponent {
   imgsArt:any = {};
   usuarioDB:any = {};
   favorito:any = {};
-  constructor (private autorizacionService:AutorizacionService, private storage: AngularFireStorage, private route:ActivatedRoute, private lugaresService:LugaresService, private articuloService:ArticulosService){
+  resenia: any = {};
+  resenias: any = {};
+  faStar = faStar;
+  faDollarSign = faDollarSign;
+  constructor (private autorizacionService:AutorizacionService, private storage: AngularFireStorage, private route:ActivatedRoute, private lugaresService:LugaresService, private articuloService:ArticulosService, private angularFireAuth: AngularFireAuth){
     this.id = this.route.snapshot.params['id'];
     const ref = this.storage.ref('atracciones/' + this.id);
     this.profileUrl = ref.getDownloadURL();
@@ -37,6 +44,12 @@ export class DetalleComponent {
     subscribe(articulos => {
       this.articulos = articulos;
     });
+    this.lugaresService.obtenerResenias(this.id).
+    valueChanges().
+    subscribe(resenias => {
+      this.resenias = resenias;
+      console.log(resenias);
+    });
     this.autorizacionService.isLogged()
     .subscribe((result) => {
       if(result && result.uid){
@@ -48,7 +61,7 @@ export class DetalleComponent {
           subscribe(usuarioDB => {
             this.usuarioDB = usuarioDB;
           });
-          this.autorizacionService.obtenerFavorito(this.id)
+          this.autorizacionService.obtenerLugarUsr(this.id)
           .valueChanges().
           subscribe((favorito) => {
             if (favorito != null) {
@@ -79,4 +92,38 @@ export class DetalleComponent {
   public noFavorita() {
     this.autorizacionService.quitarFavorito(this.id);
   }
+
+  public estoyAqui(){
+    this.autorizacionService.agregarEstoyAqui(this.id);
+  }
+
+  public guardarResenia() {
+    this.resenia.propietario = this.angularFireAuth.auth.currentUser.uid;
+    this.lugaresService.guardarResenia(this.resenia, this.lugar);
+    alert("Reseña creada con exito");
+  }
+
+  public range(start, stop, step) {
+    if (typeof stop == 'undefined') {
+        // one param defined
+        stop = start;
+        start = 0;
+    }
+
+    if (typeof step == 'undefined') {
+        step = 1;
+    }
+
+    if ((step > 0 && start >= stop) || (step < 0 && start <= stop)) {
+        return [];
+    }
+
+    var result = [];
+    for (var i = start; step > 0 ? i < stop : i > stop; i += step) {
+        result.push(i);
+    }
+
+    return result;
+  }
 }
+

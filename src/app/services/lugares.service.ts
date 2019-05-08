@@ -23,6 +23,12 @@ export class LugaresService{
   public editarLugar(lugar){
     this.afDB.database.ref('lugares/' + lugar.id).set(lugar);
   }
+  public guardarResenia(resenia, lugar){
+    this.afDB.database.ref('lugares/' + lugar.id + '/resenias').push(resenia);
+  }
+  public obtenerResenias(id){
+    return this.afDB.list('lugares/' + id + '/resenias');
+  }
   public obtenerGeoData(direccion){
     return this.http.get('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyB2JEN5BecGIXzKVY697OXtB90xvoeGfuE&address='+ direccion);
   }

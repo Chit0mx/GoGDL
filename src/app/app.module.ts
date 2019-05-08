@@ -43,6 +43,7 @@ import { UsuarioComponent } from "./usuario/usuario.component";
 import { FilterPipe } from "./pipes/filter.pipe";
 import { CrearArticulosComponent } from "./articulos.crear/articulos.crear.component";
 import { ArticulosService } from './services/articulos.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const appRoutes: Routes = [
   {
@@ -174,7 +175,8 @@ const appRoutes: Routes = [
     }),
     RouterModule.forRoot(appRoutes),
     NgbModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [LugaresService, AutorizacionService, GuardiaService, ArticulosService],
   bootstrap: [AppComponent]

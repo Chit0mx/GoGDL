@@ -69,9 +69,9 @@ export class AutorizacionService {
 
   public agregarFavorito(idA) {
     const $id = this.angularFireAuth.auth.currentUser.uid;
-    let usuario = this.afDB.object('/users/' + $id + '/favoritos/' + idA)
+    let usuario = this.afDB.object('/users/' + $id + '/' + idA)
     usuario.update({
-      favorito: idA
+      favorito: true
     });
     alert("Ahora es una atracción favorita");
     this.router.navigate(['/detalle/' + idA]);
@@ -79,21 +79,26 @@ export class AutorizacionService {
 
   public quitarFavorito(idA) {
     const $id = this.angularFireAuth.auth.currentUser.uid;
-    let usuario = this.afDB.object('/users/' + $id + '/favoritos/' + idA)
+    let usuario = this.afDB.object('/users/' + $id + '/' + idA)
     usuario.update({
-      favorito: 0
+      favorito: false
     });
     alert("Ya no es una atracción favorita");
     this.router.navigate(['/detalle/' + idA]);
   }
 
-  public obtenerFavorito(idA) {
+  public obtenerLugarUsr(idA) {
     const $id = this.angularFireAuth.auth.currentUser.uid;
-    return this.afDB.object('/users/' + $id + '/favoritos/' + idA);
+    return this.afDB.object('/users/' + $id + '/' + idA);
   }
 
-  public obtenerFavoritos() {
+  public agregarEstoyAqui(idA) {
     const $id = this.angularFireAuth.auth.currentUser.uid;
-    return this.afDB.list('/users/' + $id + '/favoritos');
+    let usuario = this.afDB.object('/users/' + $id + '/' + idA)
+    usuario.update({
+      Visite: true
+    });
+    alert("Ahora visitaste este lugar");
+    this.router.navigate(['/detalle/' + idA]);
   }
 }

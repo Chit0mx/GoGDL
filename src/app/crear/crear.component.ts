@@ -4,7 +4,6 @@ import { ActivatedRoute } from "@angular/router";
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
 
 @Component({
   selector: "app-crear",
@@ -20,8 +19,7 @@ export class CrearComponent {
     private lugaresService: LugaresService,
     private route: ActivatedRoute,
     private storage: AngularFireStorage,
-    private angularFireAuth: AngularFireAuth,
-    private afDB: AngularFireDatabase
+    private angularFireAuth: AngularFireAuth
   ) {
     this.id = this.route.snapshot.params["id"];
     if (this.id != "new") {

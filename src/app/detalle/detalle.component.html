@@ -8,8 +8,8 @@
         </h4>
         <hr/>
         <div>
-          <a class="botonLS btn btn-primary" (click)="favorita()" *ngIf="loggedUser && (favorito.favorito != lugar.id)">Agregar a Favoritos</a>
-          <a class="botonLS btn btn-primary" (click)="noFavorita()" *ngIf="loggedUser && (favorito.favorito == lugar.id)">Quitar de Favoritos</a>
+          <a class="botonLS btn btn-primary" (click)="favorita()" *ngIf="loggedUser && !(favorito.favorito)">Agregar a Favoritos</a>
+          <a class="botonLS btn btn-primary" (click)="noFavorita()" *ngIf="loggedUser && (favorito.favorito)">Quitar de Favoritos</a>
         </div>
         <br/>
         <h5>Categoria</h5> 
@@ -17,13 +17,14 @@
         <br/>
         <h5>Precio</h5> 
         De un rango de 1 a 5 siendo 5 más costoso 
-        <b>{{lugar.precio}}</b>
+        <div class="precio">
+          <ng-container *ngFor="let i of range(0, lugar.precio, 1)" style="display: flex">
+            <fa-icon [icon]="faDollarSign"></fa-icon>
+          </ng-container>
+        </div> 
         <br/>
-        <!--<ng-container *ngFor="let lugar of +lugar.precio">
-            <b>$</b>   
-        </ng-container>-->
         <ul class="list-group">
-            <li class="list-group-item" style="background-color: #b80f22">Amenidades</li>
+            <li class="list-group-item" style="background-color: #b80f22; color: white ">Amenidades</li>
             <li class="list-group-item" *ngIf="lugar.estacionamiento">Estacionamiento</li>
             <li class="list-group-item" *ngIf="lugar.wifi">Wifi</li>
             <li class="list-group-item" *ngIf="lugar.ac">Aire acondicionado</li>
@@ -33,7 +34,7 @@
         </ul>
         <br/>
         <table class="table" >
-            <thead style="background-color: #b80f22">
+            <thead style="background-color: #b80f22; color: white ">
             <tr>
                 <th scope="col">Dia</th>
                 <th scope="col">Apertura</th>
@@ -85,7 +86,7 @@
     </agm-map>
     <br/>
     <ul class="list-group">
-        <li class="list-group-item" style="background-color: #b80f22">Eventos/Promociones</li>
+        <li class="list-group-item" style="background-color: #b80f22; color: white ">Eventos/Promociones</li>
         <ng-container *ngFor="let articulo of articulos">
           <li class="list-group-item" *ngIf="(lugar.id == articulo.atraccion)">
             {{articulo.titulo}}
@@ -94,9 +95,60 @@
         </ng-container>
     </ul>
     <br/>
+    <ul class="list-group">
+        <li class="list-group-item" style="background-color: #b80f22; color: white ">Reseñas</li>
+        <ng-container *ngFor="let res of resenias">
+          <li class="list-group-item">
+            {{res.titulo}}
+            <p>{{res.descripcion}}</p>
+            <p>{{res.propietario}}</p>
+          </li>
+        </ng-container>
+    </ul>
+    <div *ngIf="loggedIn && favorito.Visite">
+        <br/>
+        <h3>Lugar visitado</h3>
+        <p>
+        Ya has visitado este lugar ahora puedes crear una reseña sobre el mismo o calificar el lugar.
+        </p>
+        <div>
+          <label>Titulo de la reseña</label>
+          <input type="text" class="form-control" [(ngModel)]="resenia.titulo"/>
+          <br/>
+          <label>Descripcion</label>
+          <textarea class="form-control" [(ngModel)]="resenia.descripcion"></textarea>
+          <br/>
+          <a class="botonLS btn btn-primary" (click)="guardarResenia()">Enviar</a>
+          <a class="btn btn-default m-3" routerLink="/detalle/{{this.id}}">Cancelar</a>
+          <br/>
+        </div>  
+        <div>
+          <h3>Calificar el lugar</h3>
+          <div class="ec-stars-wrapper">
+              <a data-value="1">
+                  <fa-icon [icon]="faStar"></fa-icon>
+              </a>
+              <a data-value="2">
+                  <fa-icon [icon]="faStar"></fa-icon>
+              </a>
+              <a data-value="3">
+                  <fa-icon [icon]="faStar"></fa-icon>
+              </a>
+              <a data-value="4">
+                  <fa-icon [icon]="faStar"></fa-icon>
+              </a>
+              <a data-value="5">
+                  <fa-icon [icon]="faStar"></fa-icon>
+              </a>
+          </div>
+        </div>
+    </div>
+    <div style="text-align:center">
+        <fa-icon [icon]="faCoffee"></fa-icon>
+      </div>
     <a routerLink="/crear/{{lugar.id}}" class="botonLS btn btn-primary" *ngIf="(lugar.propietario == loggedUser)">Editar</a>
     <a routerLink="/crearArticulos/{{lugar.id}}" class="botonLS btn btn-primary mx-3" *ngIf="(lugar.propietario == loggedUser)">Crear Articulo</a>
-    <a routerLink="/inicio" class="botonLS btn btn-primary" *ngIf="loggedIn && (this.usuariolat <= this.lugar.lat + .0003 && this.usuariolat >= this.lugar.lat - .0003 && this.usuariolng <= this.lugar.lng + .0003 && this.usuariolng >= this.lugar.lng - .0003)">Estoy Aqui</a>
+    <a class="botonLS btn btn-primary" (click)="estoyAqui()" *ngIf="loggedIn  && (this.usuariolat <= this.lugar.lat + .0003 && this.usuariolat >= this.lugar.lat - .0003 && this.usuariolng <= this.lugar.lng + .0003 && this.usuariolng >= this.lugar.lng - .0003)">Estoy Aqui</a>
 </div>
 <br/>
 <app-footer></app-footer>

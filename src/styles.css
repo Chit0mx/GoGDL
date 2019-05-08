@@ -117,3 +117,29 @@ agm-map {
     font-family: sans-serif;
     height: 100vh;
 }
+
+/*Estilo calificar*/
+.ec-stars-wrapper {
+	font-size: 0;
+	display: inline-block;
+}
+.ec-stars-wrapper a {
+	text-decoration: none;
+	display: inline-block;
+	font-size: 32px;
+	font-size: 2rem;
+	color: rgb(0, 0, 0);
+}
+
+.ec-stars-wrapper:hover a {
+	color: rgb(184, 15, 34);
+}
+
+.ec-stars-wrapper > a:hover ~ a {
+	color: rgb(0, 0, 0);
+}
+
+.precio {
+    display: inline-block; 
+    font-size: 32px;
+}
