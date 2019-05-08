@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8">
-      <h2>{{usuarioDB.Nombre}}  {{usuarioDB.Apellido}}</h2>
+      <h2> {{ usuarioDB.Nombre }} {{ usuarioDB.Apellido }} </h2>
       <hr/>
       <div *ngIf="!usuarioDB.Empresario">
         <a  style="cursor: pointer" class="botonLS p-2" (click)="hacerEmpresario()">Convertirme en empresario</a>
@@ -21,7 +21,7 @@
       <ul class="list-group">
         <ng-container *ngFor="let lugar of lugares">
           <a routerLink="/detalle/{{ lugar.id }}">
-            <li class="list-group-item">{{ lugar.nombre }}</li>
+            <li class="list-group-item" *ngIf="usuarioDB[lugar.id].favorito" >{{ lugar.nombre }}</li>
           </a>
         </ng-container>
       </ul>
@@ -35,5 +35,4 @@
     </div>
   </div>
 </div>
-<br />
 <app-footer></app-footer>

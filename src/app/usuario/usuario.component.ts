@@ -14,7 +14,7 @@ export class UsuarioComponent {
   lugares =null;
   lugaresFavoritos = null;
   loggedUser:any = null;
-  usuarioDB:any = {};
+  usuarioDB:any;
   favorito:any = {};
   lat:any;
   lng:any;
