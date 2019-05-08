@@ -1,0 +1,20 @@
+<div class="container">
+        <h1 class="m-4">{{articulo.titulo}}</h1>
+        <div class="card card-body bg-light">
+            <img [src]="articuloURL | async" width="100%" height="auto"/>
+            <br/>
+            <h4>
+                {{articulo.descripcion}}
+            </h4>
+            <p>
+                Empieza: {{articulo.empieza}}                                            
+                <br/>
+                Termina: {{articulo.termina}}
+            </p>
+            <br/>
+        </div>
+</div>
+<app-footer></app-footer>
+    
+    
+    

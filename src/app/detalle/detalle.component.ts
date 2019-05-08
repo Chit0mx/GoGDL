@@ -48,7 +48,6 @@ export class DetalleComponent {
     valueChanges().
     subscribe(resenias => {
       this.resenias = resenias;
-      console.log(resenias);
     });
     this.autorizacionService.isLogged()
     .subscribe((result) => {

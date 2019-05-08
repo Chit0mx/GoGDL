@@ -44,6 +44,7 @@ import { FilterPipe } from "./pipes/filter.pipe";
 import { CrearArticulosComponent } from "./articulos.crear/articulos.crear.component";
 import { ArticulosService } from './services/articulos.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ArticuloDetalleComponent } from './articulos.detalle/articulos.detalle.component';
 
 const appRoutes: Routes = [
   {
@@ -132,6 +133,10 @@ const appRoutes: Routes = [
     path: "usuario",
     component: UsuarioComponent,
     canActivate: [GuardiaService]
+  },
+  {
+    path: "articulo/:id",
+    component: ArticuloDetalleComponent,
   }
 ];
 @NgModule({
@@ -159,7 +164,8 @@ const appRoutes: Routes = [
     FooterComponent,
     UsuarioComponent,
     FilterPipe,
-    CrearArticulosComponent
+    CrearArticulosComponent,
+    ArticuloDetalleComponent
   ],
   imports: [
     BrowserModule,

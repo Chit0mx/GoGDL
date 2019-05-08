@@ -88,10 +88,12 @@
     <ul class="list-group">
         <li class="list-group-item" style="background-color: #b80f22; color: white ">Eventos/Promociones</li>
         <ng-container *ngFor="let articulo of articulos">
-          <li class="list-group-item" *ngIf="(lugar.id == articulo.atraccion)">
-            {{articulo.titulo}}
-            <p>{{articulo.descripcion}}</p>
-          </li>
+          <a routerLink="/articulo/{{ articulo.id }}">
+            <li class="list-group-item" *ngIf="(lugar.id == articulo.atraccion)">
+              {{articulo.titulo}}
+              <p>{{articulo.descripcion}}</p>
+            </li>
+          </a>
         </ng-container>
     </ul>
     <br/>

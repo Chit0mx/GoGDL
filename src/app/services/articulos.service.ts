@@ -11,6 +11,9 @@ export class ArticulosService{
   public getArticulos(){
       return this.afDB.list('articulos/');
   }
+  public getArticulo(idA){
+    return this.afDB.object('articulos/' +  idA);
+}
   public guardarArticulo(articulo){
     this.afDB.database.ref('articulos/' + articulo.id).set(articulo);
   }
