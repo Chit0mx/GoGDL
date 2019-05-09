@@ -102,7 +102,7 @@
                 <li class="list-group-item">
                     {{res.titulo}}
                     <p>{{res.descripcion}}</p>
-                    <p>{{res.propietario}}</p>
+                    <p>{{traerUsuarioEspecifico(res.propietario).Nombre}}</p>
                 </li>
             </ng-container>
         </ul>
@@ -126,7 +126,7 @@
                 <a class="btn btn-default m-3" routerLink="/detalle/{{this.id}}">Cancelar</a>
                 <br/>
             </div>
-          <a class="botonLS btn btn-primary" *ngIf="loggedIn && lugarUsr.reseniado" (click)="rehacerResenia(resenia.id)">Rehacer la reseña</a>
+          <a class="botonLS btn btn-primary" *ngIf="loggedIn && lugarUsr.reseniado" (click)="rehacerResenia(loggedUser)">Rehacer la reseña</a>
           <br/>
           <h3>Calificar el lugar</h3>
           <div class="ec-stars-wrapper">
@@ -152,7 +152,7 @@
     <br/>
     <a routerLink="/crear/{{lugar.id}}" class="botonLS btn btn-primary" *ngIf="(lugar.propietario == loggedUser)">Editar</a>
     <a routerLink="/crearArticulos/{{lugar.id}}" class="botonLS btn btn-primary mx-3" *ngIf="(lugar.propietario == loggedUser)">Crear Articulo</a>
-    <a class="botonLS btn btn-primary" (click)="estoyAqui()" *ngIf="loggedIn && !lugarUsr.Visite ">Estoy Aqui</a>
+    <a class="botonLS btn btn-primary" (click)="estoyAqui()" *ngIf="loggedIn && !lugarUsr.Visite && (this.usuariolat <= this.lugar.lat + .0003 && this.usuariolat >= this.lugar.lat - .0003 && this.usuariolng <= this.lugar.lng + .0003 && this.usuariolng >= this.lugar.lng - .0003)">Estoy Aqui</a>
 </div>
 <br/>
 <app-footer></app-footer>

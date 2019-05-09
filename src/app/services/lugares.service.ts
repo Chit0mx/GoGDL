@@ -26,12 +26,17 @@ export class LugaresService{
   }
   public guardarResenia(resenia, lugar){
     this.autorizacion.hacerResenia(lugar.id);
-    this.afDB.database.ref('lugares/' + lugar.id + '/resenias').push(resenia);
-    alert("Haz hecho una reseña de este lugar");
+    this.afDB.database.ref('lugares/' + lugar.id + '/resenias/' + resenia.id).set(resenia);
   }
   public obtenerResenias(id){
     return this.afDB.list('lugares/' + id + '/resenias');
   }
+
+  public borrarResenia(id, idUsr){
+    this.autorizacion.rehacerResenia(id);
+    this.afDB.object('lugares/' + id + '/resenias/' + idUsr).remove();
+  }
+
   public obtenerGeoData(direccion){
     return this.http.get('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyB2JEN5BecGIXzKVY697OXtB90xvoeGfuE&address='+ direccion);
   }

@@ -27,6 +27,7 @@ export class DetalleComponent {
   usuarioDB:any = {};
   lugarUsr:any = {};
   resenia: any = {};
+  reseniaAutor: any = {};
   resenias: any = {};
   faStar = faStar;
   faDollarSign = faDollarSign;
@@ -104,18 +105,22 @@ export class DetalleComponent {
 
   public guardarResenia() {
     this.resenia.propietario = this.angularFireAuth.auth.currentUser.uid;
+    this.resenia.id = this.angularFireAuth.auth.currentUser.uid;
     this.lugaresService.guardarResenia(this.resenia, this.lugar);
     alert("Reseña creada con exito");
   }
 
-  public rehacerResenia() {
-    this.autorizacionService.rehacerResenia(this.id);
+  public rehacerResenia(idUsr) {
+    this.lugaresService.borrarResenia(this.id, idUsr);
     alert("Puedes crear una nueva reseña");
+  }
+
+  public traerUsuarioEspecifico(id) {
+    return this.autorizacionService.obtenerUsuarioEspecifico(id);
   }
 
   public range(start, stop, step) {
     if (typeof stop == 'undefined') {
-        // one param defined
         stop = start;
         start = 0;
     }

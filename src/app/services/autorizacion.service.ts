@@ -45,6 +45,11 @@ export class AutorizacionService {
     const $id = this.angularFireAuth.auth.currentUser.uid;
     return this.afDB.object("users/" + $id);
   }
+
+  public obtenerUsuarioEspecifico(id) {
+    return this.afDB.object("users/" + id);
+  }
+
   public isLogged() {
     return this.angularFireAuth.authState;
   };
