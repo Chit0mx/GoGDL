@@ -25,7 +25,7 @@ export class DetalleComponent {
   loggedIn = false;
   imgsArt:any = {};
   usuarioDB:any = {};
-  favorito:any = {};
+  lugarUsr:any = {};
   resenia: any = {};
   resenias: any = {};
   faStar = faStar;
@@ -60,16 +60,19 @@ export class DetalleComponent {
           subscribe(usuarioDB => {
             this.usuarioDB = usuarioDB;
           });
-          this.autorizacionService.obtenerLugarUsr(this.id)
+        }, 500);
+        this.autorizacionService.obtenerLugarUsr(this.id)
           .valueChanges().
-          subscribe((favorito) => {
-            if (favorito != null) {
-              this.favorito = favorito;
+          subscribe((lugarUsr) => {
+            if (lugarUsr != null) {
+              this.lugarUsr = lugarUsr;
             } else {
-              this.favorito = {favorito: false};
+              this.autorizacionService.quitarFavorito(this.id);
+              this.autorizacionService.rehacerResenia(this.id);
+              this.autorizacionService.quitarEstoyAqui(this.id);
+              this.lugarUsr = lugarUsr;
             }
           });
-        }, 500);
       } else {
         this.loggedIn = false;
       }
@@ -86,20 +89,28 @@ export class DetalleComponent {
 
   public favorita(){
     this.autorizacionService.agregarFavorito(this.id);
+    alert("Ahora es una atracción favorita");
   }
 
   public noFavorita() {
     this.autorizacionService.quitarFavorito(this.id);
+    alert("Ya no es una atracción favorita");
   }
 
   public estoyAqui(){
     this.autorizacionService.agregarEstoyAqui(this.id);
+    alert("Ahora visitaste este lugar");
   }
 
   public guardarResenia() {
     this.resenia.propietario = this.angularFireAuth.auth.currentUser.uid;
     this.lugaresService.guardarResenia(this.resenia, this.lugar);
     alert("Reseña creada con exito");
+  }
+
+  public rehacerResenia() {
+    this.autorizacionService.rehacerResenia(this.id);
+    alert("Puedes crear una nueva reseña");
   }
 
   public range(start, stop, step) {

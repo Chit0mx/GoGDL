@@ -73,7 +73,6 @@ export class AutorizacionService {
     usuario.update({
       favorito: true
     });
-    alert("Ahora es una atracción favorita");
     this.router.navigate(['/detalle/' + idA]);
   }
 
@@ -83,7 +82,6 @@ export class AutorizacionService {
     usuario.update({
       favorito: false
     });
-    alert("Ya no es una atracción favorita");
     this.router.navigate(['/detalle/' + idA]);
   }
 
@@ -95,10 +93,38 @@ export class AutorizacionService {
   public agregarEstoyAqui(idA) {
     const $id = this.angularFireAuth.auth.currentUser.uid;
     let usuario = this.afDB.object('/users/' + $id + '/' + idA)
+    if (this.afDB.object('/users/' + $id + '/' + idA))
     usuario.update({
       Visite: true
     });
-    alert("Ahora visitaste este lugar");
+    this.router.navigate(['/detalle/' + idA]);
+  }
+
+  public quitarEstoyAqui(idA) {
+    const $id = this.angularFireAuth.auth.currentUser.uid;
+    let usuario = this.afDB.object('/users/' + $id + '/' + idA)
+    if (this.afDB.object('/users/' + $id + '/' + idA))
+    usuario.update({
+      Visite: false
+    });
+    this.router.navigate(['/detalle/' + idA]);
+  }
+
+  public hacerResenia(idA) {
+    const $id = this.angularFireAuth.auth.currentUser.uid;
+    let usuario = this.afDB.object('/users/' + $id + '/' + idA)
+    usuario.update({
+      reseniado: true
+    });
+    this.router.navigate(['/detalle/' + idA]);
+  }
+
+  public rehacerResenia(idA) {
+    const $id = this.angularFireAuth.auth.currentUser.uid;
+    let usuario = this.afDB.object('/users/' + $id + '/' + idA)
+    usuario.update({
+      reseniado: false
+    });
     this.router.navigate(['/detalle/' + idA]);
   }
 }

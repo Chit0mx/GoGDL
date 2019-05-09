@@ -11,11 +11,9 @@ import { AngularFireDatabase } from 'angularfire2/database';
 
 export class UsuarioComponent {
   title = 'GoGdl';
-  lugares =null;
-  lugaresFavoritos = null;
+  lugares:any;
   loggedUser:any = null;
   usuarioDB:any;
-  favorito:any = {};
   lat:any;
   lng:any;
   constructor(private afDB: AngularFireDatabase, private angularFireAuth: AngularFireAuth, private lugaresService: LugaresService, private autorizacionService:AutorizacionService) {
@@ -25,15 +23,12 @@ export class UsuarioComponent {
     .subscribe(lugares => {
       this.lugares = lugares;
     });
-
-    setTimeout(() => {
-      this.loggedUser = this.autorizacionService.getUser().currentUser.uid;
-      this.autorizacionService.obtenerUsuario()
-      .valueChanges().
-      subscribe(usuarioDB => {
-        this.usuarioDB = usuarioDB;
-      });
-    }, 500)
+    this.loggedUser = this.autorizacionService.getUser().currentUser.uid;
+    this.autorizacionService.obtenerUsuario()
+    .valueChanges().
+    subscribe(usuarioDB => {
+      this.usuarioDB = usuarioDB;
+    });
     navigator.geolocation.getCurrentPosition(this.mostrar);
   }
 

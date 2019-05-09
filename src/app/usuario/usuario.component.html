@@ -21,7 +21,7 @@
       <ul class="list-group">
         <ng-container *ngFor="let lugar of lugares">
           <a routerLink="/detalle/{{ lugar.id }}">
-            <li class="list-group-item" *ngIf="usuarioDB[lugar.id].favorito" >{{ lugar.nombre }}</li>
+            <li class="list-group-item" *ngIf="(usuarioDB[lugar.id].favorito == true)" >{{ lugar.nombre }}</li>
           </a>
         </ng-container>
       </ul>

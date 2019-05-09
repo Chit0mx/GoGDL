@@ -8,8 +8,8 @@
         </h4>
         <hr/>
         <div>
-          <a class="botonLS btn btn-primary" (click)="favorita()" *ngIf="loggedUser && !(favorito.favorito)">Agregar a Favoritos</a>
-          <a class="botonLS btn btn-primary" (click)="noFavorita()" *ngIf="loggedUser && (favorito.favorito)">Quitar de Favoritos</a>
+          <a class="botonLS btn btn-primary" (click)="favorita()" *ngIf="loggedUser && !(lugarUsr.favorito)">Agregar a Favoritos</a>
+          <a class="botonLS btn btn-primary" (click)="noFavorita()" *ngIf="loggedUser && (lugarUsr.favorito)">Quitar de Favoritos</a>
         </div>
         <br/>
         <h5>Categoria</h5> 
@@ -79,52 +79,55 @@
             </tr>
             </tbody>
         </table>
-    </div>
-    <agm-map [latitude]="lugar.lat" [longitude]="lugar.lng">
-        <agm-marker [latitude]="lugar.lat" [longitude]="lugar.lng"></agm-marker>
-        <agm-marker [latitude]="usuariolat" [longitude]="usuariolng"></agm-marker>
-    </agm-map>
-    <br/>
-    <ul class="list-group">
-        <li class="list-group-item" style="background-color: #b80f22; color: white ">Eventos/Promociones</li>
-        <ng-container *ngFor="let articulo of articulos">
-          <a routerLink="/articulo/{{ articulo.id }}">
-            <li class="list-group-item" *ngIf="(lugar.id == articulo.atraccion)">
-              {{articulo.titulo}}
-              <p>{{articulo.descripcion}}</p>
-            </li>
-          </a>
-        </ng-container>
-    </ul>
-    <br/>
-    <ul class="list-group">
-        <li class="list-group-item" style="background-color: #b80f22; color: white ">Reseñas</li>
-        <ng-container *ngFor="let res of resenias">
-          <li class="list-group-item">
-            {{res.titulo}}
-            <p>{{res.descripcion}}</p>
-            <p>{{res.propietario}}</p>
-          </li>
-        </ng-container>
-    </ul>
-    <div *ngIf="loggedIn && favorito.Visite">
+        <agm-map [latitude]="lugar.lat" [longitude]="lugar.lng">
+            <agm-marker [latitude]="lugar.lat" [longitude]="lugar.lng"></agm-marker>
+            <agm-marker [latitude]="usuariolat" [longitude]="usuariolng"></agm-marker>
+        </agm-map>
         <br/>
-        <h3>Lugar visitado</h3>
-        <p>
-        Ya has visitado este lugar ahora puedes crear una reseña sobre el mismo o calificar el lugar.
-        </p>
-        <div>
-          <label>Titulo de la reseña</label>
-          <input type="text" class="form-control" [(ngModel)]="resenia.titulo"/>
+        <ul class="list-group">
+            <li class="list-group-item" style="background-color: #b80f22; color: white ">Eventos/Promociones</li>
+            <ng-container *ngFor="let articulo of articulos">
+                <a routerLink="/articulo/{{ articulo.id }}">
+                    <li class="list-group-item" *ngIf="(lugar.id == articulo.atraccion)">
+                        {{articulo.titulo}}
+                        <p>{{articulo.descripcion}}</p>
+                    </li>
+                </a>
+            </ng-container>
+        </ul>
+        <br/>
+        <ul class="list-group">
+            <li class="list-group-item" style="background-color: #b80f22; color: white ">Reseñas</li>
+            <ng-container *ngFor="let res of resenias">
+                <li class="list-group-item">
+                    {{res.titulo}}
+                    <p>{{res.descripcion}}</p>
+                    <p>{{res.propietario}}</p>
+                </li>
+            </ng-container>
+        </ul>
+    </div>
+        <div *ngIf="loggedIn && lugarUsr.Visite">
+            <br/>
+            <hr/>
+            <br/>
+            <h3>Lugar visitado</h3>
+            <p>
+                Ya has visitado este lugar ahora puedes crear una reseña sobre el mismo o calificar el lugar.
+            </p>
+            <div *ngIf="loggedIn && !lugarUsr.reseniado">
+                <label>Titulo de la reseña</label>
+                <input type="text" class="form-control" [(ngModel)]="resenia.titulo"/>
+                <br/>
+                <label>Descripcion</label>
+                <textarea class="form-control" [(ngModel)]="resenia.descripcion"></textarea>
+                <br/>
+                <a class="botonLS btn btn-primary" (click)="guardarResenia()">Enviar</a>
+                <a class="btn btn-default m-3" routerLink="/detalle/{{this.id}}">Cancelar</a>
+                <br/>
+            </div>
+          <a class="botonLS btn btn-primary" *ngIf="loggedIn && lugarUsr.reseniado" (click)="rehacerResenia(resenia.id)">Rehacer la reseña</a>
           <br/>
-          <label>Descripcion</label>
-          <textarea class="form-control" [(ngModel)]="resenia.descripcion"></textarea>
-          <br/>
-          <a class="botonLS btn btn-primary" (click)="guardarResenia()">Enviar</a>
-          <a class="btn btn-default m-3" routerLink="/detalle/{{this.id}}">Cancelar</a>
-          <br/>
-        </div>  
-        <div>
           <h3>Calificar el lugar</h3>
           <div class="ec-stars-wrapper">
               <a data-value="1">
@@ -144,13 +147,12 @@
               </a>
           </div>
         </div>
-    </div>
-    <div style="text-align:center">
-        <fa-icon [icon]="faCoffee"></fa-icon>
-      </div>
+    <br/>
+    <hr/>
+    <br/>
     <a routerLink="/crear/{{lugar.id}}" class="botonLS btn btn-primary" *ngIf="(lugar.propietario == loggedUser)">Editar</a>
     <a routerLink="/crearArticulos/{{lugar.id}}" class="botonLS btn btn-primary mx-3" *ngIf="(lugar.propietario == loggedUser)">Crear Articulo</a>
-    <a class="botonLS btn btn-primary" (click)="estoyAqui()" *ngIf="loggedIn  && (this.usuariolat <= this.lugar.lat + .0003 && this.usuariolat >= this.lugar.lat - .0003 && this.usuariolng <= this.lugar.lng + .0003 && this.usuariolng >= this.lugar.lng - .0003)">Estoy Aqui</a>
+    <a class="botonLS btn btn-primary" (click)="estoyAqui()" *ngIf="loggedIn && !lugarUsr.Visite ">Estoy Aqui</a>
 </div>
 <br/>
 <app-footer></app-footer>
