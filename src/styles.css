@@ -123,19 +123,20 @@ agm-map {
 	font-size: 0;
 	display: inline-block;
 }
-.ec-stars-wrapper a {
+.ec-stars-wrapper a:not([href]) {
 	text-decoration: none;
 	display: inline-block;
 	font-size: 32px;
 	font-size: 2rem;
-	color: rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
+    cursor: pointer;
 }
 
-.ec-stars-wrapper:hover a {
-	color: rgb(184, 15, 34);
+.ec-stars-wrapper:hover:not([href]) a {
+    color: rgb(184, 15, 34);
 }
 
-.ec-stars-wrapper > a:hover ~ a {
+.ec-stars-wrapper > a:hover:not([href]) ~ a {
 	color: rgb(0, 0, 0);
 }
 

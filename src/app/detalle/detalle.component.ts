@@ -104,7 +104,6 @@ export class DetalleComponent {
   }
 
   public guardarResenia() {
-    this.resenia.propietario = this.angularFireAuth.auth.currentUser.uid;
     this.resenia.id = this.angularFireAuth.auth.currentUser.uid;
     this.lugaresService.guardarResenia(this.resenia, this.lugar);
     alert("Reseña creada con exito");
@@ -117,6 +116,10 @@ export class DetalleComponent {
 
   public traerUsuarioEspecifico(id) {
     return this.autorizacionService.obtenerUsuarioEspecifico(id);
+  }
+
+  public printN(n){
+    alert(n);
   }
 
   public range(start, stop, step) {

@@ -102,7 +102,7 @@
                 <li class="list-group-item">
                     {{res.titulo}}
                     <p>{{res.descripcion}}</p>
-                    <p>{{traerUsuarioEspecifico(res.propietario).Nombre}}</p>
+                    <p>{{traerUsuarioEspecifico(res.id).Nombre}}</p>
                 </li>
             </ng-container>
         </ul>
@@ -128,21 +128,22 @@
             </div>
           <a class="botonLS btn btn-primary" *ngIf="loggedIn && lugarUsr.reseniado" (click)="rehacerResenia(loggedUser)">Rehacer la reseña</a>
           <br/>
+          <br/>
           <h3>Calificar el lugar</h3>
           <div class="ec-stars-wrapper">
-              <a data-value="1">
+              <a (click)="printN(1)">
                   <fa-icon [icon]="faStar"></fa-icon>
               </a>
-              <a data-value="2">
+              <a (click)="printN(2)">
                   <fa-icon [icon]="faStar"></fa-icon>
               </a>
-              <a data-value="3">
+              <a (click)="printN(3)">
                   <fa-icon [icon]="faStar"></fa-icon>
               </a>
-              <a data-value="4">
+              <a (click)="printN(4)">
                   <fa-icon [icon]="faStar"></fa-icon>
               </a>
-              <a data-value="5">
+              <a (click)="printN(5)">
                   <fa-icon [icon]="faStar"></fa-icon>
               </a>
           </div>
