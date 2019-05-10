@@ -132,4 +132,22 @@ export class AutorizacionService {
     });
     this.router.navigate(['/detalle/' + idA]);
   }
+
+  public calificado(idA) {
+    const $id = this.angularFireAuth.auth.currentUser.uid;
+    let usuario = this.afDB.object('/users/' + $id + '/' + idA)
+    usuario.update({
+      calificado: true
+    });
+    this.router.navigate(['/detalle/' + idA]);
+  }
+
+  public noCalificado(idA) {
+    const $id = this.angularFireAuth.auth.currentUser.uid;
+    let usuario = this.afDB.object('/users/' + $id + '/' + idA)
+    usuario.update({
+      calificado: false
+    });
+    this.router.navigate(['/detalle/' + idA]);
+  }
 }

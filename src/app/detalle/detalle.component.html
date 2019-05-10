@@ -130,23 +130,24 @@
           <br/>
           <br/>
           <h3>Calificar el lugar</h3>
-          <div class="ec-stars-wrapper">
-              <a (click)="printN(1)">
+          <div class="ec-stars-wrapper" *ngIf="loggedIn && !lugarUsr.calificado">
+              <a (click)="calificar(1)">
                   <fa-icon [icon]="faStar"></fa-icon>
               </a>
-              <a (click)="printN(2)">
+              <a (click)="calificar(2)">
                   <fa-icon [icon]="faStar"></fa-icon>
               </a>
-              <a (click)="printN(3)">
+              <a (click)="calificar(3)">
                   <fa-icon [icon]="faStar"></fa-icon>
               </a>
-              <a (click)="printN(4)">
+              <a (click)="calificar(4)">
                   <fa-icon [icon]="faStar"></fa-icon>
               </a>
-              <a (click)="printN(5)">
+              <a (click)="calificar(5)">
                   <fa-icon [icon]="faStar"></fa-icon>
               </a>
           </div>
+          <a class="botonLS btn btn-primary" *ngIf="loggedIn && lugarUsr.calificado" (click)="reCalificar()">Cambiar la calificación</a>
         </div>
     <br/>
     <hr/>

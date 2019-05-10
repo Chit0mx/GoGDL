@@ -24,10 +24,20 @@ export class LugaresService{
   public editarLugar(lugar){
     this.afDB.database.ref('lugares/' + lugar.id).set(lugar);
   }
+
   public guardarResenia(resenia, lugar){
     this.autorizacion.hacerResenia(lugar.id);
     this.afDB.database.ref('lugares/' + lugar.id + '/resenias/' + resenia.id).set(resenia);
   }
+
+  public calificar(id){
+    this.autorizacion.calificado(id);
+  }
+
+  public reCalificar(id){
+    this.autorizacion.noCalificado(id);
+  }
+
   public obtenerResenias(id){
     return this.afDB.list('lugares/' + id + '/resenias');
   }

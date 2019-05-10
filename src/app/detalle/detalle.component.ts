@@ -71,6 +71,7 @@ export class DetalleComponent {
               this.autorizacionService.quitarFavorito(this.id);
               this.autorizacionService.rehacerResenia(this.id);
               this.autorizacionService.quitarEstoyAqui(this.id);
+              this.autorizacionService.noCalificado(this.id)
               this.lugarUsr = lugarUsr;
             }
           });
@@ -118,8 +119,14 @@ export class DetalleComponent {
     return this.autorizacionService.obtenerUsuarioEspecifico(id);
   }
 
-  public printN(n){
-    alert(n);
+  public calificar(n){
+    this.lugaresService.calificar(this.id)
+    alert(`Calificaste el lugar con ${n}`)
+  }
+
+  public reCalificar(){
+    this.lugaresService.reCalificar(this.id)
+    alert(`Ahora puedes calificar el lugar otra vez`)
   }
 
   public range(start, stop, step) {
