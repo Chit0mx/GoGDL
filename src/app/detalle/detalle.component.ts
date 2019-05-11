@@ -120,13 +120,12 @@ export class DetalleComponent {
   }
 
   public calificar(n){
-    this.lugaresService.calificar(this.id)
-    alert(`Calificaste el lugar con ${n}`)
+    this.lugaresService.calificar(this.id, n);
   }
 
-  public reCalificar(){
-    this.lugaresService.reCalificar(this.id)
-    alert(`Ahora puedes calificar el lugar otra vez`)
+  public reCalificar(n){
+    this.lugaresService.reCalificar(this.id, n);
+    alert(`Ahora puedes calificar el lugar otra vez`);
   }
 
   public range(start, stop, step) {

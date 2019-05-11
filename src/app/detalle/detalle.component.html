@@ -147,7 +147,9 @@
                   <fa-icon [icon]="faStar"></fa-icon>
               </a>
           </div>
-          <a class="botonLS btn btn-primary" *ngIf="loggedIn && lugarUsr.calificado" (click)="reCalificar()">Cambiar la calificación</a>
+          <br/>
+          <p *ngIf="loggedIn && lugarUsr.calificado">Haz calificado la atracción con un {{lugarUsr.calificacion}}</p>
+          <a class="botonLS btn btn-primary" *ngIf="loggedIn && lugarUsr.calificado" (click)="reCalificar(lugarUsr.calificacion)">Cambiar la calificación</a>
         </div>
     <br/>
     <hr/>

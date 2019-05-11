@@ -133,11 +133,12 @@ export class AutorizacionService {
     this.router.navigate(['/detalle/' + idA]);
   }
 
-  public calificado(idA) {
+  public calificado(idA, n) {
     const $id = this.angularFireAuth.auth.currentUser.uid;
     let usuario = this.afDB.object('/users/' + $id + '/' + idA)
     usuario.update({
-      calificado: true
+      calificado: true,
+      calificacion: n
     });
     this.router.navigate(['/detalle/' + idA]);
   }
@@ -146,7 +147,8 @@ export class AutorizacionService {
     const $id = this.angularFireAuth.auth.currentUser.uid;
     let usuario = this.afDB.object('/users/' + $id + '/' + idA)
     usuario.update({
-      calificado: false
+      calificado: false,
+      calificacion: 0
     });
     this.router.navigate(['/detalle/' + idA]);
   }

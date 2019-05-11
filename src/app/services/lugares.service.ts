@@ -30,12 +30,20 @@ export class LugaresService{
     this.afDB.database.ref('lugares/' + lugar.id + '/resenias/' + resenia.id).set(resenia);
   }
 
-  public calificar(id){
-    this.autorizacion.calificado(id);
+  public calificar(idlugar, numero){
+    this.autorizacion.calificado(idlugar, numero);
+    this.afDB.object(`lugares/${idlugar}/calificacion/${numero}`).query
+    .ref.transaction(calificacion => {
+       return calificacion + 1;
+    })
   }
 
-  public reCalificar(id){
-    this.autorizacion.noCalificado(id);
+  public reCalificar(idlugar, n){
+    this.autorizacion.noCalificado(idlugar);
+    this.afDB.object(`lugares/${idlugar}/calificacion/${n}`).query
+    .ref.transaction(calificacion => {
+       return calificacion - 1;
+    })
   }
 
   public obtenerResenias(id){
