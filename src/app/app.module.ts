@@ -42,9 +42,10 @@ import { RegistroComponent } from "./registro/registro.component";
 import { UsuarioComponent } from "./usuario/usuario.component";
 import { FilterPipe } from "./pipes/filter.pipe";
 import { CrearArticulosComponent } from "./articulos.crear/articulos.crear.component";
-import { ArticulosService } from './services/articulos.service';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ArticuloDetalleComponent } from './articulos.detalle/articulos.detalle.component';
+import { ArticulosService } from "./services/articulos.service";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { ArticuloDetalleComponent } from "./articulos.detalle/articulos.detalle.component";
+import { SweetAlert2Module } from "@toverux/ngx-sweetalert2";
 
 const appRoutes: Routes = [
   {
@@ -136,7 +137,7 @@ const appRoutes: Routes = [
   },
   {
     path: "articulo/:id",
-    component: ArticuloDetalleComponent,
+    component: ArticuloDetalleComponent
   }
 ];
 @NgModule({
@@ -171,6 +172,7 @@ const appRoutes: Routes = [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    SweetAlert2Module.forRoot(),
     AngularFireModule,
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -184,7 +186,12 @@ const appRoutes: Routes = [
     HttpClientModule,
     FontAwesomeModule
   ],
-  providers: [LugaresService, AutorizacionService, GuardiaService, ArticulosService],
+  providers: [
+    LugaresService,
+    AutorizacionService,
+    GuardiaService,
+    ArticulosService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
