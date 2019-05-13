@@ -7,6 +7,8 @@ import { AutorizacionService } from '../services/autorizacion.service';
 import { ArticulosService } from '../services/articulos.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { faStar, faDollarSign } from '@fortawesome/free-solid-svg-icons';
+import swal from "sweetalert2";
+
 @Component({
   selector: "app-detalle",
   templateUrl: "./detalle.component.html"
@@ -91,28 +93,48 @@ export class DetalleComponent {
 
   public favorita(){
     this.autorizacionService.agregarFavorito(this.id);
-    alert("Ahora es una atracción favorita");
+    swal.fire(
+      "Atraccion Favorita",
+      "La atraccion se a agregado a la lista de favoritos",
+      "success"
+    );
   }
 
   public noFavorita() {
     this.autorizacionService.quitarFavorito(this.id);
-    alert("Ya no es una atracción favorita");
+    swal.fire(
+      "Atraccion ya no es Favorita",
+      "La atraccion se a quitado de la lista de favoritos",
+      "info"
+    );
   }
 
   public estoyAqui(){
     this.autorizacionService.agregarEstoyAqui(this.id);
-    alert("Ahora visitaste este lugar");
+    swal.fire(
+      "Atraccion visitada",
+      "A visitado la atracción",
+      "success"
+    );
   }
 
   public guardarResenia() {
     this.resenia.id = this.angularFireAuth.auth.currentUser.uid;
     this.lugaresService.guardarResenia(this.resenia, this.lugar);
-    alert("Reseña creada con exito");
+    swal.fire(
+      "Reseña creada con exito",
+      "Se a creado una reseña",
+      "success"
+    );
   }
 
   public rehacerResenia(idUsr) {
     this.lugaresService.borrarResenia(this.id, idUsr);
-    alert("Puedes crear una nueva reseña");
+    swal.fire(
+      "Ahora se puede crear otra reseña",
+      "Ya es posible de crear o modificar la reseña",
+      "info"
+    );
   }
 
   public traerUsuarioEspecifico(id) {
@@ -125,7 +147,11 @@ export class DetalleComponent {
 
   public reCalificar(n){
     this.lugaresService.reCalificar(this.id, n);
-    alert(`Ahora puedes calificar el lugar otra vez`);
+    swal.fire(
+      "Ya se puede calificar el lugar",
+      "Es posible volver a calificar el lugar",
+      "info"
+    );
   }
 
   public mostrarCal(n1, n2, n3, n4, n5, n) {

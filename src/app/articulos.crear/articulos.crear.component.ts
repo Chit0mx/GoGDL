@@ -4,6 +4,7 @@ import { AngularFireStorage } from 'angularfire2/storage';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { ArticulosService } from '../services/articulos.service';
+import swal from "sweetalert2";
 
 @Component({
   selector: "app-crearArticulos",
@@ -32,7 +33,11 @@ export class CrearArticulosComponent {
       const filePath = "articulos/" + this.articulo.id;
       const fileRef = this.storage.ref(filePath);
       const task = this.storage.upload(filePath, this.file);
-      alert("Evento/promoción Guardada con exito");
+      swal.fire(
+        "Evento/Promoción creada con exito",
+        "Se a creado un evento o promoción",
+        "success"
+      );
       this.router.navigate(['/detalle/' + this.articulo]);
   }
 
