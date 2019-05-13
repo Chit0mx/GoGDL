@@ -46,6 +46,7 @@ import { ArticulosService } from './services/articulos.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ArticuloDetalleComponent } from './articulos.detalle/articulos.detalle.component';
 import { OnCreate } from './directives/onCreate.directive';
+import { ReporteComponent } from './reporte/reporte.component';
 
 const appRoutes: Routes = [
   {
@@ -138,6 +139,10 @@ const appRoutes: Routes = [
   {
     path: "articulo/:id",
     component: ArticuloDetalleComponent,
+  },
+  {
+    path: "reporte/:id",
+    component:ReporteComponent,
   }
 ];
 @NgModule({
@@ -167,7 +172,8 @@ const appRoutes: Routes = [
     UsuarioComponent,
     FilterPipe,
     CrearArticulosComponent,
-    ArticuloDetalleComponent
+    ArticuloDetalleComponent,
+    ReporteComponent
   ],
   imports: [
     BrowserModule,
