@@ -6,9 +6,7 @@ import { AngularFireStorage } from 'angularfire2/storage';
 import { AutorizacionService } from '../services/autorizacion.service';
 import { ArticulosService } from '../services/articulos.service';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
-
+import { faStar, faDollarSign } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: "app-detalle",
   templateUrl: "./detalle.component.html"
@@ -31,6 +29,8 @@ export class DetalleComponent {
   resenias: any = {};
   faStar = faStar;
   faDollarSign = faDollarSign;
+  cal:any = {};
+  promedio = 0;
   constructor (private autorizacionService:AutorizacionService, private storage: AngularFireStorage, private route:ActivatedRoute, private lugaresService:LugaresService, private articuloService:ArticulosService, private angularFireAuth: AngularFireAuth){
     this.id = this.route.snapshot.params['id'];
     const ref = this.storage.ref('atracciones/' + this.id);
@@ -127,6 +127,17 @@ export class DetalleComponent {
     this.lugaresService.reCalificar(this.id, n);
     alert(`Ahora puedes calificar el lugar otra vez`);
   }
+
+  public mostrarCal(n1, n2, n3, n4, n5, n) {
+    this.promedio = Math.round((5 * n5 + 4 * n4 + 3 * n3 + 2 * n2 + 1 * n1) / (n5 + n4 + n3 + n2 + n1)*1000)/1000;
+    debugger;
+    if (n <= this.promedio) {
+      this.cal[n] = true;
+    } else {
+      this.cal[n] = false;
+    }
+  }
+
 
   public range(start, stop, step) {
     if (typeof stop == 'undefined') {

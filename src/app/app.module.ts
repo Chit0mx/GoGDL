@@ -45,6 +45,7 @@ import { CrearArticulosComponent } from "./articulos.crear/articulos.crear.compo
 import { ArticulosService } from './services/articulos.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ArticuloDetalleComponent } from './articulos.detalle/articulos.detalle.component';
+import { OnCreate } from './directives/onCreate.directive';
 
 const appRoutes: Routes = [
   {
@@ -144,6 +145,7 @@ const appRoutes: Routes = [
     AppComponent,
     ResaltarDirective,
     ContarClicksDirective,
+    OnCreate,
     DetalleComponent,
     LugaresComponent,
     AntrosComponent,
