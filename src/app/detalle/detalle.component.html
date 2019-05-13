@@ -23,6 +23,15 @@
           </ng-container>
         </div> 
         <br/>
+        <h5>Calificacion</h5> 
+        <div class="precio">
+          <ng-container *ngFor="let i of range(1, 6, 1)">
+            <fa-icon [icon]="faStar" *ngIf="(cal[i] == true)"></fa-icon>
+            <span (onCreate)="mostrarCal(lugar.calificacion[1], lugar.calificacion[2], lugar.calificacion[3], lugar.calificacion[4], lugar.calificacion[5], i)"></span>
+          </ng-container>
+        </div>
+        <p>El lugar tiene una calificacion de {{promedio}}</p>
+        <br/>
         <ul class="list-group">
             <li class="list-group-item" style="background-color: #b80f22; color: white ">Amenidades</li>
             <li class="list-group-item" *ngIf="lugar.estacionamiento">Estacionamiento</li>
