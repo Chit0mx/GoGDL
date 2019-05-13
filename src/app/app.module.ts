@@ -42,17 +42,11 @@ import { RegistroComponent } from "./registro/registro.component";
 import { UsuarioComponent } from "./usuario/usuario.component";
 import { FilterPipe } from "./pipes/filter.pipe";
 import { CrearArticulosComponent } from "./articulos.crear/articulos.crear.component";
-<<<<<<< HEAD
 import { ArticulosService } from "./services/articulos.service";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { ArticuloDetalleComponent } from "./articulos.detalle/articulos.detalle.component";
+import { OnCreate } from "./directives/onCreate.directive";
 import { SweetAlert2Module } from "@toverux/ngx-sweetalert2";
-=======
-import { ArticulosService } from './services/articulos.service';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ArticuloDetalleComponent } from './articulos.detalle/articulos.detalle.component';
-import { OnCreate } from './directives/onCreate.directive';
->>>>>>> 30e413577963f576fb9fdd9cce5f39897e5f8288
 
 const appRoutes: Routes = [
   {
