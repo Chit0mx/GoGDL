@@ -1,9 +1,10 @@
 import { Component } from "@angular/core";
 import { LugaresService } from "../services/lugares.service";
 import { ActivatedRoute } from "@angular/router";
-import { Observable } from 'rxjs';
-import { AngularFireStorage } from 'angularfire2/storage';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { Observable } from "rxjs";
+import { AngularFireStorage } from "angularfire2/storage";
+import { AngularFireAuth } from "angularfire2/auth";
+import swal from "sweetalert2";
 
 @Component({
   selector: "app-crear",
@@ -33,7 +34,8 @@ export class CrearComponent {
   }
 
   guardarLugar() {
-    var direccion = this.lugar.calle + "," + this.lugar.ciudad + "," + this.lugar.pais;
+    var direccion =
+      this.lugar.calle + "," + this.lugar.ciudad + "," + this.lugar.pais;
     this.lugaresService.obtenerGeoData(direccion).subscribe((result: any) => {
       this.lugar.lat = result.results[0].geometry.location.lat;
       this.lugar.lng = result.results[0].geometry.location.lng;
@@ -43,16 +45,24 @@ export class CrearComponent {
         this.storage.ref(filePath).delete();
         const fileRef = this.storage.ref(filePath);
         const task = this.storage.upload(filePath, this.file);
-        alert("Atraccion Editada con exito");
+        swal.fire(
+          "Atraccion Editada",
+          "Tu atraccion se a editado con exito",
+          "success"
+        );
       } else {
         this.lugar.id = Date.now();
         this.lugar.propietario = this.angularFireAuth.auth.currentUser.uid;
-        this.lugar.calificacion = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
+        this.lugar.calificacion = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
         this.lugaresService.guardarLugar(this.lugar);
         const filePath = "atracciones/" + this.lugar.id;
         const fileRef = this.storage.ref(filePath);
         const task = this.storage.upload(filePath, this.file);
-        alert("Atraccion Guardada con exito");
+        swal.fire(
+          "Atraccion Creada!",
+          "Tu atraccion se a creado con exito",
+          "success"
+        );
       }
       this.lugar = {};
     });

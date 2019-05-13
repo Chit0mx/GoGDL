@@ -47,6 +47,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ArticuloDetalleComponent } from './articulos.detalle/articulos.detalle.component';
 import { OnCreate } from './directives/onCreate.directive';
 import { ReporteComponent } from './reporte/reporte.component';
+import { SweetAlert2Module } from "@toverux/ngx-sweetalert2";
 
 const appRoutes: Routes = [
   {
@@ -179,6 +180,7 @@ const appRoutes: Routes = [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    SweetAlert2Module.forRoot(),
     AngularFireModule,
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -192,7 +194,12 @@ const appRoutes: Routes = [
     HttpClientModule,
     FontAwesomeModule
   ],
-  providers: [LugaresService, AutorizacionService, GuardiaService, ArticulosService],
+  providers: [
+    LugaresService,
+    AutorizacionService,
+    GuardiaService,
+    ArticulosService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
