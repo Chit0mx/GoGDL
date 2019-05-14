@@ -48,6 +48,7 @@ import { ArticuloDetalleComponent } from './articulos.detalle/articulos.detalle.
 import { OnCreate } from './directives/onCreate.directive';
 import { ReporteComponent } from './reporte/reporte.component';
 import { SweetAlert2Module } from "@toverux/ngx-sweetalert2";
+import { ReporteAtraccionComponent } from './reporte.atraccion/reporte.atraccion.component';
 
 const appRoutes: Routes = [
   {
@@ -142,8 +143,12 @@ const appRoutes: Routes = [
     component: ArticuloDetalleComponent,
   },
   {
-    path: "reporte/:id",
+    path: "reporte",
     component:ReporteComponent,
+  },
+  {
+    path: "reporteAtraccion/:id/:p",
+    component: ReporteAtraccionComponent,
   }
 ];
 @NgModule({
@@ -174,7 +179,8 @@ const appRoutes: Routes = [
     FilterPipe,
     CrearArticulosComponent,
     ArticuloDetalleComponent,
-    ReporteComponent
+    ReporteComponent,
+    ReporteAtraccionComponent
   ],
   imports: [
     BrowserModule,

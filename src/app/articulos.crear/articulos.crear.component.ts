@@ -38,7 +38,7 @@ export class CrearArticulosComponent {
         "Se a creado un evento o promoción",
         "success"
       );
-      this.router.navigate(['/detalle/' + this.articulo]);
+      this.router.navigate(['/detalle/' + this.id]);
   }
 
   uploadFile(event) {

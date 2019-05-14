@@ -39,6 +39,7 @@ export class AutorizacionService {
           .set({
             Nombre: nombre,
             Apellido: apellido,
+            Email: email,
             Empresario: false
           });
         this.router.navigate(["inicio"]);
@@ -55,7 +56,7 @@ export class AutorizacionService {
     const $id = this.angularFireAuth.auth.currentUser.uid;
     return this.afDB.object("users/" + $id);
   }
-
+  
   public obtenerUsuarioEspecifico(id) {
     return this.afDB.object("users/" + id);
   }

@@ -156,7 +156,6 @@ export class DetalleComponent {
 
   public mostrarCal(n1, n2, n3, n4, n5, n) {
     this.promedio = Math.round((5 * n5 + 4 * n4 + 3 * n3 + 2 * n2 + 1 * n1) / (n5 + n4 + n3 + n2 + n1)*1000)/1000;
-    debugger;
     if (n <= this.promedio) {
       this.cal[n] = true;
     } else {

@@ -168,6 +168,6 @@
     <a class="botonLS btn btn-primary" (click)="estoyAqui()" *ngIf="loggedIn && !lugarUsr.Visite && (this.usuariolat <= this.lugar.lat + .0003 && this.usuariolat >= this.lugar.lat - .0003 && this.usuariolng <= this.lugar.lng + .0003 && this.usuariolng >= this.lugar.lng - .0003)">Estoy Aqui</a>
 </div>
 <br/>
-<app-footer></app-footer>
+<app-footer [atraccion]="id" [propietario]="lugar.propietario"></app-footer>
 
 
