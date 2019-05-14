@@ -5,9 +5,16 @@
         <h2>Reportar</h2>
         <br/>
         <p>En esta seccion se puede enviar un email, para reportar algún asunto relacionado con la atracción {{lugar.nombre}}</p>
-        <h5>¿Tiene algun inconveniente con la atraccion?</h5>
+        <h5>¿Decida un motivo del reporte?</h5>
         <br/>
-        <a href="mailto:{{usuario.Email}}?subject=Reportar GoGDL" style="color:black; font-size: 120px;"><fa-icon [icon]="faEnvelope"></fa-icon></a>
+        <a href="mailto:{{usuario.Email}}?subject=Reporte de usuario con motivo de retroalimentacion" class="reporte">
+          <h5>Retroalimentación</h5>
+          <fa-icon [icon]="faEnvelope"></fa-icon>
+        </a>
+        <a href="mailto:{{usuario.Email}}?subject=Reporte de usuario con motivo de soporte tecnico" class="reporte">
+          <h5>Soporte tecnico</h5>
+          <fa-icon [icon]="faEnvelope"></fa-icon>
+        </a>
       </div>
     </div>
   </div>
