@@ -7,18 +7,22 @@ import { Observable } from 'rxjs';
 export class ArticulosService{
   profileUrl: Observable<string | null>;
   
-  constructor (private afDB: AngularFireDatabase, private http: HttpClient){}
+  constructor (private afDB: AngularFireDatabase, private http: HttpClient) {
+  }
   public getArticulos(){
       return this.afDB.list('articulos/');
   }
   public getArticulo(idA){
     return this.afDB.object('articulos/' +  idA);
-}
+  }
   public guardarArticulo(articulo){
     this.afDB.database.ref('articulos/' + articulo.id).set(articulo);
   }
   public editarArticulo(articulo){
     this.afDB.database.ref('articulos/' + articulo.id).set(articulo);
+  }
+  public borrarArticulo(idA){
+    return this.afDB.database.ref('articulos/' +  idA).remove();
   }
 }
 

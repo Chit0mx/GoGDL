@@ -139,7 +139,7 @@ const appRoutes: Routes = [
     canActivate: [GuardiaService]
   },
   {
-    path: "articulo/:id",
+    path: "articulo/:idlugar/:id",
     component: ArticuloDetalleComponent,
   },
   {

@@ -1,18 +1,26 @@
 <div class="container">
-        <h1 class="m-4">{{articulo.titulo}}</h1>
+        <h1 class="m-4">{{ lugar.nombre }}</h1>
+        <h2 class="m-4">{{ articulo.titulo }}</h2>
         <div class="card card-body bg-light">
             <img [src]="articuloURL | async" width="100%" height="auto"/>
+            <br/>
+            <input type="hidden" value="{{articulo.lugar}}" [value]="this.idLugar"/>
             <br/>
             <h4>
                 {{articulo.descripcion}}
             </h4>
+            <h6>Duracion:</h6>
             <p>
                 Empieza: {{articulo.empieza}}                                            
                 <br/>
                 Termina: {{articulo.termina}}
             </p>
             <br/>
+            <div with="200px">
+                <a class="botonLS btn btn-primary" (click)="eliminarAtraccion()" *ngIf="loggedIn && (loggedUser == lugar.propietario)">Eliminar Evento/promoción</a>    
+            </div>
         </div>
+        <br/>
 </div>
 <app-footer></app-footer>
     

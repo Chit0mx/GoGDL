@@ -30,6 +30,7 @@ export class AppComponent {
     }, (error) => {
       this.loggedIn = false;
     })
+    
   }
   logout(){
     this.autorizacionService.logout();
