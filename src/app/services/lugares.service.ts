@@ -14,9 +14,12 @@ export class LugaresService{
   }
   public getLugar(id){
     return this.afDB.object('lugares/' + id);
-}
+  }
   public buscarlugar(id){
     return this.afDB.object('lugares/'+ id);
+  }
+  public borrarLugar(id){
+    return this.afDB.database.ref('lugares/' + id).remove();
   }
   public guardarLugar(lugar){
     this.afDB.database.ref('lugares/' + lugar.id).set(lugar);

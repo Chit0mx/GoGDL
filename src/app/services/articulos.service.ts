@@ -22,7 +22,7 @@ export class ArticulosService{
     this.afDB.database.ref('articulos/' + articulo.id).set(articulo);
   }
   public borrarArticulo(idA){
-    return this.afDB.database.ref('articulos/' +  idA).remove();
+    this.afDB.database.ref('articulos/' +  idA).remove();
   }
 }
 

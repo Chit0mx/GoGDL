@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { LugaresService } from "../services/lugares.service";
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from 'angularfire2/storage';
@@ -33,7 +33,14 @@ export class DetalleComponent {
   faDollarSign = faDollarSign;
   cal:any = {};
   promedio = 0;
-  constructor (private autorizacionService:AutorizacionService, private storage: AngularFireStorage, private route:ActivatedRoute, private lugaresService:LugaresService, private articuloService:ArticulosService, private angularFireAuth: AngularFireAuth){
+  constructor (private autorizacionService:AutorizacionService, 
+    private storage: AngularFireStorage, 
+    private route:ActivatedRoute, 
+    private lugaresService:LugaresService, 
+    private articuloService:ArticulosService, 
+    private angularFireAuth: AngularFireAuth,
+    private router: Router
+    ){
     this.id = this.route.snapshot.params['id'];
     const ref = this.storage.ref('atracciones/' + this.id);
     this.profileUrl = ref.getDownloadURL();
@@ -163,6 +170,45 @@ export class DetalleComponent {
     }
   }
 
+  public eliminarAtraccion() {
+    swal.fire({
+      title: '¿Esta seguro que desea eliminar su atacción?',
+      text: "No podra deshacer esto, su atraccion ya no estara disponible en GoGDL",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar la atracción'
+    }).then((result) => {
+      if (result.value) {
+        this.lugaresService.borrarLugar(this.id);
+        this.router.navigate(["/destacados"]);
+        swal.fire(
+          "Atraccion eliminada",
+          "Sea eliminado la atraccion con exito",
+          "info"
+        );
+      }
+    })
+  }
+
+  public eliminarArticuloAutomaticamente(idA, dia) {
+    let date = new Date().toISOString();
+    let diaHoy = new Date(date);
+    let d = new Date(dia);
+    if (d < diaHoy) {
+      this.articuloService.borrarArticulo(idA);
+      this.router.navigate([`/detalle/${this.id}`]).then(mesagge => {console.log(`Eliminado el evento ${mesagge}`)
+    }).catch(message => console.log(`no se pudo ${message}`));
+      swal.fire(
+        "La promocion o evento se termino",
+        "Ya no esta disponible esta promociones o eventos",
+        "info"
+      );
+    } else {
+      this.router.navigate([`/articulo/${this.id}/${idA}`]);
+    }
+  }
 
   public range(start, stop, step) {
     if (typeof stop == 'undefined') {

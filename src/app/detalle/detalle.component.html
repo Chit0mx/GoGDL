@@ -96,7 +96,7 @@
         <ul class="list-group">
             <li class="list-group-item" style="background-color: #b80f22; color: white ">Eventos/Promociones</li>
             <ng-container *ngFor="let articulo of articulos">
-                <a routerLink="/articulo/{{ id }}/{{ articulo.id }}">
+                <a (click)="eliminarArticuloAutomaticamente(articulo.id, articulo.termina)">
                     <li class="list-group-item" *ngIf="(lugar.id == articulo.atraccion)">
                         {{articulo.titulo}}
                         <p>{{articulo.descripcion}}</p>
@@ -166,6 +166,7 @@
     <a routerLink="/crear/{{lugar.id}}" class="botonLS btn btn-primary" *ngIf="(lugar.propietario == loggedUser)">Editar</a>
     <a routerLink="/crearArticulos/{{lugar.id}}" class="botonLS btn btn-primary mx-3" *ngIf="(lugar.propietario == loggedUser)">Crear Articulo</a>
     <a class="botonLS btn btn-primary" (click)="estoyAqui()" *ngIf="loggedIn && !lugarUsr.Visite && (this.usuariolat <= this.lugar.lat + .0003 && this.usuariolat >= this.lugar.lat - .0003 && this.usuariolng <= this.lugar.lng + .0003 && this.usuariolng >= this.lugar.lng - .0003)">Estoy Aqui</a>
+    <a class="botonLS btn btn-primary" (click)="eliminarAtraccion()" *ngIf="loggedIn && (lugar.propietario == loggedUser)">Eliminar la atracción</a>
 </div>
 <br/>
 <app-footer [atraccion]="id" [propietario]="lugar.propietario"></app-footer>
