@@ -1,175 +1,293 @@
+<div id="fb-root"></div>
+<script
+  async
+  defer
+  crossorigin="anonymous"
+  src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.3"
+></script>
+
 <div class="container">
-    <h1 class="m-4">{{lugar.nombre}}</h1>
-    <div class="card card-body bg-light">
-        <img [src]="profileUrl | async" width="100%" height="auto"/>
-        <br/>
-        <h4>
-            {{lugar.descripcion}}
-        </h4>
-        <hr/>
-        <div>
-          <a class="botonLS btn btn-primary" (click)="favorita()" *ngIf="loggedUser && !(lugarUsr.favorito)">Agregar a Favoritos</a>
-          <a class="botonLS btn btn-primary" (click)="noFavorita()" *ngIf="loggedUser && (lugarUsr.favorito)">Quitar de Favoritos</a>
-        </div>
-        <br/>
-        <h5>Categoria</h5> 
-        <b>{{lugar.categoria}}</b>
-        <br/>
-        <h5>Precio</h5> 
-        De un rango de 1 a 5 siendo 5 más costoso 
-        <div class="precio">
-          <ng-container *ngFor="let i of range(0, lugar.precio, 1)">
-            <fa-icon [icon]="faDollarSign"></fa-icon>
-          </ng-container>
-        </div> 
-        <br/>
-        <h5>Calificacion</h5> 
-        <div class="precio">
-          <ng-container *ngFor="let i of range(1, 6, 1)">
-            <fa-icon [icon]="faStar" *ngIf="(cal[i] == true)"></fa-icon>
-            <span (onCreate)="mostrarCal(lugar.calificacion[1], lugar.calificacion[2], lugar.calificacion[3], lugar.calificacion[4], lugar.calificacion[5], i)"></span>
-          </ng-container>
-        </div>
-        <p>El lugar tiene una calificacion de {{promedio}}</p>
-        <br/>
-        <ul class="list-group">
-            <li class="list-group-item" style="background-color: #b80f22; color: white ">Amenidades</li>
-            <li class="list-group-item" *ngIf="lugar.estacionamiento">Estacionamiento</li>
-            <li class="list-group-item" *ngIf="lugar.wifi">Wifi</li>
-            <li class="list-group-item" *ngIf="lugar.ac">Aire acondicionado</li>
-            <li class="list-group-item" *ngIf="lugar.sd">Servicio a domicilio</li>
-            <li class="list-group-item" *ngIf="lugar.tarjeta">Pago con tarjeta</li>
-            <li class="list-group-item" *ngIf="lugar.reservaciones">Reservaciones</li>
-        </ul>
-        <br/>
-        <table class="table" >
-            <thead style="background-color: #b80f22; color: white ">
-            <tr>
-                <th scope="col">Dia</th>
-                <th scope="col">Apertura</th>
-                <th scope="col">Cierre</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">Lunes</th>
-                <td>{{lugar.lunesabrir}}</td>
-                <td>{{lugar.lunescerrar}}</td>
-            </tr>
-            <tr>
-                <th scope="row">Martes</th>
-                <td>{{lugar.martesabrir}}</td>
-                <td>{{lugar.martescerrar}}</td>
-            </tr>
-            <tr>
-                <th scope="row">Miercoles</th>
-                <td>{{lugar.miercolesabrir}}</td>
-                <td>{{lugar.miercolescerrar}}</td>
-            </tr>
-            <tr>
-                <th scope="row">Jueves</th>
-                <td>{{lugar.juevesabrir}}</td>
-                <td>{{lugar.juevescerrar}}</td>
-            </tr>
-            <tr>
-                <th scope="row">Viernes</th>
-                <td>{{lugar.viernesabrir}}</td>
-                <td>{{lugar.viernescerrar}}</td>
-            </tr>
-            <tr>
-                <th scope="row">Sabado</th>
-                <td>{{lugar.sabadoabrir}}</td>
-                <td>{{lugar.sabadocerrar}}</td>
-            </tr>
-            <tr>
-                <th scope="row">Domingo</th>
-                <td>{{lugar.domingoabrir}}</td>
-                <td>{{lugar.domingocerrar}}</td>
-            </tr>
-            </tbody>
-        </table>
-        <agm-map [latitude]="lugar.lat" [longitude]="lugar.lng">
-            <agm-marker [latitude]="lugar.lat" [longitude]="lugar.lng"></agm-marker>
-            <agm-marker [latitude]="usuariolat" [longitude]="usuariolng"></agm-marker>
-        </agm-map>
-        <br/>
-        <ul class="list-group">
-            <li class="list-group-item" style="background-color: #b80f22; color: white ">Eventos/Promociones</li>
-            <ng-container *ngFor="let articulo of articulos">
-                <a (click)="eliminarArticuloAutomaticamente(articulo.id, articulo.termina)">
-                    <li class="list-group-item" *ngIf="(lugar.id == articulo.atraccion)">
-                        {{articulo.titulo}}
-                        <p>{{articulo.descripcion}}</p>
-                    </li>
-                </a>
-            </ng-container>
-        </ul>
-        <br/>
-        <ul class="list-group">
-            <li class="list-group-item" style="background-color: #b80f22; color: white ">Reseñas</li>
-            <ng-container *ngFor="let res of resenias">
-                <li class="list-group-item">
-                    {{res.titulo}}
-                    <p>{{res.descripcion}}</p>
-                    <p>{{traerUsuarioEspecifico(res.id).Nombre}}</p>
-                </li>
-            </ng-container>
-        </ul>
+  <h1 class="m-4">{{ lugar.nombre }}</h1>
+  <div class="card card-body bg-light">
+    <img [src]="profileUrl | async" width="100%" height="auto" />
+    <br />
+    <h4>
+      {{ lugar.descripcion }}
+    </h4>
+    <hr />
+    <div>
+      <a
+        class="botonLS btn btn-primary"
+        style="background-color: #b80f22; color: white "
+        (click)="favorita()"
+        *ngIf="loggedUser && !lugarUsr.favorito"
+        >Agregar a Favoritos</a
+      >
+      <a
+        class="botonLS btn btn-primary"
+        style="background-color: #b80f22; color: white "
+        (click)="noFavorita()"
+        *ngIf="loggedUser && lugarUsr.favorito"
+        >Quitar de Favoritos</a
+      >
+      <div
+        class="botonLS btn btn-primary"
+        style="background-color: #b80f22; color: white "
+        data-href="https://github.com/Chit0mx/gogdl"
+        data-layout="button"
+        data-size="large"
+      >
+        <!--apartir del .com%2 poner el link del lo que se quiere compartir cambiar el link de referencia-->
+        <a
+          style="background-color: #b80f22; color: white "
+          target="_blank"
+          href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgithub.com%2FChit0mx%2Fgogdl&amp;src=sdkpreparse"
+          class="fb-xfbml-parse-ignore"
+          >Compartir en facebook</a
+        >
+      </div>
     </div>
-        <div *ngIf="loggedIn && lugarUsr.Visite">
-            <br/>
-            <hr/>
-            <br/>
-            <h3>Lugar visitado</h3>
-            <p>
-                Ya has visitado este lugar ahora puedes crear una reseña sobre el mismo o calificar el lugar.
-            </p>
-            <div *ngIf="loggedIn && !lugarUsr.reseniado">
-                <label>Titulo de la reseña</label>
-                <input type="text" class="form-control" [(ngModel)]="resenia.titulo"/>
-                <br/>
-                <label>Descripcion</label>
-                <textarea class="form-control" [(ngModel)]="resenia.descripcion"></textarea>
-                <br/>
-                <a class="botonLS btn btn-primary" (click)="guardarResenia()">Enviar</a>
-                <a class="btn btn-default m-3" routerLink="/detalle/{{this.id}}">Cancelar</a>
-                <br/>
-            </div>
-          <a class="botonLS btn btn-primary" *ngIf="loggedIn && lugarUsr.reseniado" (click)="rehacerResenia(loggedUser)">Rehacer la reseña</a>
-          <br/>
-          <br/>
-          <h3>Calificar el lugar</h3>
-          <div class="ec-stars-wrapper" *ngIf="loggedIn && !lugarUsr.calificado">
-              <a (click)="calificar(1)">
-                  <fa-icon [icon]="faStar"></fa-icon>
-              </a>
-              <a (click)="calificar(2)">
-                  <fa-icon [icon]="faStar"></fa-icon>
-              </a>
-              <a (click)="calificar(3)">
-                  <fa-icon [icon]="faStar"></fa-icon>
-              </a>
-              <a (click)="calificar(4)">
-                  <fa-icon [icon]="faStar"></fa-icon>
-              </a>
-              <a (click)="calificar(5)">
-                  <fa-icon [icon]="faStar"></fa-icon>
-              </a>
-          </div>
-          <br/>
-          <p *ngIf="loggedIn && lugarUsr.calificado">Haz calificado la atracción con un {{lugarUsr.calificacion}}</p>
-          <a class="botonLS btn btn-primary" *ngIf="loggedIn && lugarUsr.calificado" (click)="reCalificar(lugarUsr.calificacion)">Cambiar la calificación</a>
-        </div>
-    <br/>
-    <hr/>
-    <br/>
-    <a class="botonLS btn btn-primary" (click)="estoyAqui()" *ngIf="loggedIn && !lugarUsr.Visite && (this.usuariolat <= this.lugar.lat + .0003 && this.usuariolat >= this.lugar.lat - .0003 && this.usuariolng <= this.lugar.lng + .0003 && this.usuariolng >= this.lugar.lng - .0003)">Estoy Aqui</a>
-    <a routerLink="/crear/{{lugar.id}}" class="botonLS btn btn-primary mx-3" *ngIf="(lugar.propietario == loggedUser)">Editar</a>
-    <a routerLink="/crearArticulos/{{lugar.id}}" class="botonLS btn btn-primary" *ngIf="(lugar.propietario == loggedUser)">Crear Evento/Promoción</a>
-    <a class="botonLS btn btn-primary mx-3" (click)="eliminarAtraccion()" *ngIf="loggedIn && (lugar.propietario == loggedUser)">Eliminar</a>
-    <a class="botonLS btn btn-primary" (click)="ocultarLugar(lugar)" *ngIf="loggedIn && (lugar.propietario == loggedUser)">Ocultar</a>
+    <br />
+    <h5>Categoria</h5>
+    <b>{{ lugar.categoria }}</b>
+    <br />
+    <h5>Precio</h5>
+    De un rango de 1 a 5 siendo 5 más costoso
+    <div class="precio">
+      <ng-container *ngFor="let i of range(0, lugar.precio, 1)">
+        <fa-icon [icon]="faDollarSign"></fa-icon>
+      </ng-container>
+    </div>
+    <br />
+    <h5>Calificacion</h5>
+    <div class="precio">
+      <ng-container *ngFor="let i of range(1, 6, 1)">
+        <fa-icon [icon]="faStar" *ngIf="cal[i] == true"></fa-icon>
+        <span
+          (onCreate)="
+            mostrarCal(
+              lugar.calificacion[1],
+              lugar.calificacion[2],
+              lugar.calificacion[3],
+              lugar.calificacion[4],
+              lugar.calificacion[5],
+              i
+            )
+          "
+        ></span>
+      </ng-container>
+    </div>
+    <p>El lugar tiene una calificacion de {{ promedio }}</p>
+    <br />
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        style="background-color: #b80f22; color: white "
+      >
+        Amenidades
+      </li>
+      <li class="list-group-item" *ngIf="lugar.estacionamiento">
+        Estacionamiento
+      </li>
+      <li class="list-group-item" *ngIf="lugar.wifi">Wifi</li>
+      <li class="list-group-item" *ngIf="lugar.ac">Aire acondicionado</li>
+      <li class="list-group-item" *ngIf="lugar.sd">Servicio a domicilio</li>
+      <li class="list-group-item" *ngIf="lugar.tarjeta">Pago con tarjeta</li>
+      <li class="list-group-item" *ngIf="lugar.reservaciones">Reservaciones</li>
+    </ul>
+    <br />
+    <table class="table">
+      <thead style="background-color: #b80f22; color: white ">
+        <tr>
+          <th scope="col">Dia</th>
+          <th scope="col">Apertura</th>
+          <th scope="col">Cierre</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Lunes</th>
+          <td>{{ lugar.lunesabrir }}</td>
+          <td>{{ lugar.lunescerrar }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Martes</th>
+          <td>{{ lugar.martesabrir }}</td>
+          <td>{{ lugar.martescerrar }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Miercoles</th>
+          <td>{{ lugar.miercolesabrir }}</td>
+          <td>{{ lugar.miercolescerrar }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Jueves</th>
+          <td>{{ lugar.juevesabrir }}</td>
+          <td>{{ lugar.juevescerrar }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Viernes</th>
+          <td>{{ lugar.viernesabrir }}</td>
+          <td>{{ lugar.viernescerrar }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Sabado</th>
+          <td>{{ lugar.sabadoabrir }}</td>
+          <td>{{ lugar.sabadocerrar }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Domingo</th>
+          <td>{{ lugar.domingoabrir }}</td>
+          <td>{{ lugar.domingocerrar }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <agm-map [latitude]="lugar.lat" [longitude]="lugar.lng">
+      <agm-marker [latitude]="lugar.lat" [longitude]="lugar.lng"></agm-marker>
+      <agm-marker [latitude]="usuariolat" [longitude]="usuariolng"></agm-marker>
+    </agm-map>
+    <br />
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        style="background-color: #b80f22; color: white "
+      >
+        Eventos/Promociones
+      </li>
+      <ng-container *ngFor="let articulo of articulos">
+        <a
+          (click)="
+            eliminarArticuloAutomaticamente(articulo.id, articulo.termina)
+          "
+        >
+          <li class="list-group-item" *ngIf="lugar.id == articulo.atraccion">
+            {{ articulo.titulo }}
+            <p>{{ articulo.descripcion }}</p>
+          </li>
+        </a>
+      </ng-container>
+    </ul>
+    <br />
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        style="background-color: #b80f22; color: white "
+      >
+        Reseñas
+      </li>
+      <ng-container *ngFor="let res of resenias">
+        <li class="list-group-item">
+          {{ res.titulo }}
+          <p>{{ res.descripcion }}</p>
+          <p>{{ traerUsuarioEspecifico(res.id).Nombre }}</p>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+  <div *ngIf="loggedIn && lugarUsr.Visite">
+    <br />
+    <hr />
+    <br />
+    <h3>Lugar visitado</h3>
+    <p>
+      Ya has visitado este lugar ahora puedes crear una reseña sobre el mismo o
+      calificar el lugar.
+    </p>
+    <div *ngIf="loggedIn && !lugarUsr.reseniado">
+      <label>Titulo de la reseña</label>
+      <input type="text" class="form-control" [(ngModel)]="resenia.titulo" />
+      <br />
+      <label>Descripcion</label>
+      <textarea
+        class="form-control"
+        [(ngModel)]="resenia.descripcion"
+      ></textarea>
+      <br />
+      <a class="botonLS btn btn-primary" (click)="guardarResenia()">Enviar</a>
+      <a class="btn btn-default m-3" routerLink="/detalle/{{ this.id }}"
+        >Cancelar</a
+      >
+      <br />
+    </div>
+    <a
+      class="botonLS btn btn-primary"
+      *ngIf="loggedIn && lugarUsr.reseniado"
+      (click)="rehacerResenia(loggedUser)"
+      >Rehacer la reseña</a
+    >
+    <br />
+    <br />
+    <h3>Calificar el lugar</h3>
+    <div class="ec-stars-wrapper" *ngIf="loggedIn && !lugarUsr.calificado">
+      <a (click)="calificar(1)">
+        <fa-icon [icon]="faStar"></fa-icon>
+      </a>
+      <a (click)="calificar(2)">
+        <fa-icon [icon]="faStar"></fa-icon>
+      </a>
+      <a (click)="calificar(3)">
+        <fa-icon [icon]="faStar"></fa-icon>
+      </a>
+      <a (click)="calificar(4)">
+        <fa-icon [icon]="faStar"></fa-icon>
+      </a>
+      <a (click)="calificar(5)">
+        <fa-icon [icon]="faStar"></fa-icon>
+      </a>
+    </div>
+    <br />
+    <p *ngIf="loggedIn && lugarUsr.calificado">
+      Haz calificado la atracción con un {{ lugarUsr.calificacion }}
+    </p>
+    <a
+      class="botonLS btn btn-primary"
+      *ngIf="loggedIn && lugarUsr.calificado"
+      (click)="reCalificar(lugarUsr.calificacion)"
+      >Cambiar la calificación</a
+    >
+  </div>
+  <br />
+  <hr />
+  <br />
+  <a
+    class="botonLS btn btn-primary"
+    (click)="estoyAqui()"
+    *ngIf="
+      loggedIn &&
+      !lugarUsr.Visite &&
+      (this.usuariolat <= this.lugar.lat + 0.0003 &&
+        this.usuariolat >= this.lugar.lat - 0.0003 &&
+        this.usuariolng <= this.lugar.lng + 0.0003 &&
+        this.usuariolng >= this.lugar.lng - 0.0003)
+    "
+    >Estoy Aqui</a
+  >
+  <a
+    routerLink="/crear/{{ lugar.id }}"
+    class="botonLS btn btn-primary mx-3"
+    *ngIf="lugar.propietario == loggedUser"
+    >Editar</a
+  >
+  <a
+    routerLink="/crearArticulos/{{ lugar.id }}"
+    class="botonLS btn btn-primary"
+    *ngIf="lugar.propietario == loggedUser"
+    >Crear Evento/Promoción</a
+  >
+  <a
+    class="botonLS btn btn-primary mx-3"
+    (click)="eliminarAtraccion()"
+    style="background-color: #b80f22; color: white "
+    *ngIf="loggedIn && lugar.propietario == loggedUser"
+    >Eliminar</a
+  >
+  <a
+    class="botonLS btn btn-primary"
+    (click)="ocultarLugar(lugar)"
+    style="background-color: #b80f22; color: white "
+    *ngIf="loggedIn && lugar.propietario == loggedUser"
+    >Ocultar</a
+  >
 </div>
-<br/>
+<br />
 <app-footer [atraccion]="id" [propietario]="lugar.propietario"></app-footer>
-
-
