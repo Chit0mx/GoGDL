@@ -22,16 +22,29 @@
     <textarea class="form-control"[(ngModel)]="articulo.descripcion"></textarea>
     <br/>
     <h3>Duración</h3>
-    <ul class="list-group">
-            <li class="list-group-item">
-                <label for="empieza">Empieza: </label>
-                <input class="form-control" type="date" id="empieza" name="empieza" required [(ngModel)]="articulo.empieza"/>
-                <label for="termina">Termina:</label>
-                <input class="form-control" type="date" id="termina" name="termina" required [(ngModel)]="articulo.termina"/>
-            </li>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="duracion" id="indefinida" value="false" [(ngModel)]="articulo.definida" checked (click)="mostrar(false)" >
+      <label class="form-check-label" for="indefinida">
+        Indefinida
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="duracion" id="definida" value="true" [(ngModel)]="articulo.definida" (click)="mostrar(true)">
+      <label class="form-check-label" for="definida">
+        Definida
+      </label>
+    </div>
+    <br/>
+    <ul class="list-group" *ngIf="mst">
+      <li class="list-group-item">
+          <label for="empieza">Empieza: </label>
+          <input class="form-control" type="date" id="empieza" name="empieza" required [(ngModel)]="articulo.empieza"/>
+          <label for="termina">Termina:</label>
+          <input class="form-control" type="date" id="termina" name="termina" required [(ngModel)]="articulo.termina"/>
+      </li>
     </ul>
     <br/>
-    <a class="botonLS btn btn-primary"(click)="guardarLugar()">Enviar</a>
+    <a class="botonLS btn btn-primary"(click)="guardarLugar()">Crear Evento/Promoción</a>
     <a class="btn btn-default m-3" routerLink="/detalle/{{this.id}}">Cancelar</a>
     <br/>
 </div>

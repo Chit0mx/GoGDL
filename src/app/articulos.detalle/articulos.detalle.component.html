@@ -9,12 +9,14 @@
             <h4>
                 {{articulo.descripcion}}
             </h4>
-            <h6>Duracion:</h6>
-            <p>
-                Empieza: {{articulo.empieza}}                                            
-                <br/>
-                Termina: {{articulo.termina}}
-            </p>
+            <div *ngIf="articulo.definida">
+                <h6>Duracion:</h6>
+                <p *ngIf="articulo.definida">
+                    Empieza: {{articulo.empieza}}                                            
+                    <br/>
+                    Termina: {{articulo.termina}}
+                </p>
+            </div>
             <br/>
             <div with="200px">
                 <a class="botonLS btn btn-primary" (click)="eliminarAtraccion()" *ngIf="loggedIn && (loggedUser == lugar.propietario)">Eliminar Evento/promoción</a>    

@@ -5,6 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { ArticulosService } from '../services/articulos.service';
 import swal from "sweetalert2";
+import { faLessThanEqual } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: "app-crearArticulos",
@@ -15,6 +16,7 @@ export class CrearArticulosComponent {
   id: any = null;
   idA: any = null;
   file: any;
+  mst = false;
   constructor(
     private articulosService: ArticulosService,
     private route: ActivatedRoute,
@@ -26,7 +28,7 @@ export class CrearArticulosComponent {
     this.id = this.route.snapshot.params["id"];
   }
 
-  guardarLugar() {
+  public guardarLugar() {
       this.articulo.id = this.id + Date.now();
       this.articulo.atraccion = this.id;
       this.articulosService.guardarArticulo(this.articulo);
@@ -41,7 +43,11 @@ export class CrearArticulosComponent {
       this.router.navigate(['/detalle/' + this.id]);
   }
 
-  uploadFile(event) {
+  public uploadFile(event) {
     this.file = event.target.files[0];
+  }
+
+  public mostrar(ms) {
+    this.mst = ms;
   }
 }

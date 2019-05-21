@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { LugaresService } from "../services/lugares.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { AngularFireStorage } from "angularfire2/storage";
 import { AngularFireAuth } from "angularfire2/auth";
@@ -20,7 +20,8 @@ export class CrearComponent {
     private lugaresService: LugaresService,
     private route: ActivatedRoute,
     private storage: AngularFireStorage,
-    private angularFireAuth: AngularFireAuth
+    private angularFireAuth: AngularFireAuth,
+    private router: Router
   ) {
     this.id = this.route.snapshot.params["id"];
     if (this.id != "new") {
@@ -50,6 +51,7 @@ export class CrearComponent {
           "Tu atraccion se a editado con exito",
           "success"
         );
+        this.router.navigate([`/detalle/${this.id}`]);
       } else {
         this.lugar.id = Date.now();
         this.lugar.propietario = this.angularFireAuth.auth.currentUser.uid;
@@ -63,6 +65,7 @@ export class CrearComponent {
           "Tu atraccion se a creado con exito",
           "success"
         );
+        this.router.navigate([`/detalle/${this.lugar.id}`]);
       }
       this.lugar = {};
     });
