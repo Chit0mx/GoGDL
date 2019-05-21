@@ -45,6 +45,7 @@ export class CrearArticulosComponent {
 
   public uploadFile(event) {
     this.file = event.target.files[0];
+    console.log(this.file);
   }
 
   public mostrar(ms) {

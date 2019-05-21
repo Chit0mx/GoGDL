@@ -14,25 +14,29 @@ import swal from "sweetalert2";
   templateUrl: "./detalle.component.html"
 })
 export class DetalleComponent {
-  id = null;
-  lugar: any = {};
-  articulos: any = {};
-  nombre = null;
-  profileUrl: Observable<string | null>;
-  loggedUser:any = null;
-  usuariolat:any;
-  usuariolng:any;
-  loggedIn = false;
-  imgsArt:any = {};
-  usuarioDB:any = {};
-  lugarUsr:any = {};
-  resenia: any = {};
-  reseniaAutor: any = {};
-  resenias: any = {};
-  faStar = faStar;
-  faDollarSign = faDollarSign;
-  cal:any = {};
-  promedio = 0;
+  private id = null;
+  private lugar: any = {};
+  private articulos: any = {};
+  private nombre = null;
+  private profileUrl: Observable<string | null>;
+  private loggedUser:any = null;
+  private usuariolat:any;
+  private usuariolng:any;
+  private loggedIn = false;
+  private imgsArt:any = {};
+  private usuarioDB:any = {};
+  private lugarUsr:any = {};
+  private resenia: any = {};
+  private reseniaAutor: any = {};
+  private resenias: any = {};
+  private faStar = faStar;
+  private faDollarSign = faDollarSign;
+  private cal:any = {};
+  private promedio = 0;
+  private mostrarAgregarF:boolean = false; 
+  private ImagenNueva:any;
+  private FotoLugar: Observable<string | null>;
+  private fotos:any;
   constructor (private autorizacionService:AutorizacionService, 
     private storage: AngularFireStorage, 
     private route:ActivatedRoute, 
@@ -58,6 +62,12 @@ export class DetalleComponent {
     valueChanges().
     subscribe(resenias => {
       this.resenias = resenias;
+    });
+    this.lugaresService.getImagenes(this.id).
+    valueChanges().
+    subscribe(fotos => {
+      console.log(fotos);
+      this.fotos = fotos;
     });
     this.autorizacionService.isLogged()
     .subscribe((result) => {
@@ -217,6 +227,36 @@ export class DetalleComponent {
       "Para volverla a mostrar hagalo en su lista de atracciones ocultas",
       "success"
     );
+  }
+
+  public mostrarAF() {
+    this.mostrarAgregarF = !(this.mostrarAgregarF);
+    this.ImagenNueva = null;
+  }
+
+
+  public uploadFile(event) {
+    this.ImagenNueva = event.target.files[0];
+  }
+
+  public subirImagenNueva() {
+    let idImagen = Date.now();
+    const filePath = `${this.id}/Imagenes/${idImagen}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, this.ImagenNueva);
+    this.lugaresService.subirImagenNueva(this.id, idImagen);
+    this.mostrarAF();
+    swal.fire(
+      "Fotografia agregada con exito",
+      "Se agrego una nueva foto a la atracción",
+      "success"
+    );
+    this.router.navigate([`/detalle/${this.id}`]);
+  }  
+
+  public bajarImagen(idFoto){
+    const ref = this.storage.ref(`${this.id}/Imagenes/${idFoto}`);
+    this.FotoLugar = ref.getDownloadURL();
   }
 
   public range(start, stop, step) {

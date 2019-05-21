@@ -1,12 +1,16 @@
 <div class="container">
     <br/>
-    <h3>Datos de la atracción</h3>
+    <h1>Datos de la atracción</h1>
+    <br/>
+    <hr/>
+    <h5>Ingresa la imagen de la atracción</h5>
+    <br/>
+    <p>Seleccione la imagen pricipal de la atracción, aquella que la representa</p>
     <div class="input-group mb-3">
-        <div class="form-group">
-            <label for="AvatarA">Imagen de la atracción</label>
-            <input type="file" class="form-control-file" id="AvatarA" aria-describedby="fileHelp" accept="image/png, image/jpeg" (change)="uploadFile($event)">
-            <small id="fileHelp" class="form-text text-muted">Seleccione la imagen que representara la atracción</small>
-        </div>
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" id="imagenLugar" aria-describedby="fileHelp" lang="es" accept="image/png, image/jpeg" (change)="uploadFile($event)">
+        <label class="custom-file-label" for="imagenLugar">{{file.name}}</label>
+    </div>
     </div>
     <br/>   
     <label>Nombre</label>

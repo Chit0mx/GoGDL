@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AutorizacionService } from './autorizacion.service';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireStorage } from 'angularfire2/storage';
 
 @Injectable()
 export class LugaresService{
@@ -12,7 +13,8 @@ export class LugaresService{
   constructor (private afDB: AngularFireDatabase,
     private http: HttpClient, 
     private autorizacion: AutorizacionService,
-    private angularFireAuth: AngularFireAuth
+    private angularFireAuth: AngularFireAuth,
+    private storage: AngularFireStorage
     ){}
   public getLugares(){
       return this.afDB.list('lugares/');
@@ -86,6 +88,20 @@ export class LugaresService{
 
   public obtenerGeoData(direccion){
     return this.http.get('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyB2JEN5BecGIXzKVY697OXtB90xvoeGfuE&address='+ direccion);
+  }
+
+  public subirImagenNueva(idA, idImagen) {
+    this.afDB.database.ref('lugares/' + idA + '/fotos/' + idImagen).set({
+      id: idImagen
+    });
+  }  
+
+  public borrarImagen(idA, idImagen){
+    this.afDB.database.ref('lugares/' + idA + '/fotos/' + idImagen).remove();
+  }
+
+  public getImagenes(idA){
+    return this.afDB.list(`lugares/${idA}/fotos`);
   }
 }
 

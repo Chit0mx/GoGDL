@@ -7,12 +7,13 @@
       cosa que se quiera transmitir al usuario.
     </p>
     <hr/>
+    <h5>Imagen del Evento/Promoción</h5> 
+    <p>Seleccione una imagen que representara la promoción o evento</p>
     <div class="input-group mb-3">
-        <div class="form-group">
-            <label for="AvatarA">Imagen del Eventos/Promociones</label>
-            <input type="file" class="form-control-file" id="AvatarA" aria-describedby="fileHelp" accept="image/png, image/jpeg" (change)="uploadFile($event)">
-            <small id="fileHelp" class="form-text text-muted">Seleccione la imagen que representara el Eventos/Promociones</small>
-        </div>
+      <div class="custom-file">
+          <input type="file" class="custom-file-input" id="fotoArticulo" aria-describedby="fileHelp" lang="es" accept="image/png, image/jpeg" (change)="uploadFile($event)">
+          <label class="custom-file-label" for="fotoArticulo">{{file.name}}</label>
+      </div>
     </div>
     <br/>   
     <label>Titulo del Eventos/Promociones</label>
