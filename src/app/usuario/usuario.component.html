@@ -17,6 +17,14 @@
         </ng-container>
       </ul>
       <br/>
+      <h2 *ngIf="usuarioDB.Empresario" >Mis atracciones ocultas</h2>
+      <ul class="list-group" *ngIf="usuarioDB.Empresario">
+        <ng-container *ngFor="let lugarO of lugaresOcultos">
+          <a routerLink="/detalle/{{ lugarO.id }}"><li class="list-group-item">{{ lugarO.nombre }}</li></a>
+          <!--<li *ngIf="(lugarO == null)" class="list-group-item">No hay atracciones ocultas</li>-->
+        </ng-container>
+      </ul>
+      <br/>
       <h2>Atracciones favoritas</h2>
       <ul class="list-group">
         <ng-container *ngFor="let lugar of lugares">

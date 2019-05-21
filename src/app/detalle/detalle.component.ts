@@ -198,8 +198,7 @@ export class DetalleComponent {
     let d = new Date(dia);
     if (d < diaHoy) {
       this.articuloService.borrarArticulo(idA);
-      this.router.navigate([`/detalle/${this.id}`]).then(mesagge => {console.log(`Eliminado el evento ${mesagge}`)
-    }).catch(message => console.log(`no se pudo ${message}`));
+      this.router.navigate([`/detalle/${this.id}`]);
       swal.fire(
         "La promocion o evento se termino",
         "Ya no esta disponible esta promociones o eventos",
@@ -208,6 +207,16 @@ export class DetalleComponent {
     } else {
       this.router.navigate([`/articulo/${this.id}/${idA}`]);
     }
+  }
+
+  public ocultarLugar(lugar) {
+    this.lugaresService.ocultarLugar(lugar);
+    this.router.navigate([`/usuario`]);
+    swal.fire(
+      "Se oculto su atracción",
+      "Para volverla a mostrar hagalo en su lista de atracciones ocultas",
+      "success"
+    );
   }
 
   public range(start, stop, step) {

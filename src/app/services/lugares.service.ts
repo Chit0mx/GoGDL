@@ -3,12 +3,17 @@ import { AngularFireDatabase} from  "angularfire2/database";
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AutorizacionService } from './autorizacion.service';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Injectable()
 export class LugaresService{
   profileUrl: Observable<string | null>;
   
-  constructor (private afDB: AngularFireDatabase, private http: HttpClient, private autorizacion: AutorizacionService){}
+  constructor (private afDB: AngularFireDatabase,
+    private http: HttpClient, 
+    private autorizacion: AutorizacionService,
+    private angularFireAuth: AngularFireAuth
+    ){}
   public getLugares(){
       return this.afDB.list('lugares/');
   }
@@ -26,6 +31,27 @@ export class LugaresService{
   }
   public editarLugar(lugar){
     this.afDB.database.ref('lugares/' + lugar.id).set(lugar);
+  }
+  
+  public desocultarLugar(lugar) {
+    this.guardarLugar(lugar);
+    const id = this.angularFireAuth.auth.currentUser.uid;
+    this.afDB.database.ref(`users/${id}/lugaresOcultos/${lugar.id}`).remove();
+  }
+
+  public ocultarLugar(lugar){
+    const id = this.angularFireAuth.auth.currentUser.uid;
+    this.afDB.database.ref(`users/${id}/lugaresOcultos/${lugar.id}`).set(lugar);
+    this.borrarLugar(lugar.id);
+  }
+  
+  public getLugaresOcultos(){
+    const id = this.angularFireAuth.auth.currentUser.uid;
+    return this.afDB.list(`users/${id}/lugaresOcultos/`);
+  }
+  public getLugarOculto(id){
+    const idU = this.angularFireAuth.auth.currentUser.uid;
+    return this.afDB.object(`users/${idU}/lugaresOcultos/${id}`);
   }
 
   public guardarResenia(resenia, lugar){
