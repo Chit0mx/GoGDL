@@ -164,9 +164,9 @@
     <hr/>
     <br/>
     <a class="botonLS btn btn-primary" (click)="estoyAqui()" *ngIf="loggedIn && !lugarUsr.Visite && (this.usuariolat <= this.lugar.lat + .0003 && this.usuariolat >= this.lugar.lat - .0003 && this.usuariolng <= this.lugar.lng + .0003 && this.usuariolng >= this.lugar.lng - .0003)">Estoy Aqui</a>
-    <a routerLink="/crear/{{lugar.id}}" class="botonLS btn btn-primary" *ngIf="(lugar.propietario == loggedUser)">Editar</a>
-    <a routerLink="/crearArticulos/{{lugar.id}}" class="botonLS btn btn-primary mx-3" *ngIf="(lugar.propietario == loggedUser)">Crear Evento/Promoción</a>
-    <a class="botonLS btn btn-primary" (click)="eliminarAtraccion()" *ngIf="loggedIn && (lugar.propietario == loggedUser)">Eliminar</a>
+    <a routerLink="/crear/{{lugar.id}}" class="botonLS btn btn-primary mx-3" *ngIf="(lugar.propietario == loggedUser)">Editar</a>
+    <a routerLink="/crearArticulos/{{lugar.id}}" class="botonLS btn btn-primary" *ngIf="(lugar.propietario == loggedUser)">Crear Evento/Promoción</a>
+    <a class="botonLS btn btn-primary mx-3" (click)="eliminarAtraccion()" *ngIf="loggedIn && (lugar.propietario == loggedUser)">Eliminar</a>
     <a class="botonLS btn btn-primary" (click)="ocultarLugar(lugar)" *ngIf="loggedIn && (lugar.propietario == loggedUser)">Ocultar</a>
 </div>
 <br/>

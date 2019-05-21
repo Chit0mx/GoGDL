@@ -94,10 +94,12 @@ agm-map {
     outline: none;
     height: 40px;
     background: #b80f22;
-    color:#fff;
+    color: white;
+    text-decoration-color: white;
     font-size: 18px;
     border-radius: 20px;
     text-decoration: none;
+    cursor: pointer;
 }
 .lnkRegistro{
     text-decoration: none;

@@ -3,6 +3,8 @@ import{LugaresService}from "../services/lugares.service";
 import { AutorizacionService } from '../services/autorizacion.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
+import swal from "sweetalert2";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-usuario',
@@ -17,7 +19,12 @@ export class UsuarioComponent {
   private usuarioDB:any;
   private lat:any;
   private lng:any;
-  constructor(private afDB: AngularFireDatabase, private angularFireAuth: AngularFireAuth, private lugaresService: LugaresService, private autorizacionService:AutorizacionService) {
+  constructor(private afDB: AngularFireDatabase,
+    private angularFireAuth: AngularFireAuth,
+    private lugaresService: LugaresService, 
+    private autorizacionService:AutorizacionService,
+    private router: Router
+    ) {
     lugaresService
     .getLugares()
     .valueChanges()
@@ -48,5 +55,27 @@ export class UsuarioComponent {
 
   public hacerEmpresario() {
     this.autorizacionService.hacerEmpresario();
+  }
+
+  public desocultar(lugar){
+    swal.fire({
+      title: '¿Esta seguro que desea dejar de ocultar esta atracción?',
+      text: "Volvera a estar disponible para todos los usuarios de GoGDL",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, dejar de ocultar'
+    }).then((result) => {
+      if (result.value) {
+        this.lugaresService.desocultarLugar(lugar);
+        this.router.navigate([`/detalle/${lugar.id}`]);
+        swal.fire(
+          "La atracción ya no esta oculta",
+          "Ahora esta disponible para todos los usuarios",
+          "info"
+        );
+      }
+    })
   }
 }
