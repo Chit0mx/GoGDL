@@ -1,23 +1,33 @@
 <div class="registro">
   <div class="login-box r">
-    <img class="avatar" src="../../assets/Logo.png" alt="Logo Go GDL">
+    <img class="avatar" src="../../assets/Logo.png" alt="Logo Go GDL" />
     <h1>Crear un Usuario</h1>
     <!-- Nombre -->
     <label for="nombre">Nombre</label>
-    <input type="text" [(ngModel)]="registro.nombre" placeholder="Nombre">
-    
+    <input type="text" [(ngModel)]="registro.nombre" placeholder="Nombre" />
+
     <!-- Apellido -->
     <label for="apellido">Apellido</label>
-    <input type="text" [(ngModel)]="registro.apellido" placeholder="Apellido">
-    
+    <input type="text" [(ngModel)]="registro.apellido" placeholder="Apellido" />
+
     <!-- Correo -->
     <label for="correo">Correo electronico</label>
-    <input type="email" [(ngModel)]="registro.email" placeholder="Correo electronico">
+    <input
+      type="email"
+      [(ngModel)]="registro.email"
+      placeholder="Correo electronico"
+    />
 
     <!-- Contraseña -->
     <label for="password">Contraseña</label>
-    <input type="password" [(ngModel)]="registro.password" placeholder="Contraseña">
-    
-    <a class="botonLS btn btn-primary btn-block" (click)="registrar()">Enviar</a>
+    <input
+      type="password"
+      [(ngModel)]="registro.password"
+      placeholder="Contraseña"
+    />
+
+    <a class="botonLS btn btn-primary btn-block" (click)="registrar()"
+      >Enviar</a
+    >
   </div>
 </div>

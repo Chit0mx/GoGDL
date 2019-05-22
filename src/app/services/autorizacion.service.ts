@@ -13,6 +13,9 @@ export class AutorizacionService {
   ) {
     this.isLogged();
   }
+  public actionCodeSettings = {
+    url: "http://192.168.200.2:4200/inicio-sesion"
+  };
   public login = (email, password) => {
     this.angularFireAuth.auth
       .signInWithEmailAndPassword(email, password)
@@ -60,6 +63,21 @@ export class AutorizacionService {
         console.log(error);
       });
   };
+  public send_verification() {
+    var user = this.angularFireAuth.auth.currentUser;
+    user
+      .sendEmailVerification()
+      .then(function() {
+        swal.fire(
+          "Se envio un correo de verificacion",
+          "Revisa tu bandeja de entrada y sigue los pasos del correo recibido",
+          "success"
+        );
+      })
+      .catch(function(error) {
+        swal.fire("Error", "No se enviar el correo de verificacion", "warning");
+      });
+  }
   public obtenerUsuario() {
     const $id = this.angularFireAuth.auth.currentUser.uid;
     return this.afDB.object("users/" + $id);
