@@ -38,6 +38,7 @@ export class DetalleComponent {
   private FotoLugar: Observable<string[] | null>;
   private arrayF: any = [];
   private fotos:any;
+  private mostarListaDeFotos:Boolean = false;
   constructor (private autorizacionService:AutorizacionService, 
     private storage: AngularFireStorage, 
     private route:ActivatedRoute, 
@@ -252,13 +253,41 @@ export class DetalleComponent {
       "Se agrego una nueva foto a la atracción",
       "success"
     );
-    this.router.navigate([`/detalle/${this.id}`]);
-}  
+    this.router.navigate([`/destacados`]);
+  }
 
   public bajarImagen(idFoto){
     const ref = this.storage.ref(`${this.id}/Imagenes/${idFoto}`);
     this.FotoLugar = ref.getDownloadURL();
     this.arrayF.push(this.FotoLugar);
+  }
+
+  public mostrarListaEliminar(){
+    this.mostarListaDeFotos = !(this.mostarListaDeFotos);
+  }
+
+  public eliminarImagen(idI) {
+    swal.fire({
+      title: '¿Esta seguro de que desea eliminar la imagen?',
+      text: "No podra deshacer esto, la imagen ya no estara disponible en su atracción",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar la imagen'
+    }).then((result) => {
+      if (result.value) {
+        this.lugaresService.borrarImagen(this.id, idI);
+        const filePath = `${this.id}/Imagenes/${idI}`;
+        this.storage.ref(filePath).delete();
+        this.router.navigate(["/destacados"]);
+        swal.fire(
+          "Imagen eliminada",
+          "Se a eliminado la imagen con exito",
+          "info"
+        );
+      }
+    })
   }
 
   public range(start, stop, step) {

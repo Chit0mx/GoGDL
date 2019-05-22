@@ -83,10 +83,20 @@
             </div>
             <br/>
             <div with="100px">
+                <a  class="botonLS btn btn-primary" (click)="mostrarListaEliminar()" *ngIf="loggedIn && (fotoActual != 0) && (lugar.propietario == loggedUser)">Eliminar fotografia {{fotoActual}}</a>
                 <!--<a class="botonLS btn btn-primary" (click)="estoyAqui()" *ngIf="loggedIn && !lugarUsr.Visite">Agregar fotorgrafia</a>-->
-                <a  class="botonLS btn btn-primary" (click)="mostrarAF()" *ngIf="loggedIn">Agregar fotorgrafia</a>
+                <a  class="botonLS btn btn-primary mx-3" (click)="mostrarAF()" *ngIf="loggedIn">Agregar fotorgrafia</a>
             </div>
+            <div *ngIf="mostarListaDeFotos">
+                <br/>
+                <p>Elimina la foto que no te agrade, el conteo empieza con la segunda que se muestra, ya que la primera foto es la que se ingreso al crearse la Atraccion</p>
+                <ul class="list-group">
+                    <ng-container *ngFor="let f of range(0, fotos.length, 1)">
+                        <a (click)="eliminarImagen(fotos[f].id)"><li class="list-group-item">Imagen numero {{f + 1}}</li></a>
+                    </ng-container>
+                </ul>
             <br/>
+            </div>
             <div *ngIf="mostrarAgregarF">
                 <p>Seleccione la fotografia que desea agregar a las fotografias de esta atracción</p>
                 <h5>Ingresa la fotografia de la atracción</h5>
