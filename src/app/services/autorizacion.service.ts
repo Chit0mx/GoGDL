@@ -13,9 +13,6 @@ export class AutorizacionService {
   ) {
     this.isLogged();
   }
-  public actionCodeSettings = {
-    url: "http://192.168.200.2:4200/inicio-sesion"
-  };
   public login = (email, password) => {
     this.angularFireAuth.auth
       .signInWithEmailAndPassword(email, password)
@@ -54,6 +51,7 @@ export class AutorizacionService {
             Empresario: false
           });
         this.router.navigate(["inicio"]);
+        this.send_verification();
       })
       .catch(error => {
         console.log(error);
