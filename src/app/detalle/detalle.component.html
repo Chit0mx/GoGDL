@@ -19,7 +19,7 @@
           <a class="botonLS btn btn-primary"style="background-color: #b80f22; color: white " (click)="favorita()" *ngIf="loggedUser && !(lugarUsr.favorito)">Agregar a Favoritos</a>
           <a class="botonLS btn btn-primary"style="background-color: #b80f22; color: white " (click)="noFavorita()" *ngIf="loggedUser && (lugarUsr.favorito)">Quitar de Favoritos</a>
           <div
-          class="botonLS btn btn-primary"
+          class="botonLS btn btn-primary mx-3"
           style="background-color: #b80f22; color: white "
           data-href="https://github.com/Chit0mx/gogdl"
           data-layout="button"
@@ -116,7 +116,7 @@
                 <p>Elimina la foto que no te agrade, el conteo empieza con la segunda que se muestra, ya que la primera foto es la que se ingreso al crearse la Atraccion</p>
                 <ul class="list-group">
                     <ng-container *ngFor="let f of range(0, fotos.length, 1)">
-                        <a (click)="eliminarImagen(fotos[f].id)"><li class="list-group-item">Imagen numero {{f + 1}}</li></a>
+                        <a (click)="eliminarImagen(fotos[f].id)"><li class="list-group-item" style="cursor: pointer;">Imagen numero {{f + 1}}</li></a>
                     </ng-container>
                 </ul>
             <br/>
@@ -221,6 +221,25 @@
             </ng-container>
         </ul>
     </div>
+    <div *ngIf="loggedIn && lugarUsr.Visite">
+            <br/>
+            <hr/>
+            <br/>
+            <h3>Lugar visitado</h3>
+            <p>
+                Ya has visitado este lugar ahora puedes crear una reseña sobre el mismo o calificar el lugar.
+            </p>
+            <div *ngIf="loggedIn && !lugarUsr.reseniado">
+                <label>Titulo de la reseña</label>
+                <input type="text" class="form-control" [(ngModel)]="resenia.titulo"/>
+                <br/>
+                <label>Descripcion</label>
+                <textarea class="form-control" [(ngModel)]="resenia.descripcion"></textarea>
+                <br/>
+                <a class="botonLS btn btn-primary" (click)="guardarResenia()">Enviar</a>
+                <a class="btn btn-default m-3" routerLink="/detalle/{{this.id}}">Cancelar</a>
+                <br/>
+            </div>
     <a
       class="botonLS btn btn-primary"
       *ngIf="loggedIn && lugarUsr.reseniado"
