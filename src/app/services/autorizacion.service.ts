@@ -27,6 +27,11 @@ export class AutorizacionService {
       });
   };
   forgot(email: string): any {
+    swal.fire(
+      "Restableciste tu contraseña",
+      "Por favor ve a tu bandeja de entrada y sigue los pasos indicados en el correo",
+      "success"
+    );
     return this.angularFireAuth.auth.sendPasswordResetEmail(email);
   }
   public registro = (email, password, nombre, apellido) => {
