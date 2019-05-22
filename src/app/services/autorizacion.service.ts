@@ -26,6 +26,14 @@ export class AutorizacionService {
         console.log(error);
       });
   };
+  forgot(email: string): any {
+    swal.fire(
+      "Restableciste tu contraseña",
+      "Por favor ve a tu bandeja de entrada y sigue los pasos indicados en el correo",
+      "success"
+    );
+    return this.angularFireAuth.auth.sendPasswordResetEmail(email);
+  }
   public registro = (email, password, nombre, apellido) => {
     this.angularFireAuth.auth
       .createUserWithEmailAndPassword(email, password)
@@ -43,6 +51,7 @@ export class AutorizacionService {
             Empresario: false
           });
         this.router.navigate(["inicio"]);
+        this.send_verification();
       })
       .catch(error => {
         console.log(error);
@@ -52,11 +61,26 @@ export class AutorizacionService {
         console.log(error);
       });
   };
+  public send_verification() {
+    var user = this.angularFireAuth.auth.currentUser;
+    user
+      .sendEmailVerification()
+      .then(function() {
+        swal.fire(
+          "Se envio un correo de verificacion",
+          "Revisa tu bandeja de entrada y sigue los pasos del correo recibido",
+          "success"
+        );
+      })
+      .catch(function(error) {
+        swal.fire("Error", "No se enviar el correo de verificacion", "warning");
+      });
+  }
   public obtenerUsuario() {
     const $id = this.angularFireAuth.auth.currentUser.uid;
     return this.afDB.object("users/" + $id);
   }
-  
+
   public obtenerUsuarioEspecifico(id) {
     return this.afDB.object("users/" + id);
   }

@@ -1,3 +1,11 @@
+<div id="fb-root"></div>
+<script
+  async
+  defer
+  crossorigin="anonymous"
+  src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.3"
+></script>
+
 <div class="container">
     <h1 class="m-4">{{lugar.nombre}}</h1>
     <div class="card card-body bg-light">
@@ -10,6 +18,22 @@
         <div>
           <a class="botonLS btn btn-primary" (click)="favorita()" *ngIf="loggedUser && !(lugarUsr.favorito)">Agregar a Favoritos</a>
           <a class="botonLS btn btn-primary" (click)="noFavorita()" *ngIf="loggedUser && (lugarUsr.favorito)">Quitar de Favoritos</a>
+          <div
+          class="botonLS btn btn-primary"
+          style="background-color: #b80f22; color: white "
+          data-href="https://github.com/Chit0mx/gogdl"
+          data-layout="button"
+          data-size="large"
+        >
+          <!--apartir del .com%2 poner el link del lo que se quiere compartir cambiar el link de referencia-->
+          <a
+            style="background-color: #b80f22; color: white "
+            target="_blank"
+            href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgithub.com%2FChit0mx%2Fgogdl&amp;src=sdkpreparse"
+            class="fb-xfbml-parse-ignore"
+            >Compartir en facebook</a
+          >
+        </div>
         </div>
         <br/>
         <h5>Categoria</h5> 
@@ -197,60 +221,85 @@
             </ng-container>
         </ul>
     </div>
-        <div *ngIf="loggedIn && lugarUsr.Visite">
-            <br/>
-            <hr/>
-            <br/>
-            <h3>Lugar visitado</h3>
-            <p>
-                Ya has visitado este lugar ahora puedes crear una reseña sobre el mismo o calificar el lugar.
-            </p>
-            <div *ngIf="loggedIn && !lugarUsr.reseniado">
-                <label>Titulo de la reseña</label>
-                <input type="text" class="form-control" [(ngModel)]="resenia.titulo"/>
-                <br/>
-                <label>Descripcion</label>
-                <textarea class="form-control" [(ngModel)]="resenia.descripcion"></textarea>
-                <br/>
-                <a class="botonLS btn btn-primary" (click)="guardarResenia()">Enviar</a>
-                <a class="btn btn-default m-3" routerLink="/detalle/{{this.id}}">Cancelar</a>
-                <br/>
-            </div>
-          <a class="botonLS btn btn-primary" *ngIf="loggedIn && lugarUsr.reseniado" (click)="rehacerResenia(loggedUser)">Rehacer la reseña</a>
-          <br/>
-          <br/>
-          <h3>Calificar el lugar</h3>
-          <div class="ec-stars-wrapper" *ngIf="loggedIn && !lugarUsr.calificado">
-              <a (click)="calificar(1)">
-                  <fa-icon [icon]="faStar"></fa-icon>
-              </a>
-              <a (click)="calificar(2)">
-                  <fa-icon [icon]="faStar"></fa-icon>
-              </a>
-              <a (click)="calificar(3)">
-                  <fa-icon [icon]="faStar"></fa-icon>
-              </a>
-              <a (click)="calificar(4)">
-                  <fa-icon [icon]="faStar"></fa-icon>
-              </a>
-              <a (click)="calificar(5)">
-                  <fa-icon [icon]="faStar"></fa-icon>
-              </a>
-          </div>
-          <br/>
-          <p *ngIf="loggedIn && lugarUsr.calificado">Haz calificado la atracción con un {{lugarUsr.calificacion}}</p>
-          <a class="botonLS btn btn-primary" *ngIf="loggedIn && lugarUsr.calificado" (click)="reCalificar(lugarUsr.calificacion)">Cambiar la calificación</a>
-        </div>
-    <br/>
-    <hr/>
-    <br/>
-    <a class="botonLS btn btn-primary" (click)="estoyAqui()" *ngIf="loggedIn && !lugarUsr.Visite && (this.usuariolat <= this.lugar.lat + .0003 && this.usuariolat >= this.lugar.lat - .0003 && this.usuariolng <= this.lugar.lng + .0003 && this.usuariolng >= this.lugar.lng - .0003)">Estoy Aqui</a>
-    <a routerLink="/crear/{{lugar.id}}" class="botonLS btn btn-primary mx-3" *ngIf="(lugar.propietario == loggedUser)">Editar</a>
-    <a routerLink="/crearArticulos/{{lugar.id}}" class="botonLS btn btn-primary" *ngIf="(lugar.propietario == loggedUser)">Crear Evento/Promoción</a>
-    <a class="botonLS btn btn-primary mx-3" (click)="eliminarAtraccion()" *ngIf="loggedIn && (lugar.propietario == loggedUser)">Eliminar</a>
-    <a class="botonLS btn btn-primary" (click)="ocultarLugar(lugar)" *ngIf="loggedIn && (lugar.propietario == loggedUser)">Ocultar</a>
+    <a
+      class="botonLS btn btn-primary"
+      *ngIf="loggedIn && lugarUsr.reseniado"
+      (click)="rehacerResenia(loggedUser)"
+      >Rehacer la reseña</a
+    >
+    <br />
+    <br />
+    <h3>Calificar el lugar</h3>
+    <div class="ec-stars-wrapper" *ngIf="loggedIn && !lugarUsr.calificado">
+      <a (click)="calificar(1)">
+        <fa-icon [icon]="faStar"></fa-icon>
+      </a>
+      <a (click)="calificar(2)">
+        <fa-icon [icon]="faStar"></fa-icon>
+      </a>
+      <a (click)="calificar(3)">
+        <fa-icon [icon]="faStar"></fa-icon>
+      </a>
+      <a (click)="calificar(4)">
+        <fa-icon [icon]="faStar"></fa-icon>
+      </a>
+      <a (click)="calificar(5)">
+        <fa-icon [icon]="faStar"></fa-icon>
+      </a>
+    </div>
+    <br />
+    <p *ngIf="loggedIn && lugarUsr.calificado">
+      Haz calificado la atracción con un {{ lugarUsr.calificacion }}
+    </p>
+    <a
+      class="botonLS btn btn-primary"
+      *ngIf="loggedIn && lugarUsr.calificado"
+      (click)="reCalificar(lugarUsr.calificacion)"
+      >Cambiar la calificación</a
+    >
+  </div>
+  <br />
+  <hr />
+  <br />
+  <a
+    class="botonLS btn btn-primary"
+    (click)="estoyAqui()"
+    *ngIf="
+      loggedIn &&
+      !lugarUsr.Visite &&
+      (this.usuariolat <= this.lugar.lat + 0.0003 &&
+        this.usuariolat >= this.lugar.lat - 0.0003 &&
+        this.usuariolng <= this.lugar.lng + 0.0003 &&
+        this.usuariolng >= this.lugar.lng - 0.0003)
+    "
+    >Estoy Aqui</a
+  >
+  <a
+    routerLink="/crear/{{ lugar.id }}"
+    class="botonLS btn btn-primary mx-3"
+    *ngIf="lugar.propietario == loggedUser"
+    >Editar</a
+  >
+  <a
+    routerLink="/crearArticulos/{{ lugar.id }}"
+    class="botonLS btn btn-primary"
+    *ngIf="lugar.propietario == loggedUser"
+    >Crear Evento/Promoción</a
+  >
+  <a
+    class="botonLS btn btn-primary mx-3"
+    (click)="eliminarAtraccion()"
+    style="background-color: #b80f22; color: white "
+    *ngIf="loggedIn && lugar.propietario == loggedUser"
+    >Eliminar</a
+  >
+  <a
+    class="botonLS btn btn-primary"
+    (click)="ocultarLugar(lugar)"
+    style="background-color: #b80f22; color: white "
+    *ngIf="loggedIn && lugar.propietario == loggedUser"
+    >Ocultar</a
+  >
 </div>
-<br/>
+<br />
 <app-footer [atraccion]="id" [propietario]="lugar.propietario"></app-footer>
-
-

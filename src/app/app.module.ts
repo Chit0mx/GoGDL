@@ -42,13 +42,14 @@ import { RegistroComponent } from "./registro/registro.component";
 import { UsuarioComponent } from "./usuario/usuario.component";
 import { FilterPipe } from "./pipes/filter.pipe";
 import { CrearArticulosComponent } from "./articulos.crear/articulos.crear.component";
-import { ArticulosService } from './services/articulos.service';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ArticuloDetalleComponent } from './articulos.detalle/articulos.detalle.component';
-import { OnCreate } from './directives/onCreate.directive';
-import { ReporteComponent } from './reporte/reporte.component';
+import { ArticulosService } from "./services/articulos.service";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { ArticuloDetalleComponent } from "./articulos.detalle/articulos.detalle.component";
+import { OnCreate } from "./directives/onCreate.directive";
+import { ReporteComponent } from "./reporte/reporte.component";
 import { SweetAlert2Module } from "@toverux/ngx-sweetalert2";
-import { ReporteAtraccionComponent } from './reporte.atraccion/reporte.atraccion.component';
+import { ReporteAtraccionComponent } from "./reporte.atraccion/reporte.atraccion.component";
+import { ForgotComponent } from "./forgot/forgot.component";
 
 const appRoutes: Routes = [
   {
@@ -140,15 +141,19 @@ const appRoutes: Routes = [
   },
   {
     path: "articulo/:idlugar/:id",
-    component: ArticuloDetalleComponent,
+    component: ArticuloDetalleComponent
   },
   {
     path: "reporte",
-    component:ReporteComponent,
+    component: ReporteComponent
   },
   {
     path: "reporteAtraccion/:id/:p",
-    component: ReporteAtraccionComponent,
+    component: ReporteAtraccionComponent
+  },
+  {
+    path: "forgot",
+    component: ForgotComponent
   }
 ];
 @NgModule({
@@ -180,7 +185,8 @@ const appRoutes: Routes = [
     CrearArticulosComponent,
     ArticuloDetalleComponent,
     ReporteComponent,
-    ReporteAtraccionComponent
+    ReporteAtraccionComponent,
+    ForgotComponent
   ],
   imports: [
     BrowserModule,

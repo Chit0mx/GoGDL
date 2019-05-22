@@ -1,17 +1,27 @@
 <div class="inicio-sesion">
   <div class="login-box col-md-offset-4 col-med-4">
-      <img class="avatar" src="../../assets/Logo.png" alt="Logo Go GDL">
-      <h1>Inicia Sesión</h1>
-        <!-- Usuario -->
-      <label for="Usuario">Email</label>
-      <input type="text" [(ngModel)]="loginParams.email" placeholder="Nombre de Usuario">
-      
-      <!-- Contraseña -->
-      <label for="username">Contraseña</label>
-      <input type="password" [(ngModel)]="loginParams.password" placeholder="Contraseña">
-      
-      <a class="botonLS btn btn-primary btn-block" (click)="login()">Enviar</a>
-      <br/>
-      <a class="lnkRegistro" routerLink="/registro">No tienes una cuenta?</a>
+    <img class="avatar" src="../../assets/Logo.png" alt="Logo Go GDL" />
+    <h1>Inicia Sesión</h1>
+    <!-- Usuario -->
+    <label for="Usuario">Email</label>
+    <input
+      type="text"
+      [(ngModel)]="loginParams.email"
+      placeholder="Nombre de Usuario"
+    />
+
+    <!-- Contraseña -->
+    <label for="username">Contraseña</label>
+    <input
+      type="password"
+      [(ngModel)]="loginParams.password"
+      placeholder="Contraseña"
+    />
+
+    <a class="botonLS btn btn-primary btn-block" (click)="login()">Enviar</a>
+
+    <a class="lnkRegistro" routerLink="/registro">No tienes una cuenta?</a>
+    <br />
+    <a class="lnkRegistro" routerLink="/forgot">Olvidaste tu contraseña?</a>
   </div>
 </div>

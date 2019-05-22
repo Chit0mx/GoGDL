@@ -1,0 +1,15 @@
+<div class="inicio-sesion">
+  <div class="login-box col-md-offset-4 col-med-4">
+    <img class="avatar" src="../../assets/Logo.png" alt="Logo Go GDL" />
+    <h1>Inicia Sesión</h1>
+    <!-- Usuario -->
+    <label for="Usuario">Email</label>
+    <input type="text" [(ngModel)]="email" />
+    <a class="botonLS btn btn-primary btn-block" (click)="forgot()"
+      >Recuperar contraseña</a
+    >
+    <a class="lnkRegistro" routerLink="/inicio-sesion"
+      >Ir al inicio de sesión</a
+    >
+  </div>
+</div>
