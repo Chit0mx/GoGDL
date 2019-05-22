@@ -26,6 +26,9 @@ export class AutorizacionService {
         console.log(error);
       });
   };
+  forgot(email: string): any {
+    return this.angularFireAuth.auth.sendPasswordResetEmail(email);
+  }
   public registro = (email, password, nombre, apellido) => {
     this.angularFireAuth.auth
       .createUserWithEmailAndPassword(email, password)
@@ -56,7 +59,7 @@ export class AutorizacionService {
     const $id = this.angularFireAuth.auth.currentUser.uid;
     return this.afDB.object("users/" + $id);
   }
-  
+
   public obtenerUsuarioEspecifico(id) {
     return this.afDB.object("users/" + id);
   }
