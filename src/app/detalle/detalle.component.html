@@ -56,9 +56,8 @@
                 </div>
                 <ng-container *ngFor="let f of range(0, fotos.length, 1)">
                     <span (onCreate)="bajarImagen(fotos[f].id, f)"></span>
-                    <!--<img width="300px" height="auto" [src]="FotoLugar | async"/>-->
                     <div class="carousel-item">
-                        <img class="d-block w-100" [src]="FotoLugar | async"/>
+                        <img class="d-block w-100" [src]="arrayF[f] | async"/>
                     </div>
                 </ng-container>
                 <a
@@ -82,10 +81,6 @@
                 </div>
                 <br />
             </div>
-            <ng-container *ngFor="let f of range(0, fotos.length, 1)">
-                <p>{{fotos[f].id}}</p>
-                <!--<img width="300px" height="auto" [src]="FotoLugar | async"/>-->
-            </ng-container>
             <br/>
             <div with="100px">
                 <!--<a class="botonLS btn btn-primary" (click)="estoyAqui()" *ngIf="loggedIn && !lugarUsr.Visite">Agregar fotorgrafia</a>-->

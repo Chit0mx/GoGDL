@@ -35,7 +35,8 @@ export class DetalleComponent {
   private promedio = 0;
   private mostrarAgregarF:boolean = false; 
   private ImagenNueva:any;
-  private FotoLugar: Observable<string | null>;
+  private FotoLugar: Observable<string[] | null>;
+  private arrayF: any = [];
   private fotos:any;
   constructor (private autorizacionService:AutorizacionService, 
     private storage: AngularFireStorage, 
@@ -252,11 +253,12 @@ export class DetalleComponent {
       "success"
     );
     this.router.navigate([`/detalle/${this.id}`]);
-  }  
+}  
 
   public bajarImagen(idFoto){
     const ref = this.storage.ref(`${this.id}/Imagenes/${idFoto}`);
     this.FotoLugar = ref.getDownloadURL();
+    this.arrayF.push(this.FotoLugar);
   }
 
   public range(start, stop, step) {
