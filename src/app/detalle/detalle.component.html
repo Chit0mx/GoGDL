@@ -16,8 +16,8 @@
         </h4>
         <hr/>
         <div>
-          <a class="botonLS btn btn-primary" (click)="favorita()" *ngIf="loggedUser && !(lugarUsr.favorito)">Agregar a Favoritos</a>
-          <a class="botonLS btn btn-primary" (click)="noFavorita()" *ngIf="loggedUser && (lugarUsr.favorito)">Quitar de Favoritos</a>
+          <a class="botonLS btn btn-primary"style="background-color: #b80f22; color: white " (click)="favorita()" *ngIf="loggedUser && !(lugarUsr.favorito)">Agregar a Favoritos</a>
+          <a class="botonLS btn btn-primary"style="background-color: #b80f22; color: white " (click)="noFavorita()" *ngIf="loggedUser && (lugarUsr.favorito)">Quitar de Favoritos</a>
           <div
           class="botonLS btn btn-primary"
           style="background-color: #b80f22; color: white "
@@ -109,7 +109,7 @@
             <div with="100px">
                 <a  class="botonLS btn btn-primary" (click)="mostrarListaEliminar()" *ngIf="loggedIn && (fotoActual != 0) && (lugar.propietario == loggedUser)">Eliminar fotografia {{fotoActual}}</a>
                 <!--<a class="botonLS btn btn-primary" (click)="estoyAqui()" *ngIf="loggedIn && !lugarUsr.Visite">Agregar fotorgrafia</a>-->
-                <a  class="botonLS btn btn-primary mx-3" (click)="mostrarAF()" *ngIf="loggedIn">Agregar fotorgrafia</a>
+                <a  class="botonLS btn btn-primary mx-3" style="background-color: #b80f22; color: white " (click)="mostrarAF()" *ngIf="loggedIn">Agregar fotorgrafia</a>
             </div>
             <div *ngIf="mostarListaDeFotos">
                 <br/>
@@ -300,6 +300,6 @@
     *ngIf="loggedIn && lugar.propietario == loggedUser"
     >Ocultar</a
   >
-</div>
+
 <br />
 <app-footer [atraccion]="id" [propietario]="lugar.propietario"></app-footer>

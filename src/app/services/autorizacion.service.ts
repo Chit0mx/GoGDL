@@ -73,8 +73,32 @@ export class AutorizacionService {
         );
       })
       .catch(function(error) {
-        swal.fire("Error", "No se enviar el correo de verificacion", "warning");
+        swal.fire("Error", "No se enviar el correo de verificacion", "error");
       });
+  }
+  public bajaUsuario(){
+    var user = this.angularFireAuth.auth.currentUser;
+    user.delete().then(function(){
+      swal.fire(
+        "Se ha eliminado tu cuenta",
+        "Ojalá regreses a GoGDL pronto",
+        "warning"
+      );
+    }).catch(function(error){
+      swal.fire("Error", "No se pudo eliminar tu cuenta , intentalo más tarde", "error");
+    })
+  }
+  public cambiarPassword(password: string) {
+    var user = this.angularFireAuth.auth.currentUser;
+    user.updatePassword(password).then(function(){
+      swal.fire(
+        "Cambiaste tu contraseña",
+        "Ahora puedes usar tu nueva contraseña",
+        "success"
+      );
+    }).catch(function(error){
+      swal.fire("Error", "No se pudo cambiar tu contraseña , intentalo más tarde", "error");
+    })
   }
   public obtenerUsuario() {
     const $id = this.angularFireAuth.auth.currentUser.uid;
