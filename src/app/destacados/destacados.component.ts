@@ -29,4 +29,5 @@ export class DestacadosComponent {
       });
   }
   filterLugar = "";
+  filtroArt = "";
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import{LugaresService}from "../services/lugares.service";
+import { ArticulosService } from '../services/articulos.service';
 import { AutorizacionService } from '../services/autorizacion.service';
 
 @Component({
@@ -15,13 +16,21 @@ lugares = null;
 loggedUser:any = null;
 usuario:any = {};
 loggedIn = false;
+articulos: any = {};
 
-  constructor(private lugaresService: LugaresService, private autorizacionService:AutorizacionService) {
+  constructor(private lugaresService: LugaresService, private autorizacionService:AutorizacionService, private articulosService:ArticulosService) {
     lugaresService.getLugares().
     valueChanges().
     subscribe(lugares => {
       this.lugares = lugares;
     });
+    articulosService
+      .getArticulos()
+      .valueChanges()
+      .subscribe(articulos => {
+        this.articulos = articulos ;
+      });
   }
+  filtroArt = "";
   filterLugar = "";
 }

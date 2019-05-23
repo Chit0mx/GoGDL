@@ -54,9 +54,11 @@ export class UsuarioComponent {
     this.lat = pos.coords.latitude;
     this.lng = pos.coords.longitude;
   }
-public cambiarPassword(){
+public cambiarPassword(password){
   this.autorizacionService.cambiarPassword(
-    this.cambiarPass.password);
+    this.cambiarPass.password
+    );
+  console.log(this.cambiarPass.password);
 }
 public bajaUser(){
   this.autorizacionService.bajaUsuario();
