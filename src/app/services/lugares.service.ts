@@ -28,6 +28,7 @@ export class LugaresService{
   public borrarLugar(id){
     return this.afDB.database.ref('lugares/' + id).remove();
   }
+  
   public guardarLugar(lugar){
     this.afDB.database.ref('lugares/' + lugar.id).set(lugar);
   }
@@ -89,6 +90,8 @@ export class LugaresService{
   public obtenerGeoData(direccion){
     return this.http.get('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyB2JEN5BecGIXzKVY697OXtB90xvoeGfuE&address='+ direccion);
   }
+
+  /*Fotos de la atracción*/
 
   public subirImagenNueva(idA, idImagen) {
     this.afDB.database.ref('lugares/' + idA + '/fotos/' + idImagen).set({

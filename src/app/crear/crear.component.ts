@@ -13,8 +13,6 @@ import swal from "sweetalert2";
 export class CrearComponent {
   lugar: any = {};
   id: any = null;
-  uploadPercent: Observable<number>;
-  downloadURL: Observable<string>;
   file: any;
   constructor(
     private lugaresService: LugaresService,

@@ -1,0 +1,144 @@
+<div class="container">
+  <h2>Crear sucursal</h2>
+  <br />
+  <div class="row">
+      <div class="col">
+        <ul class="list-group" *ngIf="usuarioDB.Empresario">
+          <ng-container *ngFor="let lugar of lugares">
+            <a (click)="mostrarCrear(lugar.id)" *ngIf="lugar.propietario == loggedUser"> <li class="list-group-item">{{ lugar.nombre }}</li></a>
+          </ng-container>
+        </ul>    
+      </div>
+      <div class="col">
+        <div *ngIf="mostrarC">
+          <br/>
+          <h1>Datos de la sucursal</h1>
+          <br/>
+          <hr/>
+          <h5>Ingresa la imagen de la sucursal</h5>
+          <br/>
+          <p>Seleccione la imagen pricipal de la sucursal, aquella que la representa</p>
+          <div class="input-group mb-3">
+          <div class="custom-file">
+              <input type="file" class="custom-file-input" id="imagenLugar" aria-describedby="fileHelp" lang="es" accept="image/png, image/jpeg" (change)="uploadFile($event)">
+              <label class="custom-file-label" for="imagenLugar">{{file.name}}</label>
+          </div>
+          </div>
+          <br/>   
+          <label>Nombre</label>
+          <input type="text" class="form-control" [(ngModel)]="lugar.nombre"/>
+          <br/>
+          <label>Descripcion</label>
+          <textarea class="form-control"[(ngModel)]="lugar.descripcion"></textarea>
+          <br/>
+          <div class="form-row align-items-center">
+            <div class="col-auto my-1">
+              <label class="mr-sm-2" for="categorias">Categoria</label>
+              <select class="custom-select mr-sm-2" id="categorias" name="categoria" [(ngModel)]="lugar.categoria">
+                <option selected>Tipo de atracción</option>
+                <option value="Antros">Antros</option>
+                <option value="Bares">Bares</option>
+                <option value="Restaurantes">Restaurantes</option>
+                <option value="Museos">Museos</option>
+                <option value="Parques">Parques</option>
+                <option value="Puestos">Puestos</option>
+                <option value="Centro">Centro</option>
+                <option value="Plazas">Plazas</option>
+              </select>
+            </div>
+          </div>
+          <br/>
+          <div class="form-row align-items-center">
+            <div class="col-auto my-1">
+              <label class="mr-sm-2" for="precios">Rango de precios</label>
+              <select class="custom-select mr-sm-2" id="precios" name="precio" [(ngModel)]="lugar.precio">
+                <option selected>Más o menos</option>
+                <option value="1">$ - de 1 a 50MXN</option>
+                <option value="2">$$ - de 51 a 100MXN</option>
+                <option value="3">$$$ - de 101 a 300MXN</option>
+                <option value="4">$$$$ - de 301 a 500MXN</option>
+                <option value="5">$$$$$ - 501MXN o más</option>
+              </select>
+            </div>
+          </div>
+          <br/>
+          <h3>Amenidades</h3>
+          <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="true" [(ngModel)]="lugar.estacionamiento"/> <label class="form-check-label">Estacionamiento</label>
+              <br/>
+              <input class="form-check-input" type="checkbox" value="true" [(ngModel)]="lugar.wifi"/> <label class="form-check-label">Wifi</label>
+              <br/>
+              <input class="form-check-input" type="checkbox" value="true" [(ngModel)]="lugar.ac"/> <label class="form-check-label">Aire acondicionado</label>
+              <br/>
+              <input class="form-check-input" type="checkbox" value="true" [(ngModel)]="lugar.sd"/> <label class="form-check-label">Servicio a domicilio</label>
+              <br/>
+              <input class="form-check-input" type="checkbox" value="true" [(ngModel)]="lugar.tarjeta"/> <label class="form-check-label">Pago con tarjeta</label>
+              <br/>
+              <input class="form-check-input" type="checkbox" value="true" [(ngModel)]="lugar.reservaciones"/> <label class="form-check-label">Reservaciones</label>
+            </div>
+          <br/>
+          <h3>Horario</h3>
+          <ul class="list-group">
+                  <li class="list-group-item">
+                      <label for="lunesA">Lunes de : </label>
+                      <input class="form-control" type="time" id="lunesA" name="lunesA" required [(ngModel)]="lugar.lunesabrir"/>
+                      <label for="lunesC">a :</label>
+                      <input class="form-control" type="time" id="lunesC" name="lunesC" required [(ngModel)]="lugar.lunescerrar"/>
+                  </li>
+                  <li class="list-group-item">
+                          <label for="martesA">Martes de : </label>
+                          <input class="form-control" type="time" id="martesA" name="martesA" required [(ngModel)]="lugar.martesabrir">
+                          <label for="martesC">a :</label>
+                          <input class="form-control" type="time" id="martesC" name="martesC" required [(ngModel)]="lugar.martescerrar">
+                  </li>
+                  <li class="list-group-item">
+                          <label for="miercolesA">Miercoles de : </label>
+                          <input class="form-control" type="time" id="miercolesA" name="miercolesA" required [(ngModel)]="lugar.miercolesabrir">
+                          <label for="miercolesC">a :</label>
+                          <input class="form-control" type="time" id="miercolesC" name="miercolesC" required [(ngModel)]="lugar.miercolescerrar">
+                  </li>
+                  <li class="list-group-item">
+                          <label for="juevesA">Jueves de : </label>
+                          <input class="form-control" type="time" id="juevesA" name="juevesA" required [(ngModel)]="lugar.juevesabrir">
+                          <label for="juevesC">a :</label>
+                          <input class="form-control" type="time" id="juevesC" name="juevesC" required [(ngModel)]="lugar.juevescerrar">
+                  </li>
+                  <li class="list-group-item">
+                          <label for="viernesA">Viernes de : </label>
+                          <input class="form-control" type="time" id="viernesA" name="viernesA" required [(ngModel)]="lugar.viernesabrir">
+                          <label for="viernesC">a :</label>
+                          <input class="form-control" type="time" id="viernesC" name="viernesC" required [(ngModel)]="lugar.viernescerrar">
+                  </li>
+                  <li class="list-group-item">
+                          <label for="sabadoA">Sabado de : </label>
+                          <input class="form-control" type="time" id="sabadoA" name="sabadoA" required [(ngModel)]="lugar.sabadoabrir">
+                          <label for="sabadoC">a :</label>
+                          <input class="form-control" type="time" id="sabadoC" name="sabadoC" required [(ngModel)]="lugar.sabadocerrar">
+                  </li>
+                  <li class="list-group-item">
+                          <label for="domingoA">Domingo de : </label>
+                          <input class="form-control" type="time" id="domingoA" name="domingoA" required [(ngModel)]="lugar.domingoabrir">
+                          <label for="domingoC">a :</label>
+                          <input class="form-control" type="time" id="domingoC" name="domingoC" required [(ngModel)]="lugar.domingocerrar">
+                  </li>
+          </ul>
+          <br/>
+          <h3>Datos de direccion</h3>
+          <label>Calle y número</label>
+          <input type="text" class="form-control"[(ngModel)]="lugar.calle"/>
+          <br/>
+          <label>Ciudad</label>
+          <input type="text" class="form-control"[(ngModel)]="lugar.ciudad"/>
+          <br/>
+          <label>Pais</label>
+          <input type="text" class="form-control"[(ngModel)]="lugar.pais"/>
+          <br/>
+          <a class="botonLS btn btn-primary"(click)="guardarLugar(lugar.id)">Crear Atracción</a>
+          <a class="btn btn-default m-3" routerLink="/lugares">Cancelar</a>
+          <br/>
+        </div>
+      </div>
+  </div>
+</div>
+<br />
+<app-footer></app-footer>
