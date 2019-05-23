@@ -17,6 +17,9 @@ loggedUser:any = null;
 usuario:any = {};
 loggedIn = false;
 articulos: any = {};
+private promedio = 0;
+mC: Boolean = false;
+listaCalificacion:any = [];
 
   constructor(private lugaresService: LugaresService, private autorizacionService:AutorizacionService, private articulosService:ArticulosService) {
     lugaresService.getLugares().
@@ -33,4 +36,13 @@ articulos: any = {};
   }
   filtroArt = "";
   filterLugar = "";
+
+  public mostrarCal(n1, n2, n3, n4,n5, lugar) {
+    this.promedio = Math.round((5 * n5 + 4 * n4 + 3 * n3 + 2 * n2 + 1 * n1) / (n5 + n4 + n3 + n2 + n1)*1000)/1000;
+    
+    console.log(this.promedio);
+  }
+  public mayorCalificacion(){
+    this.mC = !(this.mC);
+  }
 }

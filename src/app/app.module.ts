@@ -51,6 +51,7 @@ import { ReporteComponent } from "./reporte/reporte.component";
 import { SweetAlert2Module } from "@toverux/ngx-sweetalert2";
 import { ReporteAtraccionComponent } from "./reporte.atraccion/reporte.atraccion.component";
 import { ForgotComponent } from "./forgot/forgot.component";
+import { ContraComponent } from "./cambiar.contraseña/cambiar.component";
 
 const appRoutes: Routes = [
   {
@@ -155,6 +156,10 @@ const appRoutes: Routes = [
   {
     path: "forgot",
     component: ForgotComponent
+  },
+  {
+    path: "cambiarContra",
+    component: ContraComponent
   }
 ];
 @NgModule({
@@ -188,7 +193,8 @@ const appRoutes: Routes = [
     ArticuloDetalleComponent,
     ReporteComponent,
     ReporteAtraccionComponent,
-    ForgotComponent
+    ForgotComponent,
+    ContraComponent
   ],
   imports: [
     BrowserModule,

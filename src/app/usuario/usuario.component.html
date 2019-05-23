@@ -50,21 +50,11 @@
         </ng-container>
       </ul>
       <br />
-      <div>
           <h2>Configuraciones</h2>
-          <a
-        class="botonLS btn btn-primary"
-        style="background-color: #b80f22; color: white "
-        (click)="cambiarPassword(password)"
-        >Cambiar Contraseña</a>
-      <br>
-      <label for="password">Nueva Contraseña</label>
-      <br>
-      <input
-        type="password"
-        [(ngModel)]="cambiarPass.password"
-        placeholder="Elige una nueva Contraseña"
-      />
+          <a  
+          class="botonLS btn btn-primary"
+          style="background-color: #b80f22; color: white "
+          routerLink="/cambiarContra">Cambiar Contraseña</a>
       <br>
       <br>
       <a
@@ -73,7 +63,6 @@
       (click)="bajaUser()"
       >Eliminar Cuenta</a
     >
-      </div>
       <br />
       <h2>Ubicación actual</h2>
       <br>
