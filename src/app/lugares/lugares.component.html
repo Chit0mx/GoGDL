@@ -20,8 +20,10 @@
         [(ngModel)]="filterLugar"
       />
       <br />
-      <ul class="list-group">
+      <ul class="list-group" *ngIf = "!mC">
+        <h2>Lista Original</h2>
         <ng-container *ngFor="let lugar of (lugares | filter: filterLugar)">
+          <span (onCreate)="mostrarCal(lugar.calificacion[1], lugar.calificacion[2], lugar.calificacion[3], lugar.calificacion[4], lugar.calificacion[5], lugar)"></span>
           <a routerLink="/detalle/{{ lugar.id }}"><li class="list-group-item">
             <div *ngIf="(lugar.AtraccionPrincipal)">
                 Sucursal de
@@ -30,6 +32,31 @@
           </li></a>
         </ng-container>
       </ul>
+      <ul class="list-group" *ngIf = "mC">
+          <h2>Lista filtrada</h2>
+          <ng-container *ngFor="let lugar of (lugares | filter: filterLugar)">
+            <a routerLink="/detalle/{{ lugar.id }}"><li class="list-group-item">{{ lugar.nombre }}</li></a>
+          </ng-container>
+        </ul>
+      <br>
+      <br>
+      <h2 class="text-center">Eventos y promociones</h2>
+      <br />
+      <input
+        class="form-control mr-sm-2"
+        type="search"
+        name="filtroArt"
+        placeholder="Buscar"
+        aria-label="Search"
+        [(ngModel)]="filtroArt"
+      />
+      <br>
+    <br>
+    <ul class="list-group">
+        <ng-container *ngFor="let articulo of (articulos | filtro: filtroArt)">
+            <a routerLink="/detalle/{{ articulo.atraccion }}"><li class="list-group-item">{{ articulo.titulo }}</li></a>
+          </ng-container>
+    </ul>
     </div>
     <div class="col-md-4">
         <br>
@@ -40,7 +67,7 @@
         <a  class="botonLS btn btn-primary mx-3" style="background-color: #b80f22; color: white " >Mayor Número de visitas</a>
         <br>
         <br>
-        <a  class="botonLS btn btn-primary mx-3" style="background-color: #b80f22; color: white " >Mayor Calificación</a>
+        <a  class="botonLS btn btn-primary mx-3" (click)="mayorCalificacion()" style="background-color: #b80f22; color: white " >Mayor Calificación</a>
         <br>
       </div>
   </div>

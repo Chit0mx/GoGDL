@@ -34,6 +34,7 @@ export class AutorizacionService {
     );
     return this.angularFireAuth.auth.sendPasswordResetEmail(email);
   }
+  cambiarC
   public registro = (email, password, nombre, apellido) => {
     this.angularFireAuth.auth
       .createUserWithEmailAndPassword(email, password)
@@ -86,18 +87,6 @@ export class AutorizacionService {
       );
     }).catch(function(error){
       swal.fire("Error", "No se pudo eliminar tu cuenta , intentalo más tarde", "error");
-    })
-  }
-  public cambiarPassword(password: string) {
-    var user = this.angularFireAuth.auth.currentUser;
-    user.updatePassword(password).then(function(){
-      swal.fire(
-        "Cambiaste tu contraseña",
-        "Ahora puedes usar tu nueva contraseña",
-        "success"
-      );
-    }).catch(function(error){
-      swal.fire("Error", "No se pudo cambiar tu contraseña , intentalo más tarde", "error");
     })
   }
   public obtenerUsuario() {

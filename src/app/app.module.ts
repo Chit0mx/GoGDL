@@ -52,6 +52,7 @@ import { SweetAlert2Module } from "@toverux/ngx-sweetalert2";
 import { ReporteAtraccionComponent } from "./reporte.atraccion/reporte.atraccion.component";
 import { ForgotComponent } from "./forgot/forgot.component";
 import { CrearSucursalComponent } from './crear.sucursal/crear.sucursal.component';
+import { ContraComponent } from "./cambiar.contraseña/cambiar.component";
 
 const appRoutes: Routes = [
   {
@@ -161,6 +162,10 @@ const appRoutes: Routes = [
     path: "crear-sucursal",
     component: CrearSucursalComponent,
     canActivate: [GuardiaService]
+  },
+  {
+    path: "cambiarContra",
+    component: ContraComponent
   }
 ];
 @NgModule({
@@ -195,7 +200,8 @@ const appRoutes: Routes = [
     ReporteComponent,
     ReporteAtraccionComponent,
     ForgotComponent,
-    CrearSucursalComponent
+    CrearSucursalComponent,
+    ContraComponent
   ],
   imports: [
     BrowserModule,
