@@ -19,6 +19,8 @@ export class UsuarioComponent {
   private usuarioDB:any;
   private lat:any;
   private lng:any;
+  private cambiarPass:any = {};
+
   constructor(private afDB: AngularFireDatabase,
     private angularFireAuth: AngularFireAuth,
     private lugaresService: LugaresService, 
@@ -52,7 +54,14 @@ export class UsuarioComponent {
     this.lat = pos.coords.latitude;
     this.lng = pos.coords.longitude;
   }
-
+public cambiarPassword(){
+  this.autorizacionService.cambiarPassword(
+    this.cambiarPass.password);
+}
+public bajaUser(){
+  this.autorizacionService.bajaUsuario();
+  this.router.navigate([`/inicio`]);
+}
   public hacerEmpresario() {
     this.autorizacionService.hacerEmpresario();
   }
