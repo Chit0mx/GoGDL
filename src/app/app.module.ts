@@ -41,6 +41,7 @@ import { GuardiaService } from "./services/guardia.service";
 import { RegistroComponent } from "./registro/registro.component";
 import { UsuarioComponent } from "./usuario/usuario.component";
 import { FilterPipe } from "./pipes/filter.pipe";
+import { FiltroPipe } from "./pipe.events/filtro.pipe";
 import { CrearArticulosComponent } from "./articulos.crear/articulos.crear.component";
 import { ArticulosService } from "./services/articulos.service";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
@@ -182,6 +183,7 @@ const appRoutes: Routes = [
     FooterComponent,
     UsuarioComponent,
     FilterPipe,
+    FiltroPipe,
     CrearArticulosComponent,
     ArticuloDetalleComponent,
     ReporteComponent,

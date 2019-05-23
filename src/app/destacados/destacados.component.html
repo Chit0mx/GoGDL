@@ -20,6 +20,25 @@
           <a routerLink="/detalle/{{ lugar.id }}"><li class="list-group-item">{{ lugar.nombre }}</li></a>
         </ng-container>
       </ul>
+      <br>
+      <br>
+      <h2 class="text-center">Eventos y promociones</h2>
+      <br />
+      <input
+        class="form-control mr-sm-2"
+        type="search"
+        name="filtroArt"
+        placeholder="Buscar"
+        aria-label="Search"
+        [(ngModel)]="filtroArt"
+      />
+      <br>
+    <br>
+    <ul class="list-group">
+        <ng-container *ngFor="let articulo of (articulos | filtro: filtroArt)">
+            <a routerLink="/detalle/{{ articulo.atraccion }}"><li class="list-group-item">{{ articulo.titulo }}</li></a>
+          </ng-container>
+    </ul>
     </div>
     <div class="col-md-4">
       <br>
