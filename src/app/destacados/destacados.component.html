@@ -17,7 +17,12 @@
     <br>
       <ul class="list-group">
         <ng-container *ngFor="let lugar of (lugares | filter: filterLugar)">
-          <a routerLink="/detalle/{{ lugar.id }}"><li class="list-group-item">{{ lugar.nombre }}</li></a>
+          <a routerLink="/detalle/{{ lugar.id }}"><li class="list-group-item">
+            <div *ngIf="(lugar.AtraccionPrincipal)">
+                Sucursal de
+            </div>
+            {{ lugar.nombre }}
+          </li></a>
         </ng-container>
       </ul>
       <br>

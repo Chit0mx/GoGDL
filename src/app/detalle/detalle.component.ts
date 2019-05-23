@@ -16,6 +16,7 @@ import swal from "sweetalert2";
 export class DetalleComponent {
   private id = null;
   private lugar: any = {};
+  private lugares:any = {};
   private articulos: any = {};
   private nombre = null;
   private profileUrl: Observable<string | null>;
@@ -50,6 +51,12 @@ export class DetalleComponent {
     this.id = this.route.snapshot.params['id'];
     const ref = this.storage.ref('atracciones/' + this.id);
     this.profileUrl = ref.getDownloadURL();
+    lugaresService
+    .getLugares()
+    .valueChanges()
+    .subscribe(lugares => {
+      this.lugares = lugares;
+    });
     this.lugaresService.buscarlugar(this.id).
     valueChanges().
     subscribe(lugar => {

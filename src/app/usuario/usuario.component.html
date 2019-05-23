@@ -21,7 +21,12 @@
           <a
             routerLink="/detalle/{{ lugar.id }}"
             *ngIf="lugar.propietario == loggedUser"
-            ><li class="list-group-item">{{ lugar.nombre }}</li></a
+            ><li class="list-group-item">
+              <div *ngIf="(lugar.AtraccionPrincipal)">
+                  Sucursal de
+              </div>
+              {{ lugar.nombre }}
+            </li></a
           >
         </ng-container>
       </ul>
@@ -30,8 +35,12 @@
       <ul class="list-group" *ngIf="usuarioDB.Empresario">
         <ng-container *ngFor="let lugarO of lugaresOcultos">
           <a style="cursor: pointer" (click)="desocultar(lugarO)"
-            ><li class="list-group-item">{{ lugarO.nombre }}</li></a
-          >
+            ><li class="list-group-item">
+              <div *ngIf="(lugar.AtraccionPrincipal)">
+                  Sucursal de
+              </div>
+              {{ lugarO.nombre }}
+            </li></a>
           <!--<li *ngIf="(lugarO == null)" class="list-group-item">No hay atracciones ocultas</li>-->
         </ng-container>
       </ul>
@@ -44,6 +53,9 @@
               class="list-group-item"
               *ngIf="usuarioDB[lugar.id].favorito == true"
             >
+              <div *ngIf="(lugar.AtraccionPrincipal)">
+                  Sucursal de
+              </div>
               {{ lugar.nombre }}
             </li>
           </a>
