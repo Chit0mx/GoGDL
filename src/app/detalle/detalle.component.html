@@ -16,10 +16,10 @@
         </h4>
         <hr/>
         <div>
-          <a class="botonLS btn btn-primary" (click)="favorita()" *ngIf="loggedUser && !(lugarUsr.favorito)">Agregar a Favoritos</a>
-          <a class="botonLS btn btn-primary" (click)="noFavorita()" *ngIf="loggedUser && (lugarUsr.favorito)">Quitar de Favoritos</a>
+          <a class="botonLS btn btn-primary mr-3 mb-3" (click)="favorita()" *ngIf="loggedUser && !(lugarUsr.favorito)">Agregar a Favoritos</a>
+          <a class="botonLS btn btn-primary mr-3 mb-3" (click)="noFavorita()" *ngIf="loggedUser && (lugarUsr.favorito)">Quitar de Favoritos</a>
           <div
-          class="botonLS btn btn-primary mx-3"
+          class="botonLS btn btn-primary mr-3 mb-3"
           style="background-color: #b80f22; color: white "
           data-href="https://github.com/Chit0mx/gogdl"
           data-layout="button"
@@ -116,9 +116,9 @@
             </div>
             <br/>
             <div with="100px">
-                <a  class="botonLS btn btn-primary" (click)="mostrarListaEliminar()" *ngIf="loggedIn && (fotoActual != 0) && (lugar.propietario == loggedUser)">Eliminar fotografia {{fotoActual}}</a>
+                <a  class="botonLS btn btn-primary mr-3 mb-3" (click)="mostrarListaEliminar()" *ngIf="loggedIn && (fotoActual != 0) && (lugar.propietario == loggedUser)">Eliminar fotografia {{fotoActual}}</a>
                 <!--<a class="botonLS btn btn-primary" (click)="estoyAqui()" *ngIf="loggedIn && !lugarUsr.Visite">Agregar fotorgrafia</a>-->
-                <a  class="botonLS btn btn-primary mx-3" (click)="mostrarAF()" *ngIf="loggedIn">Agregar fotorgrafia</a>
+                <a  class="botonLS btn btn-primary mr-3 mb-3" (click)="mostrarAF()" *ngIf="loggedIn">Agregar fotorgrafia</a>
             </div>
             <div *ngIf="mostarListaDeFotos">
                 <br/>
@@ -299,7 +299,7 @@
   <hr />
   <br />
   <a
-    class="botonLS btn btn-primary"
+    class="botonLS btn btn-primary mr-3 mb-3"
     (click)="estoyAqui()"
     *ngIf="
       loggedIn &&
@@ -313,25 +313,25 @@
   >
   <a
     routerLink="/crear/{{ lugar.id }}"
-    class="botonLS btn btn-primary mx-3"
+    class="botonLS btn btn-primary mr-3 mb-3"
     *ngIf="lugar.propietario == loggedUser"
     >Editar</a
   >
   <a
     routerLink="/crearArticulos/{{ lugar.id }}"
-    class="botonLS btn btn-primary"
+    class="botonLS btn btn-primary mr-3 mb-3"
     *ngIf="lugar.propietario == loggedUser"
     >Crear Evento/Promoción</a
   >
   <a
-    class="botonLS btn btn-primary mx-3"
+    class="botonLS btn btn-primary mr-3 mb-3"
     (click)="eliminarAtraccion()"
     style="background-color: #b80f22; color: white "
     *ngIf="loggedIn && lugar.propietario == loggedUser"
     >Eliminar</a
   >
   <a
-    class="botonLS btn btn-primary"
+    class="botonLS btn btn-primary mr-3 mb-3"
     (click)="ocultarLugar(lugar)"
     style="background-color: #b80f22; color: white "
     *ngIf="loggedIn && lugar.propietario == loggedUser"
