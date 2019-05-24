@@ -243,9 +243,9 @@
                 <input type="text" class="form-control" [(ngModel)]="resenia.titulo"/>
                 <br/>
                 <label>Descripcion</label>
-                <textarea class="form-control" [(ngModel)]="resenia.descripcion"></textarea>
+                <textarea id="desc" class="form-control" ></textarea>
                 <br/>
-                <a class="botonLS btn btn-primary" (click)="guardarResenia()">Enviar</a>
+                <a class="botonLS btn btn-primary" (click)="botFiltro()">Enviar</a>
                 <a class="btn btn-default m-3" routerLink="/detalle/{{this.id}}">Cancelar</a>
                 <br/>
             </div>
