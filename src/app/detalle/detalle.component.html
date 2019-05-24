@@ -9,7 +9,7 @@
 <div class="container">
     <h1 class="m-4">{{lugar.nombre}}</h1>
     <div class="card card-body bg-light">
-        <img [src]="profileUrl | async" width="100%" height="auto"/>
+        <img [src]="profileUrl | async" width="100%" height="auto" (load)="calcularEstado(lugar.lunesabrir, lugar.lunescerrar, lugar.martesabrir, lugar.martescerrar, lugar.miercolesabrir, lugar.miercolescerrar, lugar.juevesabrir, lugar.juevescerrar, lugar.viernesabrir, lugar.viernescerrar, lugar.sabadoabrir, lugar.sabadocerrar, lugar.domingoabrir, lugar.domingocerrar)"/>
         <br/>
         <h4>
             {{lugar.descripcion}}
@@ -59,6 +59,15 @@
                 </div>
                 <p>El lugar tiene una calificacion de {{promedio}}</p>
             </div>
+        </div>
+        <br/>
+        <div id="Estado">
+            <ng-container *ngIf="LugarAbierto; else elseTemplate">
+                <h4>La atraccion se encuentra: <h2 >Abierta</h2></h4>
+            </ng-container>
+            <ng-template #elseTemplate>
+                <h4>La atraccion se encuentra: <h2 >Cerrada</h2></h4>
+            </ng-template>
         </div>
         <hr/>
         <div>
