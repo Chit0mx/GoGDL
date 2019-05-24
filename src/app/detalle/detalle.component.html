@@ -16,8 +16,8 @@
         </h4>
         <hr/>
         <div>
-          <a class="botonLS btn btn-primary mr-3 mb-3" (click)="favorita()" *ngIf="loggedUser && !(lugarUsr.favorito)">Agregar a Favoritos</a>
-          <a class="botonLS btn btn-primary mr-3 mb-3" (click)="noFavorita()" *ngIf="loggedUser && (lugarUsr.favorito)">Quitar de Favoritos</a>
+          <a class="botonLS btn btn-primary mr-3 mb-3" (click)="favorita()" *ngIf="loggedUser && !(lugarUsr.favorito)" style="background-color: #b80f22; color: white " >Agregar a Favoritos</a>
+          <a class="botonLS btn btn-primary mr-3 mb-3" (click)="noFavorita()" *ngIf="loggedUser && (lugarUsr.favorito)" style="background-color: #b80f22; color: white "  >Quitar de Favoritos</a>
           <div
           class="botonLS btn btn-primary mr-3 mb-3"
           style="background-color: #b80f22; color: white "
@@ -125,9 +125,9 @@
             </div>
             <br/>
             <div with="100px">
-                <a  class="botonLS btn btn-primary mr-3 mb-3" (click)="mostrarListaEliminar()" *ngIf="loggedIn && (fotoActual != 0) && (lugar.propietario == loggedUser)">Eliminar fotografia {{fotoActual}}</a>
+                <a  class="botonLS btn btn-primary mr-3 mb-3" (click)="mostrarListaEliminar()" *ngIf="loggedIn && (fotoActual != 0) && (lugar.propietario == loggedUser)" style="background-color: #b80f22; color: white " >Eliminar fotografia {{fotoActual}}</a>
                 <!--<a class="botonLS btn btn-primary" (click)="estoyAqui()" *ngIf="loggedIn && !lugarUsr.Visite">Agregar fotorgrafia</a>-->
-                <a  class="botonLS btn btn-primary mr-3 mb-3" (click)="mostrarAF()" *ngIf="loggedIn">Agregar fotorgrafia</a>
+                <a  class="botonLS btn btn-primary mr-3 mb-3" (click)="mostrarAF()" *ngIf="loggedIn" style="background-color: #b80f22; color: white "  >Agregar fotorgrafia</a>
             </div>
             <div *ngIf="mostarListaDeFotos">
                 <br/>
@@ -149,8 +149,8 @@
                     </div>
                 </div>
                 <div with="100px">
-                    <a class="botonLS btn btn-primary" (click)="subirImagenNueva()" *ngIf="loggedIn">Agregar</a>
-                    <a style="cursor: pointer;" class="btn btn-default  mx-3" (click)="mostrarAF()" *ngIf="loggedIn">Cancelar</a>
+                    <a class="botonLS btn btn-primary" (click)="subirImagenNueva()" *ngIf="loggedIn" style="background-color: #b80f22; color: white "  >Agregar</a>
+                    <a style="cursor: pointer;" class="btn btn-default  mx-3" (click)="mostrarAF()" *ngIf="loggedIn" style="background-color: #b80f22; color: white " >Cancelar</a>
                 </div>
             </div>
         </div>
@@ -261,14 +261,15 @@
                 <input type="text" class="form-control" [(ngModel)]="resenia.titulo"/>
                 <br/>
                 <label>Descripcion</label>
-                <textarea id="desc" class="form-control" ></textarea>
+                <textarea id="desc" maxlength="150" class="form-control" ></textarea>
                 <br/>
-                <a class="botonLS btn btn-primary" (click)="botFiltro()">Enviar</a>
-                <a class="btn btn-default m-3" routerLink="/detalle/{{this.id}}">Cancelar</a>
+                <a class="botonLS btn btn-primary" (click)="botFiltro()" style="background-color: #b80f22; color: white " >Enviar</a>
+                <a class="botonLS btn btn-primary" routerLink="/detalle/{{this.id}}" style="background-color: #b80f22; color: white " >Cancelar</a>
                 <br/>
             </div>
     <a
       class="botonLS btn btn-primary"
+      style="background-color: #b80f22; color: white "
       *ngIf="loggedIn && lugarUsr.reseniado"
       (click)="rehacerResenia(loggedUser)"
       >Rehacer la reseña</a
@@ -299,6 +300,7 @@
     </p>
     <a
       class="botonLS btn btn-primary"
+      style="background-color: #b80f22; color: white "
       *ngIf="loggedIn && lugarUsr.calificado"
       (click)="reCalificar(lugarUsr.calificacion)"
       >Cambiar la calificación</a
@@ -323,12 +325,14 @@
   <a
     routerLink="/crear/{{ lugar.id }}"
     class="botonLS btn btn-primary mr-3 mb-3"
+    style="background-color: #b80f22; color: white "
     *ngIf="lugar.propietario == loggedUser"
     >Editar</a
   >
   <a
     routerLink="/crearArticulos/{{ lugar.id }}"
     class="botonLS btn btn-primary mr-3 mb-3"
+    style="background-color: #b80f22; color: white "
     *ngIf="lugar.propietario == loggedUser"
     >Crear Evento/Promoción</a
   >
