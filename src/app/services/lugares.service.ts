@@ -114,5 +114,12 @@ export class LugaresService{
        return estoyaqui + 1;
     })
   }
+
+  public agregarVisto(idlugar){
+    this.afDB.object(`lugares/${idlugar}/visto`).query
+    .ref.transaction(visto => {
+       return visto + 1;
+    })
+  }
 }
 

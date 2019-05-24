@@ -99,8 +99,9 @@ export class DetalleComponent {
               this.autorizacionService.quitarFavorito(this.id);
               this.autorizacionService.rehacerResenia(this.id);
               this.autorizacionService.quitarEstoyAqui(this.id);
-              this.autorizacionService.noCalificado(this.id)
+              this.autorizacionService.noCalificado(this.id);
               this.lugarUsr = lugarUsr;
+              this.lugaresService.agregarVisto(this.id);
             }
           });
       } else {
@@ -306,7 +307,7 @@ export class DetalleComponent {
         let hourLA = timeLA[0];
         let timeLC = lc.split(":");
         let hourLC = timeLC[0];
-        if (hora > hourLA && hora < hourLC) {
+        if (hora >= hourLA && hora < hourLC) {
           this.LugarAbierto = true;
         } else {
           this.LugarAbierto = false;
@@ -317,7 +318,7 @@ export class DetalleComponent {
         let hourMA = timeMA[0];
         let timeMC = mc.split(":");
         let hourMC = timeMC[0];
-        if (hora > hourMA && hora < hourMC) {
+        if (hora >= hourMA && hora < hourMC) {
           this.LugarAbierto = true;
         } else {
           this.LugarAbierto = false;
@@ -328,7 +329,7 @@ export class DetalleComponent {
         let hourMIA = timeMIA[0];
         let timeMIC = mic.split(":");
         let hourMIC = timeMIC[0];
-        if (hora > hourMIA && hora < hourMIC) {
+        if (hora >= hourMIA && hora < hourMIC) {
           this.LugarAbierto = true;
         } else {
           this.LugarAbierto = false;
@@ -339,7 +340,7 @@ export class DetalleComponent {
         let hourJA = timeJA[0];
         let timeJC = jc.split(":");
         let hourJC = timeJC[0];
-        if (hora > hourJA && hora < hourJC) {
+        if (hora >= hourJA && hora < hourJC) {
           this.LugarAbierto = true;
         } else {
           this.LugarAbierto = false;
@@ -350,7 +351,7 @@ export class DetalleComponent {
         let hourVA = timeVA[0];
         let timeVC = vc.split(":");
         let hourVC = timeVC[0];
-        if (hora > hourVA && hora < hourVC) {
+        if (hora >= hourVA && hora < hourVC) {
           this.LugarAbierto = true;
         } else {
           this.LugarAbierto = false;
@@ -361,7 +362,7 @@ export class DetalleComponent {
         let hourSA = timeSA[0];
         let timeSC = sc.split(":");
         let hourSC = timeSC[0];
-        if (hora > hourSA && hora < hourSC) {
+        if (hora >= hourSA && hora < hourSC) {
           this.LugarAbierto = true;
         } else {
           this.LugarAbierto = false;
@@ -372,7 +373,7 @@ export class DetalleComponent {
         let hourDA = timeDA[0];
         let timeDC = dc.split(":");
         let hourDC = timeDC[0];
-        if (hora > hourDA && hora < hourDC) {
+        if (hora >= hourDA && hora < hourDC) {
           this.LugarAbierto = true;
         } else {
           this.LugarAbierto = false;

@@ -61,13 +61,22 @@
             </div>
         </div>
         <br/>
-        <div id="Estado">
-            <ng-container *ngIf="LugarAbierto; else elseTemplate">
-                <h4>La atraccion se encuentra: <h2 >Abierta</h2></h4>
-            </ng-container>
-            <ng-template #elseTemplate>
-                <h4>La atraccion se encuentra: <h2 >Cerrada</h2></h4>
-            </ng-template>
+        <div class="row">
+            <div class="col">
+                <div id="Estado">
+                    <ng-container *ngIf="LugarAbierto; else elseTemplate">
+                        <h4>La atraccion se encuentra: <h2 style="color:green">Abierta</h2></h4>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        <h4>La atraccion se encuentra: <h2 style="color:#b80f22">Cerrada</h2></h4>
+                    </ng-template>
+                </div>
+            </div>
+            <div class="col">
+                <div>
+                    <h4>La atracción ha sido vista por <strong>{{lugar.visto}}</strong> usuarios</h4>
+                </div>
+            </div>
         </div>
         <hr/>
         <div>
