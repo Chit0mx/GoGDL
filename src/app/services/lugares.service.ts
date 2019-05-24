@@ -106,5 +106,13 @@ export class LugaresService{
   public getImagenes(idA){
     return this.afDB.list(`lugares/${idA}/fotos`);
   }
+
+  public agregarEstoyAqui(idlugar){
+    this.autorizacion.agregarEstoyAqui(idlugar);
+    this.afDB.object(`lugares/${idlugar}/estoyaqui`).query
+    .ref.transaction(estoyaqui => {
+       return estoyaqui + 1;
+    })
+  }
 }
 
