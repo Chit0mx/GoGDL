@@ -1,27 +1,37 @@
 <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+          <h2>{{ usuarioDB.Nombre }} {{ usuarioDB.Apellido }}</h2>
+          <hr />
+          <div *ngIf="!usuarioDB.Empresario">
+            <a
+              style="cursor: pointer"
+              class="botonLS p-2"
+              (click)="hacerEmpresario()"
+              >Convertirme en empresario</a
+            >
+          </div>
+          <div *ngIf="usuarioDB.Empresario">
+            <b>Empresario</b>
+          </div>
+          <br />
+      </div>
+    </div>
+</div>
+<div class="container">
+    <h2 class ="text-center" *ngIf="usuarioDB.Empresario" >Mis atracciones</h2>
+    <hr>
+    <br>
   <div class="row">
-    <div class="col-md-10">
-      <h2>{{ usuarioDB.Nombre }} {{ usuarioDB.Apellido }}</h2>
-      <hr />
-      <div *ngIf="!usuarioDB.Empresario">
-        <a
-          style="cursor: pointer"
-          class="botonLS p-2"
-          (click)="hacerEmpresario()"
-          >Convertirme en empresario</a
-        >
-      </div>
-      <div *ngIf="usuarioDB.Empresario">
-        <b>Empresario</b>
-      </div>
-      <br />
-      <h2 *ngIf="usuarioDB.Empresario">Mis atracciones</h2>
+    <div class="col-md-3">
+      <h3 class ="text-center">Nombre</h3>
+      <hr>
       <ul class="list-group" *ngIf="usuarioDB.Empresario">
         <ng-container *ngFor="let lugar of lugares">
           <a
             routerLink="/detalle/{{ lugar.id }}"
             *ngIf="lugar.propietario == loggedUser"
-            ><li class="list-group-item">
+            ><li class="list-group-item text-center">
               <div *ngIf="(lugar.AtraccionPrincipal)">
                   Sucursal de
               </div>
@@ -29,60 +39,118 @@
             </li></a
           >
         </ng-container>
+        <hr>
       </ul>
-      <br />
-      <h2 *ngIf="usuarioDB.Empresario">Mis atracciones ocultas</h2>
+    </div>
+    <div class="col-md-3">
+      <h3 class="text-center">Vistas totales</h3>
+      <hr>
       <ul class="list-group" *ngIf="usuarioDB.Empresario">
-        <ng-container *ngFor="let lugarO of lugaresOcultos">
-          <a style="cursor: pointer" (click)="desocultar(lugarO)"
-            ><li class="list-group-item">
-              <div *ngIf="(lugar.AtraccionPrincipal)">
-                  Sucursal de
-              </div>
-              {{ lugarO.nombre }}
-            </li></a>
-          <!--<li *ngIf="(lugarO == null)" class="list-group-item">No hay atracciones ocultas</li>-->
-        </ng-container>
-      </ul>
-      <br />
-      <h2>Atracciones favoritas</h2>
-      <ul class="list-group">
-        <ng-container *ngFor="let lugar of lugares">
-          <a routerLink="/detalle/{{ lugar.id }}">
-            <li
-              class="list-group-item"
-              *ngIf="usuarioDB[lugar.id].favorito == true"
-            >
-              <div *ngIf="(lugar.AtraccionPrincipal)">
-                  Sucursal de
-              </div>
-              {{ lugar.nombre }}
-            </li>
-          </a>
-        </ng-container>
-      </ul>
-      <br />
-          <h2>Configuraciones</h2>
-          <a  
+          <ng-container *ngFor="let lugar of lugares">
+           <li class="list-group-item text-center" *ngIf="lugar.propietario == loggedUser">
+                <div *ngIf="(lugar.AtraccionPrincipal)">
+                    Sucursal de
+                </div>
+                {{ lugar.visto }}
+              </li>
+            
+          </ng-container>
+          <hr>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h3 class="text-center">Estoy aqui</h3>
+        <hr>
+        <ul class="list-group" *ngIf="usuarioDB.Empresario">
+            <ng-container *ngFor="let lugar of lugares">
+              <li class="list-group-item text-center" *ngIf="lugar.propietario == loggedUser">
+                  <div *ngIf="(lugar.AtraccionPrincipal)">
+                      Sucursal de
+                  </div>
+                  {{ lugar.estoyaqui }}
+                </li>
+              
+            </ng-container>
+            <hr>
+          </ul>
+      </div>
+      <div class="col-md-3">
+          <h3 class="text-center">Calificacion</h3>
+          <hr>
+          <ul class="list-group" *ngIf="usuarioDB.Empresario">
+              <ng-container *ngFor="let lugar of lugares">
+               <li class="list-group-item text-center" *ngIf="lugar.propietario == loggedUser">
+                    <div *ngIf="(lugar.AtraccionPrincipal)">
+                        Sucursal de
+                    </div>
+                    {{ lugar.categoria }}
+                  </li>
+                
+              </ng-container>
+              <hr>
+            </ul>
+      </div>
+  </div>
+  <hr>
+</div>
+
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-10">
+          <br />
+          <h2 *ngIf="usuarioDB.Empresario">Mis atracciones ocultas</h2>
+          <ul class="list-group" *ngIf="usuarioDB.Empresario">
+            <ng-container *ngFor="let lugarO of lugaresOcultos">
+              <a style="cursor: pointer" (click)="desocultar(lugarO)"
+                ><li class="list-group-item">
+                  <div *ngIf="(lugar.AtraccionPrincipal)">
+                      Sucursal de
+                  </div>
+                  {{ lugarO.nombre }}
+                </li></a>
+              <!--<li *ngIf="(lugarO == null)" class="list-group-item">No hay atracciones ocultas</li>-->
+            </ng-container>
+          </ul>
+          <br />
+          <h2>Atracciones favoritas</h2>
+          <ul class="list-group">
+            <ng-container *ngFor="let lugar of lugares">
+              <a routerLink="/detalle/{{ lugar.id }}">
+                <li
+                  class="list-group-item"
+                  *ngIf="usuarioDB[lugar.id].favorito == true"
+                >
+                  <div *ngIf="(lugar.AtraccionPrincipal)">
+                      Sucursal de
+                  </div>
+                  {{ lugar.nombre }}
+                </li>
+              </a>
+            </ng-container>
+          </ul>
+          <br />
+              <h2>Configuraciones</h2>
+              <a  
+              class="botonLS btn btn-primary"
+              style="background-color: #b80f22; color: white "
+              routerLink="/cambiarContra">Cambiar Contraseña</a>
+          <br>
+          <br>
+          <a
           class="botonLS btn btn-primary"
           style="background-color: #b80f22; color: white "
-          routerLink="/cambiarContra">Cambiar Contraseña</a>
-      <br>
-      <br>
-      <a
-      class="botonLS btn btn-primary"
-      style="background-color: #b80f22; color: white "
-      (click)="bajaUser()"
-      >Eliminar Cuenta</a
-    >
-      <br />
-      <h2>Ubicación actual</h2>
-      <br>
-      <agm-map [latitude]="lat" [longitude]="lng">
-        <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-      </agm-map>
-      <br />
+          (click)="bajaUser()"
+          >Eliminar Cuenta</a
+        >
+          <br />
+          <h2>Ubicación actual</h2>
+          <br>
+          <agm-map [latitude]="lat" [longitude]="lng">
+            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+          </agm-map>
+          <br />
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 <app-footer></app-footer>
