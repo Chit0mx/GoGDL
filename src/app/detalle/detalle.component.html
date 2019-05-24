@@ -9,17 +9,17 @@
 <div class="container">
     <h1 class="m-4">{{lugar.nombre}}</h1>
     <div class="card card-body bg-light">
-        <img [src]="profileUrl | async" width="100%" height="auto"/>
+        <img [src]="profileUrl | async" width="100%" height="auto" (load)="calcularEstado(lugar.lunesabrir, lugar.lunescerrar, lugar.martesabrir, lugar.martescerrar, lugar.miercolesabrir, lugar.miercolescerrar, lugar.juevesabrir, lugar.juevescerrar, lugar.viernesabrir, lugar.viernescerrar, lugar.sabadoabrir, lugar.sabadocerrar, lugar.domingoabrir, lugar.domingocerrar)"/>
         <br/>
         <h4>
             {{lugar.descripcion}}
         </h4>
         <hr/>
         <div>
-          <a class="botonLS btn btn-primary" (click)="favorita()" *ngIf="loggedUser && !(lugarUsr.favorito)">Agregar a Favoritos</a>
-          <a class="botonLS btn btn-primary" (click)="noFavorita()" *ngIf="loggedUser && (lugarUsr.favorito)">Quitar de Favoritos</a>
+          <a class="botonLS btn btn-primary mr-3 mb-3" (click)="favorita()" *ngIf="loggedUser && !(lugarUsr.favorito)">Agregar a Favoritos</a>
+          <a class="botonLS btn btn-primary mr-3 mb-3" (click)="noFavorita()" *ngIf="loggedUser && (lugarUsr.favorito)">Quitar de Favoritos</a>
           <div
-          class="botonLS btn btn-primary mx-3"
+          class="botonLS btn btn-primary mr-3 mb-3"
           style="background-color: #b80f22; color: white "
           data-href="https://github.com/Chit0mx/gogdl"
           data-layout="button"
@@ -59,6 +59,15 @@
                 </div>
                 <p>El lugar tiene una calificacion de {{promedio}}</p>
             </div>
+        </div>
+        <br/>
+        <div id="Estado">
+            <ng-container *ngIf="LugarAbierto; else elseTemplate">
+                <h4>La atraccion se encuentra: <h2 >Abierta</h2></h4>
+            </ng-container>
+            <ng-template #elseTemplate>
+                <h4>La atraccion se encuentra: <h2 >Cerrada</h2></h4>
+            </ng-template>
         </div>
         <hr/>
         <div>
@@ -107,9 +116,9 @@
             </div>
             <br/>
             <div with="100px">
-                <a  class="botonLS btn btn-primary" (click)="mostrarListaEliminar()" *ngIf="loggedIn && (fotoActual != 0) && (lugar.propietario == loggedUser)">Eliminar fotografia {{fotoActual}}</a>
+                <a  class="botonLS btn btn-primary mr-3 mb-3" (click)="mostrarListaEliminar()" *ngIf="loggedIn && (fotoActual != 0) && (lugar.propietario == loggedUser)">Eliminar fotografia {{fotoActual}}</a>
                 <!--<a class="botonLS btn btn-primary" (click)="estoyAqui()" *ngIf="loggedIn && !lugarUsr.Visite">Agregar fotorgrafia</a>-->
-                <a  class="botonLS btn btn-primary mx-3" (click)="mostrarAF()" *ngIf="loggedIn">Agregar fotorgrafia</a>
+                <a  class="botonLS btn btn-primary mr-3 mb-3" (click)="mostrarAF()" *ngIf="loggedIn">Agregar fotorgrafia</a>
             </div>
             <div *ngIf="mostarListaDeFotos">
                 <br/>
@@ -290,7 +299,7 @@
   <hr />
   <br />
   <a
-    class="botonLS btn btn-primary"
+    class="botonLS btn btn-primary mr-3 mb-3"
     (click)="estoyAqui()"
     *ngIf="
       loggedIn &&
@@ -304,25 +313,25 @@
   >
   <a
     routerLink="/crear/{{ lugar.id }}"
-    class="botonLS btn btn-primary mx-3"
+    class="botonLS btn btn-primary mr-3 mb-3"
     *ngIf="lugar.propietario == loggedUser"
     >Editar</a
   >
   <a
     routerLink="/crearArticulos/{{ lugar.id }}"
-    class="botonLS btn btn-primary"
+    class="botonLS btn btn-primary mr-3 mb-3"
     *ngIf="lugar.propietario == loggedUser"
     >Crear Evento/Promoción</a
   >
   <a
-    class="botonLS btn btn-primary mx-3"
+    class="botonLS btn btn-primary mr-3 mb-3"
     (click)="eliminarAtraccion()"
     style="background-color: #b80f22; color: white "
     *ngIf="loggedIn && lugar.propietario == loggedUser"
     >Eliminar</a
   >
   <a
-    class="botonLS btn btn-primary"
+    class="botonLS btn btn-primary mr-3 mb-3"
     (click)="ocultarLugar(lugar)"
     style="background-color: #b80f22; color: white "
     *ngIf="loggedIn && lugar.propietario == loggedUser"

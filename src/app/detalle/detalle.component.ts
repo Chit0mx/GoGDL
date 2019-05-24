@@ -40,6 +40,7 @@ export class DetalleComponent {
   private arrayF: any = [];
   private fotos:any;
   private mostarListaDeFotos:Boolean = false;
+  private LugarAbierto:Boolean = false;
   constructor (private autorizacionService:AutorizacionService, 
     private storage: AngularFireStorage, 
     private route:ActivatedRoute, 
@@ -75,7 +76,6 @@ export class DetalleComponent {
     this.lugaresService.getImagenes(this.id).
     valueChanges().
     subscribe(fotos => {
-      console.log(fotos);
       this.fotos = fotos;
     });
     this.autorizacionService.isLogged()
@@ -295,6 +295,92 @@ export class DetalleComponent {
         );
       }
     })
+  }
+  
+  public calcularEstado(la, lc, ma, mc, mia, mic, ja, jc, va, vc, sa, sc, da, dc) {
+    let dia = new Date().getDay();
+    let hora = new Date().getHours();
+    switch(dia) {
+      case 1: 
+        let timeLA = la.split(":");
+        let hourLA = timeLA[0];
+        let timeLC = lc.split(":");
+        let hourLC = timeLC[0];
+        if (hora > hourLA && hora < hourLC) {
+          this.LugarAbierto = true;
+        } else {
+          this.LugarAbierto = false;
+        } 
+      break
+      case 2:
+        let timeMA = ma.split(":");
+        let hourMA = timeMA[0];
+        let timeMC = mc.split(":");
+        let hourMC = timeMC[0];
+        if (hora > hourMA && hora < hourMC) {
+          this.LugarAbierto = true;
+        } else {
+          this.LugarAbierto = false;
+        } 
+      break
+      case 3:
+        let timeMIA = mia.split(":");
+        let hourMIA = timeMIA[0];
+        let timeMIC = mic.split(":");
+        let hourMIC = timeMIC[0];
+        if (hora > hourMIA && hora < hourMIC) {
+          this.LugarAbierto = true;
+        } else {
+          this.LugarAbierto = false;
+        }  
+      break
+        case 4: 
+        let timeJA = ja.split(":");
+        let hourJA = timeJA[0];
+        let timeJC = jc.split(":");
+        let hourJC = timeJC[0];
+        if (hora > hourJA && hora < hourJC) {
+          this.LugarAbierto = true;
+        } else {
+          this.LugarAbierto = false;
+        } 
+      break
+      case 5: 
+        let timeVA = va.split(":");
+        let hourVA = timeVA[0];
+        let timeVC = vc.split(":");
+        let hourVC = timeVC[0];
+        if (hora > hourVA && hora < hourVC) {
+          this.LugarAbierto = true;
+        } else {
+          this.LugarAbierto = false;
+        } 
+      break
+      case 6: 
+        let timeSA = sa.split(":");
+        let hourSA = timeSA[0];
+        let timeSC = sc.split(":");
+        let hourSC = timeSC[0];
+        if (hora > hourSA && hora < hourSC) {
+          this.LugarAbierto = true;
+        } else {
+          this.LugarAbierto = false;
+        } 
+      break
+      case 7:
+        let timeDA = da.split(":");
+        let hourDA = timeDA[0];
+        let timeDC = dc.split(":");
+        let hourDC = timeDC[0];
+        if (hora > hourDA && hora < hourDC) {
+          this.LugarAbierto = true;
+        } else {
+          this.LugarAbierto = false;
+        } 
+      break
+      default:
+        console.log("Error en calcular el dia");
+    } 
   }
 
   public range(start, stop, step) {

@@ -9,17 +9,17 @@ import { AutorizacionService } from '../services/autorizacion.service';
 })
 export class LugaresComponent {
   title = "GoGdl";
-
-lat: number = 20.6430428;
-lng: number = -103.3703034;
-lugares = null;
-loggedUser:any = null;
-usuario:any = {};
-loggedIn = false;
-articulos: any = {};
-private promedio = 0;
-mC: Boolean = false;
-listaCalificacion:any = [];
+  constante =  0.003;
+  lat: number = 20.6430428;
+  lng: number = -103.3703034;
+  lugares = null;
+  loggedUser:any = null;
+  usuario:any = {};
+  loggedIn = false;
+  articulos: any = {};
+  private promedio = 0;
+  mC: Boolean = false;
+  listaCalificacion:any = [];
 
   constructor(private lugaresService: LugaresService, private autorizacionService:AutorizacionService, private articulosService:ArticulosService) {
     lugaresService.getLugares().
@@ -33,6 +33,7 @@ listaCalificacion:any = [];
       .subscribe(articulos => {
         this.articulos = articulos ;
       });
+      //navigator.geolocation.getCurrentPosition(this.mostrar);
   }
   filtroArt = "";
   filterLugar = "";
@@ -44,5 +45,10 @@ listaCalificacion:any = [];
   }
   public mayorCalificacion(){
     this.mC = !(this.mC);
+  }
+
+  public mostrar(pos) {
+    this.lat = pos.coords.latitude;
+    this.lng = pos.coords.longitude;
   }
 }
