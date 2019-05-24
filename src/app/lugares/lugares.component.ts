@@ -18,9 +18,13 @@ export class LugaresComponent {
   loggedIn = false;
   articulos: any = {};
   mC: Boolean = false;
+  mV: Boolean = false;
   listaCalificacion:any = [];
+  listaVistas:any = [];
+  lVisto = 0;
   lPromedio = 0;
-  private listaCreada:Boolean = false;
+  private listaCreadaCal:Boolean = false;
+  private listaCreadaVis:Boolean = false;
 
   constructor(private lugaresService: LugaresService, private autorizacionService:AutorizacionService, private articulosService:ArticulosService) {
     lugaresService.getLugares().
@@ -40,8 +44,9 @@ export class LugaresComponent {
   filtroArt = "";
   filterLugar = "";
 
+  
   public mostrarCal(n1, n2, n3, n4, n5, lugar) {
-    if (this.listaCreada == false) {
+    if (this.listaCreadaCal == false) {
       let promedio = Math.round((5 * n5 + 4 * n4 + 3 * n3 + 2 * n2 + 1 * n1) / (n5 + n4 + n3 + n2 + n1)*1000)/1000;
       lugar.promedio = promedio;
       this.listaCalificacion.push(lugar);
@@ -55,17 +60,35 @@ export class LugaresComponent {
           return 0;
         });
       this.lPromedio = promedio;
+      this.mostrarVis(lugar);
+    } 
+  }
+
+  public mostrarVis(lugar) {
+    if (this.listaCreadaVis == false) {
+      this.listaVistas.push(lugar);
+      this.listaVistas.sort((a, b) => {
+        if (a.visto > b.visto) {
+          return -1;
+        }
+        if (a.visto < b.visto) {
+          return 1;
+        }
+        return 0;
+      });
     } 
   }
 
   public mayorCalificacion(){
+    this.mV = false;
     this.mC = !(this.mC);
-    this.listaCreada = true;
+    this.listaCreadaCal = true;
   }
 
-  public mostrar(pos) {
-    this.lat = pos.coords.latitude;
-    this.lng = pos.coords.longitude;
+  public mostrarListaVistas(){
+    this.mC = false;
+    this.mV = !(this.mV);
+    this.listaCreadaVis = true;
   }
 
   public range(start, stop, step) {
