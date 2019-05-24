@@ -12,16 +12,31 @@
         placeholder="Buscar"
         aria-label="Search"
         [(ngModel)]="filterLugar"
+        *ngIf = "!mC"
       />
       <br>
     <br>
-      <ul class="list-group">
+    <ul class="list-group" *ngIf = "!mC">
+        <h2>Lista ordenada por fecha de creación</h2>
         <ng-container *ngFor="let lugar of (lugares | filter: filterLugar)">
-          <a routerLink="/detalle/{{ lugar.id }}"><li class="list-group-item">
+          <span (onCreate)="mostrarCal(lugar.calificacion[1], lugar.calificacion[2], lugar.calificacion[3], lugar.calificacion[4], lugar.calificacion[5], lugar)"></span>
+          <a routerLink="/detalle/{{ lugar.id }}">
+            <li class="list-group-item">
             <div *ngIf="(lugar.AtraccionPrincipal)">
                 Sucursal de
             </div>
             {{ lugar.nombre }}
+          </li></a>
+        </ng-container>
+      </ul>
+      <ul class="list-group" *ngIf = "mC">
+        <h2>Lista ordenada por calificación</h2>
+        <ng-container *ngFor="let lc of range(0, listaCalificacion.length ,1)">
+          <a routerLink="/detalle/{{ listaCalificacion[lc].id }}"><li class="list-group-item">
+            <div *ngIf="(listaCalificacion[lc].AtraccionPrincipal)">
+                Sucursal de
+            </div>
+            {{ listaCalificacion[lc].nombre }}
           </li></a>
         </ng-container>
       </ul>
@@ -54,7 +69,7 @@
       <a  class="botonLS btn btn-primary mx-3" style="background-color: #b80f22; color: white " >Mayor Número de visitas</a>
       <br>
       <br>
-      <a  class="botonLS btn btn-primary mx-3" style="background-color: #b80f22; color: white " >Mayor Calificación</a>
+      <a  class="botonLS btn btn-primary mx-3" (click)="mayorCalificacion()" style="background-color: #b80f22; color: white " >Mayor Calificación</a>
       <br>
     </div>
   </div>
