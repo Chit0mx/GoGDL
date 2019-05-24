@@ -136,7 +136,7 @@ export class DetalleComponent {
   }
 
   public estoyAqui(){
-    this.autorizacionService.agregarEstoyAqui(this.id);
+    this.lugaresService.agregarEstoyAqui(this.id);
     swal.fire(
       "Atraccion visitada",
       "A visitado la atracción",
