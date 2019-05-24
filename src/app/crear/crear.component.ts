@@ -72,4 +72,18 @@ export class CrearComponent {
   uploadFile(event) {
     this.file = event.target.files[0];
   }
+  public botFiltro(){
+    var grocerias = ["puta","puto","marica","mierda","chingadera","chinga","puteria","mamada","chupala","alv","chupala","verga","pendejo","chingar","mamar","mamando","puteria","chingado","culo","culero","estupido","idiota","baboso","cabron","pito","tarado","tonto","cagas","joto","prostituta","golfa","malparida","malparido","ano","pene","vagina","tetas","chichis","bubis","jodido","madrazo","castra","pinche","emputado","encabronado","bastardo"];
+
+    var nodo = (document.getElementById("desc") as any);
+    var textarea = nodo.value;
+    for(var i = 0; i < grocerias.length;i++){
+        const regex = new RegExp("(^|\\s)"+grocerias[i]+"($|(?=\\s))","gi");
+        textarea = textarea.replace(grocerias[i], "!@$$#;");
+    }
+    nodo.value = textarea;
+    console.log("Tengo descripcion: "+nodo.value);
+    this.lugar.descripcion = nodo.value;
+    this.guardarLugar();
+  }
 }
