@@ -24,7 +24,13 @@
         <h2>Lista Original</h2>
         <ng-container *ngFor="let lugar of (lugares | filter: filterLugar)">
           <span (onCreate)="mostrarCal(lugar.calificacion[1], lugar.calificacion[2], lugar.calificacion[3], lugar.calificacion[4], lugar.calificacion[5], lugar)"></span>
-          <a routerLink="/detalle/{{ lugar.id }}"><li class="list-group-item">
+          <!--<a routerLink="/detalle/{{ lugar.id }}" 
+          *ngIf="(lat <= lugar.lat + constante &&
+            lat >= lugar.lat - constante &&
+            lng <= lugar.lng + constante &&
+            lng >= lugar.lng - constante)">-->
+          <a routerLink="/detalle/{{ lugar.id }}">
+            <li class="list-group-item">
             <div *ngIf="(lugar.AtraccionPrincipal)">
                 Sucursal de
             </div>

@@ -8,7 +8,6 @@ import { ArticulosService } from '../services/articulos.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { faStar, faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import swal from "sweetalert2";
-import { lchmod } from 'fs';
 
 @Component({
   selector: "app-detalle",
