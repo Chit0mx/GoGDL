@@ -409,13 +409,13 @@ export class DetalleComponent {
       var grocerias = ["puta","puto","marica","mierda","chingadera","chinga","puteria","mamada","chupala","alv","chupala","verga","pendejo","chingar","mamar","mamando","puteria","chingado","culo","culero","estupido","idiota","baboso","cabron","pito","tarado","tonto","cagas","joto","prostituta","golfa","malparida","malparido","ano","pene","vagina","tetas","chichis","bubis","jodido","madrazo","castra","pinche","emputado","encabronado","bastardo"];
 
       var nodo = (document.getElementById("desc") as any);
-      var textarea = nodo.value;
-      for(var i = 0; i < grocerias.length;i++){
+      var textarea = nodo.value.toLowerCase();
+      for(var i = 0; i < grocerias.length; i++){
           const regex = new RegExp("(^|\\s)"+grocerias[i]+"($|(?=\\s))","gi");
-          textarea = textarea.replace(grocerias[i], "!@$$#;");
+          textarea = textarea.replace(regex, "!@$$#;");
       }
       nodo.value = textarea;
-      console.log("Tengo Reseña: "+nodo.value);
+      console.log("Tengo Reseña: " + nodo.value);
       this.resenia.descripcion = nodo.value;
       this.guardarResenia();
     }
