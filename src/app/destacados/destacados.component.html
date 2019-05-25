@@ -23,7 +23,7 @@
           <a routerLink="/detalle/{{ lugar.id }}">
             <li class="list-group-item">
             <div *ngIf="(lugar.AtraccionPrincipal)">
-                Sucursal de
+                Sucursal {{lugar.calle}}
             </div>
             {{ lugar.nombre }}
           </li></a>
@@ -34,7 +34,7 @@
         <ng-container *ngFor="let lc of range(0, listaCalificacion.length ,1)">
           <a routerLink="/detalle/{{ listaCalificacion[lc].id }}"><li class="list-group-item">
             <div *ngIf="(listaCalificacion[lc].AtraccionPrincipal)">
-                Sucursal de
+                Sucursal {{listaCalificacion[lc].calle}}
             </div>
             {{ listaCalificacion[lc].nombre }}
           </li></a>
@@ -45,7 +45,7 @@
         <ng-container *ngFor="let lc of range(0, listaVistas.length ,1)">
           <a routerLink="/detalle/{{ listaVistas[lc].id }}"><li class="list-group-item">
             <div *ngIf="(listaVistas[lc].AtraccionPrincipal)">
-                Sucursal de
+                Sucursal {{listaVistas[lc].calle}}
             </div>
             {{ listaVistas[lc].nombre }}
           </li></a>
@@ -87,5 +87,19 @@
 </div>
 <br />
 <br>
-    <br>
+<br>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 <app-footer></app-footer>

@@ -33,7 +33,6 @@
             *ngIf="lugar.propietario == loggedUser"
             ><li class="list-group-item text-center">
               <div *ngIf="(lugar.AtraccionPrincipal)">
-                  Sucursal de
               </div>
               {{ lugar.nombre }}
             </li></a
@@ -49,7 +48,6 @@
           <ng-container *ngFor="let lugar of lugares">
            <li class="list-group-item text-center" *ngIf="lugar.propietario == loggedUser">
                 <div *ngIf="(lugar.AtraccionPrincipal)">
-                    Sucursal de
                 </div>
                 {{ lugar.visto }}
               </li>
@@ -65,7 +63,6 @@
             <ng-container *ngFor="let lugar of lugares">
               <li class="list-group-item text-center" *ngIf="lugar.propietario == loggedUser">
                   <div *ngIf="(lugar.AtraccionPrincipal)">
-                      Sucursal de
                   </div>
                   {{ lugar.estoyaqui }}
                 </li>
@@ -82,7 +79,6 @@
                <li class="list-group-item text-center" *ngIf="lugar.propietario == loggedUser">
                   <span (onCreate)="mostrarCal(lugar.calificacion[1], lugar.calificacion[2], lugar.calificacion[3], lugar.calificacion[4], lugar.calificacion[5])"></span>
                     <div *ngIf="(lugar.AtraccionPrincipal)">
-                        Sucursal de
                     </div>
                     {{promedio}}
                   </li> 
