@@ -19,6 +19,8 @@ export class UsuarioComponent {
   private usuarioDB:any;
   private lat:any;
   private lng:any;
+  private lugar: any = {};
+  private promedio = 0;
 
   constructor(private afDB: AngularFireDatabase,
     private angularFireAuth: AngularFireAuth,
@@ -81,5 +83,9 @@ public bajaUser(){
         );
       }
     })
+  }
+  public mostrarCal(n1, n2, n3, n4, n5) {
+    this.promedio = Math.round((5 * n5 + 4 * n4 + 3 * n3 + 2 * n2 + 1 * n1) / (n5 + n4 + n3 + n2 + n1)*1000)/1000;
+    this.lugar.promedio = this.promedio;
   }
 }

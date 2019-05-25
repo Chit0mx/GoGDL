@@ -20,7 +20,7 @@
     <input type="text" class="form-control" [(ngModel)]="articulo.titulo"/>
     <br/>
     <label>Descripcion</label>
-    <textarea class="form-control"[(ngModel)]="articulo.descripcion"></textarea>
+    <textarea id="desc" maxlength="150" class="form-control"></textarea>
     <br/>
     <h3>Duración</h3>
     <div class="form-check">
@@ -45,7 +45,7 @@
       </li>
     </ul>
     <br/>
-    <a class="botonLS btn btn-primary"(click)="guardarLugar()">Crear Evento/Promoción</a>
+    <a class="botonLS btn btn-primary" (click)="botFiltro()">Crear Evento/Promoción</a>
     <a class="btn btn-default m-3" routerLink="/detalle/{{this.id}}">Cancelar</a>
     <br/>
 </div>

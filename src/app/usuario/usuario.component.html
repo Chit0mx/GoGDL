@@ -80,12 +80,12 @@
           <ul class="list-group" *ngIf="usuarioDB.Empresario">
               <ng-container *ngFor="let lugar of lugares">
                <li class="list-group-item text-center" *ngIf="lugar.propietario == loggedUser">
+                  <span (onCreate)="mostrarCal(lugar.calificacion[1], lugar.calificacion[2], lugar.calificacion[3], lugar.calificacion[4], lugar.calificacion[5])"></span>
                     <div *ngIf="(lugar.AtraccionPrincipal)">
                         Sucursal de
                     </div>
-                    {{ lugar.categoria }}
-                  </li>
-                
+                    {{promedio}}
+                  </li> 
               </ng-container>
               <hr>
             </ul>
@@ -93,8 +93,6 @@
   </div>
   <hr>
 </div>
-
-
 <div class="container">
     <div class="row">
       <div class="col-md-10">

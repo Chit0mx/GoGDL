@@ -17,6 +17,7 @@ export class CrearArticulosComponent {
   idA: any = null;
   file: any;
   mst = false;
+  private resenia: any = {};
   constructor(
     private articulosService: ArticulosService,
     private route: ActivatedRoute,
@@ -50,5 +51,19 @@ export class CrearArticulosComponent {
 
   public mostrar(ms) {
     this.mst = ms;
+  }
+  public botFiltro(){
+    var grocerias = ["puta","puto","marica","mierda","chingadera","chinga","puteria","mamada","chupala","alv","chupala","verga","pendejo","chingar","mamar","mamando","puteria","chingado","culo","culero","estupido","idiota","baboso","cabron","pito","tarado","tonto","cagas","joto","prostituta","golfa","malparida","malparido","ano","pene","vagina","tetas","chichis","bubis","jodido","madrazo","castra","pinche","emputado","encabronado","bastardo"];
+    var nodo = (document.getElementById("desc") as any);
+    var textarea = nodo.value.toLowerCase();
+    console.log("Tengo Reseña: " + nodo.value);
+    for(var i = 0; i < grocerias.length; i++){
+        const regex = new RegExp("(^|\\s)"+grocerias[i]+"($|(?=\\s))","gi");
+        textarea = textarea.replace(regex, "!@$$#;");
+    }
+    nodo.value = textarea;
+    console.log("Tengo Reseña: " + nodo.value);
+    this.articulo.descripcion = nodo.value;
+    this.guardarLugar();
   }
 }
