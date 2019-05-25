@@ -29,11 +29,13 @@
       <ul class="list-group" *ngIf="usuarioDB.Empresario">
         <ng-container *ngFor="let lugar of lugares">
           <a
-            routerLink="/detalle/{{ lugar.id }}"
-            *ngIf="lugar.propietario == loggedUser"
-            ><li class="list-group-item text-center">
-              <div *ngIf="(lugar.AtraccionPrincipal)">
-              </div>
+          routerLink="/detalle/{{ lugar.id }}"
+          *ngIf="lugar.propietario == loggedUser"
+          ><li class="list-group-item text-center">
+            <span (onCreate)="mostrarCal(lugar.calificacion[1], lugar.calificacion[2], lugar.calificacion[3], lugar.calificacion[4], lugar.calificacion[5])"></span>
+            <!--<div *ngIf="(lugar.AtraccionPrincipal)">
+                  Sucursal {{lugar.calle}}
+              </div>-->
               {{ lugar.nombre }}
             </li></a
           >
@@ -47,8 +49,6 @@
       <ul class="list-group" *ngIf="usuarioDB.Empresario">
           <ng-container *ngFor="let lugar of lugares">
            <li class="list-group-item text-center" *ngIf="lugar.propietario == loggedUser">
-                <div *ngIf="(lugar.AtraccionPrincipal)">
-                </div>
                 {{ lugar.visto }}
               </li>
             
@@ -62,11 +62,8 @@
         <ul class="list-group" *ngIf="usuarioDB.Empresario">
             <ng-container *ngFor="let lugar of lugares">
               <li class="list-group-item text-center" *ngIf="lugar.propietario == loggedUser">
-                  <div *ngIf="(lugar.AtraccionPrincipal)">
-                  </div>
                   {{ lugar.estoyaqui }}
                 </li>
-              
             </ng-container>
             <hr>
           </ul>
@@ -75,12 +72,9 @@
           <h3 class="text-center">Calificacion</h3>
           <hr>
           <ul class="list-group" *ngIf="usuarioDB.Empresario">
-              <ng-container *ngFor="let lugar of lugares">
-               <li class="list-group-item text-center" *ngIf="lugar.propietario == loggedUser">
-                  <span (onCreate)="mostrarCal(lugar.calificacion[1], lugar.calificacion[2], lugar.calificacion[3], lugar.calificacion[4], lugar.calificacion[5])"></span>
-                    <div *ngIf="(lugar.AtraccionPrincipal)">
-                    </div>
-                    {{promedio}}
+              <ng-container *ngFor="let p of range(0, promedios.length ,1)">
+                <li class="list-group-item text-center">
+                    {{promedios[p]}}
                   </li> 
               </ng-container>
               <hr>
