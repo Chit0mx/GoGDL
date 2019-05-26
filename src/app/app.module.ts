@@ -53,6 +53,7 @@ import { ReporteAtraccionComponent } from "./reporte.atraccion/reporte.atraccion
 import { ForgotComponent } from "./forgot/forgot.component";
 import { CrearSucursalComponent } from './crear.sucursal/crear.sucursal.component';
 import { ContraComponent } from "./cambiar.contraseña/cambiar.component";
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 const appRoutes: Routes = [
   {
@@ -219,7 +220,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     NgbModule.forRoot(),
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     LugaresService,
