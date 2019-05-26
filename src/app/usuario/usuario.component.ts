@@ -17,10 +17,16 @@ export class UsuarioComponent {
   private lugaresOcultos:any;
   private loggedUser:any = null;
   private usuarioDB:any;
-  private lat:any;
-  private lng:any;
+  private latU:number;
+  private lngU:number;
+  private cordinates:any;
   private promedios: any = [];
   private promedio = 0;
+  private options = {
+    enableHighAccuracy: true,
+    timeout : Infinity,
+    maximumAge: 0
+  };
 
   constructor(private afDB: AngularFireDatabase,
     private angularFireAuth: AngularFireAuth,
@@ -48,17 +54,24 @@ export class UsuarioComponent {
     subscribe(usuarioDB => {
       this.usuarioDB = usuarioDB;
     });
-    navigator.geolocation.getCurrentPosition(this.mostrar);
+    navigator.geolocation.getCurrentPosition(this.success, this.error, this.options);
   }
+  
+  private success(pos) {
+    console.log(pos);
+    let crd = pos.coords
+    console.log(crd)
+    this.cordinates = crd;
+  };
+  
+  private error(err) {
+    console.warn('ERROR(' + err.code + '): ' + err.message);
+  };
 
-  public mostrar(pos) {
-    this.lat = pos.coords.latitude;
-    this.lng = pos.coords.longitude;
+  public bajaUser(){
+    this.autorizacionService.bajaUsuario();
+    this.router.navigate([`/inicio`]);
   }
-public bajaUser(){
-  this.autorizacionService.bajaUsuario();
-  this.router.navigate([`/inicio`]);
-}
   public hacerEmpresario() {
     this.autorizacionService.hacerEmpresario();
   }

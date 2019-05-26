@@ -11,22 +11,21 @@
           <h5>Retroalimentación</h5>
           <fa-icon [icon]="faEnvelope"></fa-icon>
         </a>
-        <a href="mailto:{{usuario.Email}}?subject=Reporte de usuario con motivo de soporte tecnico" class="reporte">
-          <h5>Soporte tecnico</h5>
+        <a href="mailto:{{email}}?subject=Reporte de usuario sobre la false existencia del lugar {{lugar.nombre}}" class="reporte">
+          <h5>El lugar no existe</h5>
           <fa-icon [icon]="faEnvelope"></fa-icon>
         </a>
+        <a href="mailto:{{email}}?subject=Reporte de usuario sobre el uso indebido de la plataforma por el lugar {{lugar.nombre}}" class="reporte">
+          <h5>Uso indebido de la plataforma</h5>
+          <fa-icon [icon]="faEnvelope"></fa-icon>
+        </a>
+        <a href="mailto:{{email}}?subject=Reporte de usuario sobre el uso de publicidad falsa por el lugar {{lugar.nombre}}" class="reporte">
+            <h5>Publicidad falsa</h5>
+            <fa-icon [icon]="faEnvelope"></fa-icon>
+          </a>
       </div>
     </div>
   </div>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
   <br/>
   <br/>
   <br/>
