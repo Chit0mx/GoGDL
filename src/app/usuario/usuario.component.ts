@@ -23,8 +23,7 @@ export class UsuarioComponent {
   private promedios: any = [];
   private promedio = 0;
   private options = {
-    enableHighAccuracy: true,
-    timeout : Infinity,
+    timeout : 500,
     maximumAge: 0
   };
 
@@ -65,8 +64,13 @@ export class UsuarioComponent {
   };
   
   private error(err) {
-    console.warn('ERROR(' + err.code + '): ' + err.message);
-  };
+    if (err.code == err.TIMEOUT) 
+        alert("Se ha superado el tiempo de espera");
+    if (err.code == err.PERMISSION_DENIED)     
+        alert("El usuario no permitió informar su posición");
+    if (err.code == err.POSITION_UNAVAILABLE)                 
+        alert("El dispositivo no pudo recuperar la posición actual");
+  }
 
   public bajaUser(){
     this.autorizacionService.bajaUsuario();
