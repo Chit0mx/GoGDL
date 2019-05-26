@@ -4,9 +4,10 @@
   "description": "La página te ayuda a conocer Guadalajara!",
   "theme_color": "#b80f22",
   "background_color": "#000000",
+  "lang": "es-MX",
   "display": "fullscreen",
   "scope": "/",
-  "start_url": "./app/Inicio/inicio.component.html",
+  "start_url": "/inicio",
   "icons": [
     {
       "src": "assets/icons/Logo.png",

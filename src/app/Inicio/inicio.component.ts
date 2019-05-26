@@ -1,12 +1,10 @@
-import { Component } from '@angular/core';
-
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-inicio',
-  templateUrl: './inicio.component.html'
+  selector: "app-inicio",
+  templateUrl: "./inicio.component.html"
 })
 export class InicioComponent {
-  lat: number = 20.6430428;
-  lng: number = -103.3703034;
-
+  lat: number = 20.659286;
+  lng: number = -103.350747;
 }

@@ -1,4 +1,4 @@
-<agm-map [latitude]="lat" [longitude]="lng">
+<agm-map [zoom]="12" [latitude]="lat" [longitude]="lng">
   <agm-marker
     *ngFor="let lugar of lugares"
     [latitude]="lugar.lat"
@@ -8,18 +8,28 @@
 <br />
 <div class="container">
   <div class="row">
-      <div class="col-md-4">
-          <br>
-          <br>
-          <h3 class="text-center">Filtros</h3>
-          <br>
-          <br>
-          <a  class="botonLS btn btn-primary mx-3" (click)="mostrarListaVistas()" style="background-color: #b80f22; color: white " >Mayor Número de visitas</a>
-          <br>
-          <br>
-          <a  class="botonLS btn btn-primary mx-3" (click)="mayorCalificacion()" style="background-color: #b80f22; color: white " >Mayor Calificación</a>
-          <br>
-        </div>
+    <div class="col-md-4">
+      <br />
+      <br />
+      <h3 class="text-center">Filtros</h3>
+      <br />
+      <br />
+      <a
+        class="botonLS btn btn-primary mx-3"
+        (click)="mostrarListaVistas()"
+        style="background-color: #b80f22; color: white "
+        >Mayor Número de visitas</a
+      >
+      <br />
+      <br />
+      <a
+        class="botonLS btn btn-primary mx-3"
+        (click)="mayorCalificacion()"
+        style="background-color: #b80f22; color: white "
+        >Mayor Calificación</a
+      >
+      <br />
+    </div>
     <div class="col-md-8">
       <h2>Restaurantes</h2>
       <br />
@@ -30,61 +40,78 @@
         placeholder="Buscar"
         aria-label="Search"
         [(ngModel)]="filterLugar"
-        *ngIf = "!mC && !mV"
+        *ngIf="!mC && !mV"
       />
       <br />
-      <ul class="list-group" *ngIf = "!mC && !mV">
-        <ng-container *ngFor="let lugar of (lugares | filter: filterLugar)">
-          <a routerLink="/detalle/{{ lugar.id }}"><li
+      <ul class="list-group" *ngIf="!mC && !mV">
+        <ng-container *ngFor="let lugar of lugares | filter: filterLugar">
+          <a routerLink="/detalle/{{ lugar.id }}"
+            ><li
               class="list-group-item"
-              *ngIf="lugar.categoria === 'Restaurantes'">
-              <span (onCreate)="mostrarCal(lugar.calificacion[1], lugar.calificacion[2], lugar.calificacion[3], lugar.calificacion[4], lugar.calificacion[5], lugar)"></span>
-              <div *ngIf="(lugar.AtraccionPrincipal)">
-                  Sucursal {{lugar.calle}}
+              *ngIf="lugar.categoria === 'Restaurantes'"
+            >
+              <span
+                (onCreate)="
+                  mostrarCal(
+                    lugar.calificacion[1],
+                    lugar.calificacion[2],
+                    lugar.calificacion[3],
+                    lugar.calificacion[4],
+                    lugar.calificacion[5],
+                    lugar
+                  )
+                "
+              ></span>
+              <div *ngIf="lugar.AtraccionPrincipal">
+                Sucursal {{ lugar.calle }}
               </div>
               {{ lugar.nombre }}
             </li></a
           >
         </ng-container>
       </ul>
-      <ul class="list-group" *ngIf = "mC">
+      <ul class="list-group" *ngIf="mC">
         <h2>Lista ordenada por calificación</h2>
-        <ng-container *ngFor="let lc of range(0, listaCalificacion.length ,1)">
-          <a routerLink="/detalle/{{ listaCalificacion[lc].id }}"><li class="list-group-item">
-            <div *ngIf="(listaCalificacion[lc].AtraccionPrincipal)">
-                Sucursal {{listaCalificacion[lc].calle}}
-            </div>
-            {{ listaCalificacion[lc].nombre }}
-          </li></a>
+        <ng-container *ngFor="let lc of range(0, listaCalificacion.length, 1)">
+          <a routerLink="/detalle/{{ listaCalificacion[lc].id }}"
+            ><li class="list-group-item">
+              <div *ngIf="listaCalificacion[lc].AtraccionPrincipal">
+                Sucursal {{ listaCalificacion[lc].calle }}
+              </div>
+              {{ listaCalificacion[lc].nombre }}
+            </li></a
+          >
         </ng-container>
       </ul>
-      <ul class="list-group" *ngIf = "mV">
+      <ul class="list-group" *ngIf="mV">
         <h2>Lista ordenada por visitas</h2>
-        <ng-container *ngFor="let lc of range(0, listaVistas.length ,1)">
-          <a routerLink="/detalle/{{ listaVistas[lc].id }}"><li class="list-group-item">
-            <div *ngIf="(listaVistas[lc].AtraccionPrincipal)">
-                Sucursal {{listaVistas[lc].calle}}
-            </div>
-            {{ listaVistas[lc].nombre }}
-          </li></a>
+        <ng-container *ngFor="let lc of range(0, listaVistas.length, 1)">
+          <a routerLink="/detalle/{{ listaVistas[lc].id }}"
+            ><li class="list-group-item">
+              <div *ngIf="listaVistas[lc].AtraccionPrincipal">
+                Sucursal {{ listaVistas[lc].calle }}
+              </div>
+              {{ listaVistas[lc].nombre }}
+            </li></a
+          >
         </ng-container>
       </ul>
     </div>
   </div>
 </div>
 <br />
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 <app-footer></app-footer>
