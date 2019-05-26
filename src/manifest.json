@@ -6,7 +6,7 @@
   "background_color": "#000000",
   "display": "fullscreen",
   "scope": "/",
-  "start_url": "/app/Inicio/inicio.component.html",
+  "start_url": "./app/Inicio/inicio.component.html",
   "icons": [
     {
       "src": "assets/icons/Logo.png",
