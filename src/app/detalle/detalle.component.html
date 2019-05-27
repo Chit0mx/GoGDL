@@ -327,7 +327,7 @@
       </tbody>
     </table>
     <agm-map [zoom]="16" [latitude]="lugar.lat" [longitude]="lugar.lng">
-      <agm-marker [latitude]="lugar.lat" [longitude]="lugar.lng"></agm-marker>
+      <agm-marker [latitude]="currentLocation.coords.latitude" [longitude]="currentLocation.coords.longitude"></agm-marker>
       <agm-marker [latitude]="usuariolat" [longitude]="usuariolng"></agm-marker>
     </agm-map>
     <br />
@@ -465,13 +465,10 @@
     *ngIf="
       loggedIn &&
       !lugarUsr.Visite &&
-      (this.usuariolat <= this.lugar.lat + 0.0003 &&
-        this.usuariolat >= this.lugar.lat - 0.0003 &&
-        this.usuariolng <= this.lugar.lng + 0.0003 &&
-        this.usuariolng >= this.lugar.lng - 0.0003)
-    "
-    >Estoy Aqui</a
-  >
+      (currentLocation.coords.latitude <= this.lugar.lat + 0.0003 &&
+        currentLocation.coords.latitude >= this.lugar.lat - 0.0003 &&
+        currentLocation.coords.longitude <= this.lugar.lng + 0.0003 &&
+        currentLocation.coords.longitude >= this.lugar.lng - 0.0003)">Estoy Aqui</a>
   <a
     routerLink="/crear/{{ lugar.id }}"
     class="botonLS btn btn-primary mr-3 mb-3"

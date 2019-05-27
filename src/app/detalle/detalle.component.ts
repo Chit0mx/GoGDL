@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
 import { LugaresService } from "../services/lugares.service";
 import { Observable } from 'rxjs';
@@ -8,6 +8,7 @@ import { ArticulosService } from '../services/articulos.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { faStar, faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import swal from "sweetalert2";
+import { GeoLocationService } from '../services/geolocation.service';
 
 @Component({
   selector: "app-detalle",
@@ -41,13 +42,17 @@ export class DetalleComponent {
   fotos:any;
   mostarListaDeFotos:Boolean = false;
   LugarAbierto:Boolean = false;
+  errorMsg: string; 
+  currentLocation: any = null;
   constructor (private autorizacionService:AutorizacionService, 
     private storage: AngularFireStorage, 
     private route:ActivatedRoute, 
     private lugaresService:LugaresService, 
     private articuloService:ArticulosService, 
     private angularFireAuth: AngularFireAuth,
-    private router: Router
+    private router: Router,
+    private refG: ChangeDetectorRef,
+    private geoLocationService: GeoLocationService
     ){
     this.id = this.route.snapshot.params['id'];
     const ref = this.storage.ref('atracciones/' + this.id);
@@ -110,12 +115,19 @@ export class DetalleComponent {
     }, (error) => {
       this.loggedIn = false;
     })
-    navigator.geolocation.getCurrentPosition(this.mostrar);
+    this.searchByCurrent();
   }
 
-  public mostrar(pos) {
-    this.usuariolat = pos.coords.latitude;
-    this.usuariolng = pos.coords.longitude;
+  searchByCurrent() { let self = this;
+    const accuracy = { enableHighAccuracy: true }; 
+    self.geoLocationService.getLocation(accuracy).subscribe((position) => {
+    console.log(position);
+    self.currentLocation = position; 
+    self.refG.detectChanges();
+    }, (error) => { 
+      self.errorMsg = error;
+      self.refG.detectChanges(); 
+    } );
   }
 
   public favorita(){
