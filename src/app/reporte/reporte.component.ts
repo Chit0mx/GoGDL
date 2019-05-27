@@ -6,8 +6,8 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
   templateUrl: "./reporte.component.html"
 })
 export class ReporteComponent {
-  private faEnvelope = faEnvelope;
-  private email:any;
+  faEnvelope = faEnvelope;
+  email:any;
   constructor() {
     this.email = "efrainbond@hotmail.com";
   }

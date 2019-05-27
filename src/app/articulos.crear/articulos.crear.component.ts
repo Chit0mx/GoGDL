@@ -17,7 +17,7 @@ export class CrearArticulosComponent {
   idA: any = null;
   file: any;
   mst = false;
-  private resenia: any = {};
+  resenia: any = {};
   constructor(
     private articulosService: ArticulosService,
     private route: ActivatedRoute,

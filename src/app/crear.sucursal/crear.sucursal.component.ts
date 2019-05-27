@@ -14,11 +14,11 @@ export class CrearSucursalComponent {
   lat: number = 20.6430428;
   lng: number = -103.3703034;
   lugares = null;
-  private loggedUser;
-  private usuarioDB:any = {};
-  private mostrarC:Boolean = false;
-  private lugar:any = {}
-  private file: any;
+  loggedUser;
+  usuarioDB:any = {};
+  mostrarC:Boolean = false;
+  lugar:any = {}
+  file: any;
   constructor(private lugaresService: LugaresService,
     private autorizacionService:AutorizacionService,
     private storage: AngularFireStorage,

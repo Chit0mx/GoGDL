@@ -152,8 +152,8 @@
       <br />
       <h2>Ubicación actual</h2>
       <br />
-      <agm-map [zoom]="17" [latitude]="currentLocation.coords.latitude" [longitude]="currentLocation.coords.longitude">
-        <agm-marker [latitude]="currentLocation.coords.latitude" [longitude]="currentLocation.coords.longitude"></agm-marker>
+      <agm-map [zoom]="17" [latitude]="currentLocation.latitude" [longitude]="currentLocation.longitude">
+        <agm-marker [latitude]="currentLocation.latitude" [longitude]="currentLocation.longitude"></agm-marker>
       </agm-map>
       <br />
     </div>

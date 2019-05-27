@@ -14,33 +14,33 @@ import swal from "sweetalert2";
   templateUrl: "./detalle.component.html"
 })
 export class DetalleComponent {
-  private id = null;
-  private lugar: any = {};
-  private lugares:any = {};
-  private articulos: any = {};
-  private nombre = null;
-  private profileUrl: Observable<string | null>;
-  private loggedUser:any = null;
-  private usuariolat:any;
-  private usuariolng:any;
-  private loggedIn = false;
-  private imgsArt:any = {};
-  private usuarioDB:any = {};
-  private lugarUsr:any = {};
-  private resenia: any = {};
-  private reseniaAutor: any = {};
-  private resenias: any = {};
-  private faStar = faStar;
-  private faDollarSign = faDollarSign;
-  private cal:any = {};
-  private promedio = 0;
-  private mostrarAgregarF:boolean = false; 
-  private ImagenNueva:any;
-  private FotoLugar: Observable<string[] | null>;
-  private arrayF: any = [];
-  private fotos:any;
-  private mostarListaDeFotos:Boolean = false;
-  private LugarAbierto:Boolean = false;
+  id = null;
+  lugar: any = {};
+  lugares:any = {};
+  articulos: any = {};
+  nombre = null;
+  profileUrl: Observable<string | null>;
+  loggedUser:any = null;
+  usuariolat:any;
+  usuariolng:any;
+  loggedIn = false;
+  imgsArt:any = {};
+  usuarioDB:any = {};
+  lugarUsr:any = {};
+  resenia: any = {};
+  reseniaAutor: any = {};
+  resenias: any = {};
+  faStar = faStar;
+  faDollarSign = faDollarSign;
+  cal:any = {};
+  promedio = 0;
+  mostrarAgregarF:boolean = false; 
+  ImagenNueva:any;
+  FotoLugar: Observable<string[] | null>;
+  arrayF: any = [];
+  fotos:any;
+  mostarListaDeFotos:Boolean = false;
+  LugarAbierto:Boolean = false;
   constructor (private autorizacionService:AutorizacionService, 
     private storage: AngularFireStorage, 
     private route:ActivatedRoute, 

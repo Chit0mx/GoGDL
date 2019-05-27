@@ -13,17 +13,17 @@ import { GeoLocationService } from '../services/geolocation.service';
 })
 
 export class UsuarioComponent {
-  private title = 'GoGdl';
-  private lugares:any;
-  private lugaresOcultos:any;
-  private loggedUser:any = null;
-  private usuarioDB:any;
-  //private latU:number;
-  //private lngU:number;
-  private cordinates:any;
-  private promedios: any = [];
-  private promedio = 0;
-  /*private options = {
+  title = 'GoGdl';
+  lugares:any;
+  lugaresOcultos:any;
+  loggedUser:any = null;
+  usuarioDB:any;
+  //latU:number;
+  //lngU:number;
+  cordinates:any;
+  promedios: any = [];
+  promedio = 0;
+  /*options = {
     timeout : 500,
     maximumAge: 0
   };*/

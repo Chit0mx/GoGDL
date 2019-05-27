@@ -25,7 +25,7 @@ export class LugaresComponent {
   listaVistas: any = [];
   lVisto = 0;
   lPromedio = 0;
-  private listaCreada: Boolean = false;
+  listaCreada: Boolean = false;
   errorMsg: string; 
   currentLocation: Coordinates = null;
 

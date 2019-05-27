@@ -11,12 +11,12 @@ import swal from "sweetalert2";
   templateUrl: "./reporte.atraccion.component.html"
 })
 export class ReporteAtraccionComponent {
-  private faEnvelope = faEnvelope;
-  private email:any;
-  private id:any;
-  private lugar:any;
-  private usuario:any;
-  private p:any;
+  faEnvelope = faEnvelope;
+  email:any;
+  id:any;
+  lugar:any;
+  usuario:any;
+  p:any;
   constructor(private location: Location, private route:ActivatedRoute, private lugaresService:LugaresService, private autorizacionService:AutorizacionService) {
     this.email = "efrainbond@hotmail.com";
     this.id = this.route.snapshot.params['id'];

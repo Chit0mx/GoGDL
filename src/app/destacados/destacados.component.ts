@@ -19,7 +19,7 @@ export class DestacadosComponent {
   listaVistas: any = [];
   lVisto = 0;
   lPromedio = 0;
-  private listaCreada: Boolean = false;
+  listaCreada: Boolean = false;
 
   constructor(
     private lugaresService: LugaresService,

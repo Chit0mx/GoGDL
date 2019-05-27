@@ -13,13 +13,13 @@ import swal from "sweetalert2";
 })
 
 export class ArticuloDetalleComponent {
-    private articulo:any = {};
-    private id:any;
-    private articuloURL: Observable<string | null>;
-    private lugar:any;
-    private idLugar:any;
-    private loggedUser;
-    private loggedIn = false;
+    articulo:any = {};
+    id:any;
+    articuloURL: Observable<string | null>;
+    lugar:any;
+    idLugar:any;
+    loggedUser;
+    loggedIn = false;
     constructor (private autorizacionService:AutorizacionService, 
         private lugaresService:LugaresService, 
         private storage: AngularFireStorage, 
