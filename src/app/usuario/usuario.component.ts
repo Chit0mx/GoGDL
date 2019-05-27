@@ -5,6 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import swal from "sweetalert2";
 import { Router } from '@angular/router';
+import { GeoLocationService } from '../services/geolocation.service';
 
 @Component({
   selector: 'app-usuario',
@@ -17,21 +18,23 @@ export class UsuarioComponent {
   private lugaresOcultos:any;
   private loggedUser:any = null;
   private usuarioDB:any;
-  private latU:number;
-  private lngU:number;
+  //private latU:number;
+  //private lngU:number;
   private cordinates:any;
   private promedios: any = [];
   private promedio = 0;
-  private options = {
+  /*private options = {
     timeout : 500,
     maximumAge: 0
-  };
+  };*/
+  private location: any;
 
   constructor(private afDB: AngularFireDatabase,
     private angularFireAuth: AngularFireAuth,
     private lugaresService: LugaresService, 
     private autorizacionService:AutorizacionService,
-    private router: Router
+    private router: Router,
+    private geo: GeoLocationService
     ) {
     lugaresService
     .getLugares()
@@ -53,9 +56,13 @@ export class UsuarioComponent {
     subscribe(usuarioDB => {
       this.usuarioDB = usuarioDB;
     });
-    navigator.geolocation.getCurrentPosition(this.success, this.error, this.options);
+    this.geo.getLocation().subscribe((location) => {
+      console.log(location);
+      this.location = location;
+    })
+    //navigator.geolocation.getCurrentPosition(this.success, this.error, this.options);
   }
-  
+  /*
   private success(pos) {
     console.log(pos);
     let crd = pos.coords
@@ -71,6 +78,7 @@ export class UsuarioComponent {
     if (err.code == err.POSITION_UNAVAILABLE)                 
         alert("El dispositivo no pudo recuperar la posición actual");
   }
+  */
 
   public bajaUser(){
     this.autorizacionService.bajaUsuario();
