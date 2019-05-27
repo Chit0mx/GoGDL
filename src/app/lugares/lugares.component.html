@@ -1,9 +1,9 @@
-<agm-map [zoom]="10" [latitude]="currentLocation.latitude" [longitude]="currentLocation.longitude">
+<agm-map [zoom]="10" [latitude]="currentLocation.coords.latitude" [longitude]="currentLocation.coords.longitude">
     <agm-marker
     *ngFor="let lugar of lugares"
     [latitude]="lugar.lat"
     [longitude]="lugar.lng" ></agm-marker>
-    <agm-marker [latitude]="currentLocation.latitude" [longitude]="currentLocation.longitude"></agm-marker>
+    <agm-marker [latitude]="currentLocation.coords.latitude" [longitude]="currentLocation.coords.longitude"></agm-marker>
 </agm-map>
 <br />
 <div class="container">
@@ -61,10 +61,10 @@
           <a
             routerLink="/detalle/{{ lugar.id }}"
             *ngIf="
-              lugar.lat <= currentLocation.latitude + constante &&
-              lugar.lat >= currentLocation.latitude - constante &&
-              lugar.lng <= currentLocation.longitude + constante &&
-              lugar.lng >= currentLocation.longitude - constante
+              lugar.lat <= currentLocation.coords.latitude + constante &&
+              lugar.lat >= currentLocation.coords.latitude - constante &&
+              lugar.lng <= currentLocation.coords.longitude + constante &&
+              lugar.lng >= currentLocation.coords.longitude - constante
             "
           >
             <li class="list-group-item">

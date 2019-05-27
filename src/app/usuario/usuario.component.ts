@@ -28,7 +28,7 @@ export class UsuarioComponent {
     maximumAge: 0
   };*/
   errorMsg: string; 
-  currentLocation: Coordinates = null;
+  currentLocation: any = null;
 
   constructor(private afDB: AngularFireDatabase,
     private angularFireAuth: AngularFireAuth,

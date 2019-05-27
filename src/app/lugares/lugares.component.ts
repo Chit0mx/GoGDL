@@ -27,7 +27,7 @@ export class LugaresComponent {
   lPromedio = 0;
   listaCreada: Boolean = false;
   errorMsg: string; 
-  currentLocation: Coordinates = null;
+  currentLocation: any = null;
 
   constructor(
     private lugaresService: LugaresService,
