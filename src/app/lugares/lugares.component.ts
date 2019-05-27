@@ -1,7 +1,9 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectorRef } from "@angular/core";
 import { LugaresService } from "../services/lugares.service";
 import { ArticulosService } from "../services/articulos.service";
 import { AutorizacionService } from "../services/autorizacion.service";
+import { GeoLocationService } from '../services/geolocation.service';
+
 
 @Component({
   selector: "app-lugares",
@@ -24,17 +26,20 @@ export class LugaresComponent {
   lVisto = 0;
   lPromedio = 0;
   private listaCreada: Boolean = false;
+  errorMsg: string; 
+  currentLocation: Coordinates = null;
 
   constructor(
     private lugaresService: LugaresService,
     private autorizacionService: AutorizacionService,
-    private articulosService: ArticulosService
+    private articulosService: ArticulosService,
+    private ref: ChangeDetectorRef,
+    private geoLocationService: GeoLocationService
   ) {
     lugaresService
       .getLugares()
       .valueChanges()
       .subscribe(lugares => {
-        console.log(lugares);
         this.lugares = lugares;
       });
     articulosService
@@ -43,15 +48,11 @@ export class LugaresComponent {
       .subscribe(articulos => {
         this.articulos = articulos;
       });
-    navigator.geolocation.getCurrentPosition(this.mostrar);
+      this.searchByCurrent();
   }
   filtroArt = "";
   filterLugar = "";
 
-  public mostrar(pos) {
-    this.lat = pos.coords.latitude;
-    this.lng = pos.coords.longitude;
-  }
 
   public mostrarCal(n1, n2, n3, n4, n5, lugar) {
     if (this.listaCreada == false) {
@@ -124,5 +125,17 @@ export class LugaresComponent {
     }
 
     return result;
+  }
+
+  searchByCurrent() { let self = this;
+    const accuracy = { enableHighAccuracy: true }; 
+    self.geoLocationService.getLocation(accuracy).subscribe((position) => {
+    console.log(position);
+    self.currentLocation = position; 
+    self.ref.detectChanges();
+    }, (error) => { 
+      self.errorMsg = error;
+      self.ref.detectChanges(); 
+    } );
   }
 }

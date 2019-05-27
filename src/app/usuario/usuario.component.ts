@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import{LugaresService}from "../services/lugares.service";
+import { Component, ChangeDetectorRef } from '@angular/core';
+import{ LugaresService }from "../services/lugares.service";
 import { AutorizacionService } from '../services/autorizacion.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -27,14 +27,16 @@ export class UsuarioComponent {
     timeout : 500,
     maximumAge: 0
   };*/
-  private location: any;
+  errorMsg: string; 
+  currentLocation: Coordinates = null;
 
   constructor(private afDB: AngularFireDatabase,
     private angularFireAuth: AngularFireAuth,
     private lugaresService: LugaresService, 
     private autorizacionService:AutorizacionService,
     private router: Router,
-    private geo: GeoLocationService
+    private ref: ChangeDetectorRef,
+    private geoLocationService: GeoLocationService
     ) {
     lugaresService
     .getLugares()
@@ -56,29 +58,8 @@ export class UsuarioComponent {
     subscribe(usuarioDB => {
       this.usuarioDB = usuarioDB;
     });
-    this.geo.getLocation().subscribe((location) => {
-      console.log(location);
-      this.location = location;
-    })
-    //navigator.geolocation.getCurrentPosition(this.success, this.error, this.options);
+    this.searchByCurrent();
   }
-  /*
-  private success(pos) {
-    console.log(pos);
-    let crd = pos.coords
-    console.log(crd)
-    this.cordinates = crd;
-  };
-  
-  private error(err) {
-    if (err.code == err.TIMEOUT) 
-        alert("Se ha superado el tiempo de espera");
-    if (err.code == err.PERMISSION_DENIED)     
-        alert("El usuario no permitió informar su posición");
-    if (err.code == err.POSITION_UNAVAILABLE)                 
-        alert("El dispositivo no pudo recuperar la posición actual");
-  }
-  */
 
   public bajaUser(){
     this.autorizacionService.bajaUsuario();
@@ -135,5 +116,17 @@ export class UsuarioComponent {
     }
 
     return result;
+  }
+
+  searchByCurrent() { let self = this;
+    const accuracy = { enableHighAccuracy: true }; 
+    self.geoLocationService.getLocation(accuracy).subscribe((position) => {
+    console.log(position);
+    self.currentLocation = position; 
+    self.ref.detectChanges();
+    }, (error) => { 
+      self.errorMsg = error;
+      self.ref.detectChanges(); 
+    } );
   }
 }

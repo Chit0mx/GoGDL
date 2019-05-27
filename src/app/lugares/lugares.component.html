@@ -1,12 +1,10 @@
-<!-- 
-  <agm-map [zoom]="12" [latitude]="lat" [longitude]="lng">
-  <agm-marker
+<agm-map [zoom]="10" [latitude]="currentLocation.coords.latitude" [longitude]="currentLocation.coords.longitude">
+    <agm-marker
     *ngFor="let lugar of lugares"
     [latitude]="lugar.lat"
-    [longitude]="lugar.lng"
-  ></agm-marker>
+    [longitude]="lugar.lng" ></agm-marker>
+    <agm-marker [latitude]="currentLocation.coords.latitude" [longitude]="currentLocation.coords.longitude"></agm-marker>
 </agm-map>
--->
 <br />
 <div class="container">
   <div class="row">
@@ -46,7 +44,7 @@
       />
       <br />
       <ul class="list-group" *ngIf="!mC && !mV">
-        <h2>Lista ordenada por fecha de creación</h2>
+        <h2>Lista de lugares cercanos</h2>
         <ng-container *ngFor="let lugar of lugares | filter: filterLugar">
           <span
             (onCreate)="
@@ -63,10 +61,10 @@
           <a
             routerLink="/detalle/{{ lugar.id }}"
             *ngIf="
-              lat <= lugar.lat + constante &&
-              lat >= lugar.lat - constante &&
-              lng <= lugar.lng + constante &&
-              lng >= lugar.lng - constante
+              lugar.lat <= currentLocation.coords.latitude + constante &&
+              lugar.lat >= currentLocation.coords.latitude - constante &&
+              lugar.lng <= currentLocation.coords.longitude + constante &&
+              lugar.lng >= currentLocation.coords.longitude - constante
             "
           >
             <li class="list-group-item">

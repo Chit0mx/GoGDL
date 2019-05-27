@@ -54,6 +54,7 @@ import { ForgotComponent } from "./forgot/forgot.component";
 import { CrearSucursalComponent } from './crear.sucursal/crear.sucursal.component';
 import { ContraComponent } from "./cambiar.contraseña/cambiar.component";
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { GeoLocationService } from './services/geolocation.service';
 
 const appRoutes: Routes = [
   {
@@ -227,7 +228,8 @@ const appRoutes: Routes = [
     LugaresService,
     AutorizacionService,
     GuardiaService,
-    ArticulosService
+    ArticulosService,
+    GeoLocationService
   ],
   bootstrap: [AppComponent]
 })
