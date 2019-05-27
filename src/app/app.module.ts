@@ -24,7 +24,7 @@ import { DetalleComponent } from "./detalle/detalle.component";
 import { ContactoComponent } from "./contacto/contacto.component";
 import { AboutComponent } from "./about/about.component";
 import { CrearComponent } from "./crear/crear.component";
-import { InicioComponent } from "./inicio/inicio.component";
+import { InicioComponent } from "./Inicio/inicio.component";
 import { FooterComponent } from "./footer/footer.component";
 
 import { environment } from "../environments/environment";
@@ -51,7 +51,7 @@ import { ReporteComponent } from "./reporte/reporte.component";
 import { SweetAlert2Module } from "@toverux/ngx-sweetalert2";
 import { ReporteAtraccionComponent } from "./reporte.atraccion/reporte.atraccion.component";
 import { ForgotComponent } from "./forgot/forgot.component";
-import { CrearSucursalComponent } from './crear.sucursal/crear.sucursal.component';
+import { CrearSucursalComponent } from "./crear.sucursal/crear.sucursal.component";
 import { ContraComponent } from "./cambiar.contraseña/cambiar.component";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { GeoLocationService } from './services/geolocation.service';
@@ -222,7 +222,9 @@ const appRoutes: Routes = [
     NgbModule.forRoot(),
     HttpClientModule,
     FontAwesomeModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register("ngsw-worker.js", {
+      enabled: environment.production
+    })
   ],
   providers: [
     LugaresService,
