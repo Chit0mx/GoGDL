@@ -8,6 +8,7 @@
   "display": "fullscreen",
   "scope": "/",
   "start_url": "/inicio",
+  "gcm_sender_id": "103953800507",
   "icons": [
     {
       "src": "assets/icons/Logo.png",
