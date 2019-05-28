@@ -5,31 +5,9 @@ admin.initializeApp(functions.config().firebase);
 exports.fcmSend = functions.database
 .ref("/articulos/{articuloId}")
 .onCreate(event => {
-  const message = event.data.val()
-  const articuloId = event.params.articuloId;
+  const message = event;
 
-  const payload = {
-    notification: {
-      title: message.titulo,
-      body: message.descripcion,
-      icon: "../favicon.ico",
-      atraccion: message.atraccion
-    }
-  }
-
-  admin.database()
-  .ref(`/fmcTokens/${userId}`)
-  .once('value')
-  .the(token => token.val())
-  .then(userFcmToken => {
-    return admin.messaging(userFcmToken, payload);
-  })
-  .then(res => {
-    console.log("Sent successfully", res);
-  })
-  .catch(err => {
-    console.log(err);
-  })
+  admin.messaging(event);
 })
 
 // // Create and Deploy Your First Cloud Functions
