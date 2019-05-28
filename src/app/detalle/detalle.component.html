@@ -373,16 +373,30 @@
       <li
         class="list-group-item"
         style="background-color: #b80f22; color: white "
-      >
+        >
         Sucursales
       </li>
-      <ng-container *ngFor="let lugar of lugares">
-        <a
-          routerLink="/detalle/{{ lugar.id }}"
-          *ngIf="lugar.AtraccionPrincipal == id"
-          ><li class="list-group-item">
-            {{ lugar.nombre }}
-          </li></a>
+      <ng-container *ngFor="let l of lugares">
+        <ng-container *ngIf="lugar.AtraccionPrincipal == null; else elseTemplate">
+          <ng-container *ngIf="l.AtraccionPrincipal == id">
+            <a style="cursor: pointer" (click)="irASucursal(l.id)">
+              <li class="list-group-item">
+                  Sucursal {{ l.calle }} 
+                  {{ l.nombre }}
+              </li>
+            </a>
+          </ng-container>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <ng-container *ngIf="(l.id == lugar.AtraccionPrincipal || l.AtraccionPrincipal == lugar.AtraccionPrincipal) && l.id != id">
+            <a style="cursor: pointer" (click)="irASucursal(l.id)">
+              <li class="list-group-item">
+                  Sucursal {{ l.calle }} 
+                  {{ l.nombre }}
+              </li>
+            </a>
+          </ng-container>
+        </ng-template>    
       </ng-container>
     </ul>
   </div>

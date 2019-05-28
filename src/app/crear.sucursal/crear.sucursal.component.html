@@ -5,7 +5,7 @@
       <div class="col">
         <ul class="list-group" *ngIf="usuarioDB.Empresario">
           <ng-container *ngFor="let lugar of lugares">
-            <a (click)="mostrarCrear(lugar.id)" *ngIf="(lugar.propietario == loggedUser) && !(lugar.AtraccionPrincipal)"> <li class="list-group-item">{{ lugar.nombre }}</li></a>
+            <a style="cursor: pointer" (click)="mostrarCrear(lugar.id)" *ngIf="(lugar.propietario == loggedUser) && !(lugar.AtraccionPrincipal)"> <li class="list-group-item">{{ lugar.nombre }}</li></a>
           </ng-container>
         </ul>    
       </div>

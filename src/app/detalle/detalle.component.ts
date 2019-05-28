@@ -433,4 +433,9 @@ export class DetalleComponent {
     this.resenia.descripcion = nodo.value;
     this.guardarResenia();
   }
+
+  public irASucursal(id) {
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+    this.router.navigate([`/detalle/${id}`])); 
+  }
 }
