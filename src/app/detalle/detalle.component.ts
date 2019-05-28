@@ -44,6 +44,7 @@ export class DetalleComponent {
   LugarAbierto:Boolean = false;
   errorMsg: string; 
   currentLocation: any = null;
+  constante = 0.0003;
   constructor (private autorizacionService:AutorizacionService, 
     private storage: AngularFireStorage, 
     private route:ActivatedRoute, 

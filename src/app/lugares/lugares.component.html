@@ -79,14 +79,13 @@
       <ul class="list-group" *ngIf="mC">
         <h2>Lista ordenada por calificación</h2>
         <ng-container *ngFor="let lc of range(0, listaCalificacion.length, 1)">
-          <a routerLink="/detalle/{{ listaCalificacion[lc].id }}"
-            ><li class="list-group-item">
+          <a routerLink="/detalle/{{ listaCalificacion[lc].id }}">
+            <li class="list-group-item">
               <div *ngIf="listaCalificacion[lc].AtraccionPrincipal">
                 Sucursal {{ listaCalificacion[lc].calle }}
               </div>
               {{ listaCalificacion[lc].nombre }}
-            </li></a
-          >
+            </li></a>
         </ng-container>
       </ul>
       <ul class="list-group" *ngIf="mV">
@@ -98,8 +97,7 @@
                 Sucursal {{ listaVistas[lc].calle }}
               </div>
               {{ listaVistas[lc].nombre }}
-            </li></a
-          >
+            </li></a>
         </ng-container>
       </ul>
       <br />

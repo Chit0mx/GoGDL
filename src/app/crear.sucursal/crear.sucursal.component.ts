@@ -61,7 +61,7 @@ export class CrearSucursalComponent {
       this.lugar.propietario = this.angularFireAuth.auth.currentUser.uid;
       this.lugar.calificacion = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
       this.lugar.estoyaqui = 0;
-      this.lugar.visto = 0;
+      this.lugar.resenias = null;
       this.lugaresService.guardarLugar(this.lugar);
       const filePath = "atracciones/" + this.lugar.id;
       const fileRef = this.storage.ref(filePath);

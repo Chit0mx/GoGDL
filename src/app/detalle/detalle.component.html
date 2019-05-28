@@ -328,7 +328,7 @@
     </table>
     <agm-map [zoom]="16" [latitude]="lugar.lat" [longitude]="lugar.lng">
       <agm-marker [latitude]="currentLocation.coords.latitude" [longitude]="currentLocation.coords.longitude"></agm-marker>
-      <agm-marker [latitude]="usuariolat" [longitude]="usuariolng"></agm-marker>
+      <agm-marker [latitude]="lugar.lat" [longitude]="lugar.lng"></agm-marker>
     </agm-map>
     <br />
     <ul class="list-group">
@@ -382,8 +382,7 @@
           *ngIf="lugar.AtraccionPrincipal == id"
           ><li class="list-group-item">
             {{ lugar.nombre }}
-          </li></a
-        >
+          </li></a>
       </ng-container>
     </ul>
   </div>
@@ -461,14 +460,15 @@
   <br />
   <a
     class="botonLS btn btn-primary mr-3 mb-3"
+    style="background-color: #b80f22; color: white "
     (click)="estoyAqui()"
     *ngIf="
       loggedIn &&
       !lugarUsr.Visite &&
-      (currentLocation.coords.latitude <= this.lugar.lat + 0.0003 &&
-        currentLocation.coords.latitude >= this.lugar.lat - 0.0003 &&
-        currentLocation.coords.longitude <= this.lugar.lng + 0.0003 &&
-        currentLocation.coords.longitude >= this.lugar.lng - 0.0003)">Estoy Aqui</a>
+      (currentLocation.coords.latitude <= lugar.lat + constante &&
+        currentLocation.coords.latitude >= lugar.lat - constante &&
+        currentLocation.coords.longitude <= lugar.lng + constante &&
+        currentLocation.coords.longitude >= lugar.lng - constante)">Estoy Aqui</a>
   <a
     routerLink="/crear/{{ lugar.id }}"
     class="botonLS btn btn-primary mr-3 mb-3"
