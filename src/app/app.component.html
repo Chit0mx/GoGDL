@@ -68,9 +68,8 @@
         <a
           class="nav-link"
           routerLink="/crear/new"
-          *ngIf="usuarioDB.Empresario && loggedIn"
-          >Crear Nueva Atraccion</a
-        >
+          *ngIf="usuarioDB.Empresario && loggedIn">
+          Crear Nueva Atraccion</a>
       </li>
     </ul>
     <!--Sing in - Log in-->
@@ -93,4 +92,10 @@
     </ul>
   </div>
 </nav>
+<div>
+  <h1>{{ (message | async)?.notificaction.title }}</h1>
+  <img [src]="(message | async)?.notifiication.icon" width="100px"/>
+  <p>{{ (message | async)?.notification.body }}</p>
+  {{ message | async | json }}
+</div>
 <router-outlet></router-outlet>
