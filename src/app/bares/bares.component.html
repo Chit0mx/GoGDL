@@ -63,7 +63,13 @@
               <div *ngIf="lugar.AtraccionPrincipal">
                 Sucursal {{ lugar.calle }}
               </div>
-              {{ lugar.nombre }}
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-5">{{ lugar.nombre }}</div>
+                  <div class="col-md-3">Vistas :{{ lugar.visto }}</div>
+                  <div class="col-md-3">Calificación :{{ lugar.promedio }}</div>
+                </div>
+              </div>
             </li></a
           >
         </ng-container>
@@ -76,7 +82,17 @@
               <div *ngIf="listaCalificacion[lc].AtraccionPrincipal">
                 Sucursal {{ listaCalificacion[lc].calle }}
               </div>
-              {{ listaCalificacion[lc].nombre }}
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-5">{{ listaCalificacion[lc].nombre }}</div>
+                  <div class="col-md-3">
+                    Vistas :{{ listaCalificacion[lc].visto }}
+                  </div>
+                  <div class="col-md-3">
+                    Calificación :{{ listaCalificacion[lc].promedio }}
+                  </div>
+                </div>
+              </div>
             </li></a
           >
         </ng-container>
@@ -89,7 +105,17 @@
               <div *ngIf="listaVistas[lc].AtraccionPrincipal">
                 Sucursal {{ listaVistas[lc].calle }}
               </div>
-              {{ listaVistas[lc].nombre }}
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-5">{{ listaVistas[lc].nombre }}</div>
+                  <div class="col-md-3">
+                    Vistas :{{ listaVistas[lc].visto }}
+                  </div>
+                  <div class="col-md-3">
+                    Calificación :{{ listaVistas[lc].promedio }}
+                  </div>
+                </div>
+              </div>
             </li></a
           >
         </ng-container>
