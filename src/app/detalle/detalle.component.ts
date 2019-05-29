@@ -121,7 +121,6 @@ export class DetalleComponent {
   searchByCurrent() { let self = this;
     const accuracy = { enableHighAccuracy: true }; 
     self.geoLocationService.getLocation(accuracy).subscribe((position) => {
-    console.log(position);
     self.currentLocation = position; 
     self.refG.detectChanges();
     }, (error) => { 
@@ -428,7 +427,6 @@ export class DetalleComponent {
         textarea = textarea.replace(regex, "!@$$#;");
     }
     nodo.value = textarea;
-    console.log("Tengo Reseña: " + nodo.value);
     this.resenia.descripcion = nodo.value;
     this.guardarResenia();
   }
