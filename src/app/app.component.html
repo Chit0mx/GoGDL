@@ -68,9 +68,8 @@
         <a
           class="nav-link"
           routerLink="/crear/new"
-          *ngIf="usuarioDB.Empresario && loggedIn"
-          >Crear Nueva Atraccion</a
-        >
+          *ngIf="usuarioDB.Empresario && loggedIn">
+          Crear Nueva Atraccion</a>
       </li>
     </ul>
     <!--Sing in - Log in-->
@@ -93,4 +92,8 @@
     </ul>
   </div>
 </nav>
+<div class="notificacion">
+  <h4>{{ (message | async)?.notification.title }}</h4>
+  <p>{{ (message | async)?.notification.body }}</p>
+</div>
 <router-outlet></router-outlet>

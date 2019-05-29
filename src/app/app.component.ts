@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener } from '@angular/core';
 import { AutorizacionService } from './services/autorizacion.service';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { MessagingService } from './services/messaging.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,11 @@ export class AppComponent {
   loggedIn = false;
   loggedUser:any = null;
   usuarioDB:any = {};
-  constructor(private autorizacionService:AutorizacionService, private afDB: AngularFireDatabase){
+  message;
+  mostrarNotificacion:Boolean = false;
+  constructor(private autorizacionService:AutorizacionService, 
+    private afDB: AngularFireDatabase,
+    public msgService: MessagingService){
     this.autorizacionService.isLogged()
     .subscribe((result) => {
       if(result && result.uid){
@@ -30,7 +35,12 @@ export class AppComponent {
     }, (error) => {
       this.loggedIn = false;
     })
-    
+    this.msgService.getPermission();
+    this.msgService.receiveMessage();
+    this.message = this.msgService.currentMessage;
+    setTimeout(() => {
+      
+    }, 10000);
   }
   logout(){
     this.autorizacionService.logout();

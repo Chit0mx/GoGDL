@@ -1,0 +1,63 @@
+[debug] [2019-05-29T21:35:10.349Z] ----------------------------------------------------------------------
+[debug] [2019-05-29T21:35:10.359Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Efraín\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2019-05-29T21:35:10.360Z] CLI Version:   6.10.0
+[debug] [2019-05-29T21:35:10.360Z] Platform:      win32
+[debug] [2019-05-29T21:35:10.360Z] Node Version:  v10.13.0
+[debug] [2019-05-29T21:35:10.367Z] Time:          Wed May 29 2019 16:35:10 GMT-0500 (GMT-05:00)
+[debug] [2019-05-29T21:35:10.367Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-05-29T21:35:10.420Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-05-29T21:35:10.422Z] > authorizing via signed-in user
+[debug] [2019-05-29T21:35:10.423Z] [iam] checking project gogdl-1551633194886 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-05-29T21:35:10.431Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-05-29T21:35:10.431Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-05-29T21:35:10.737Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-29T21:35:10.786Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/gogdl-1551633194886:testIamPermissions  
+
+[debug] [2019-05-29T21:35:11.337Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-29T21:35:11.341Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/gogdl-1551633194886  
+ 
+[debug] [2019-05-29T21:35:11.690Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'gogdl-1551633194886'...
+[info] 
+[info] i  deploying functions, hosting
+[debug] [2019-05-29T21:35:25.467Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase serve --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "8"
+  },
+  "dependencies": {
+    "firebase-admin": "~7.0.0",
+    "firebase-functions": "^2.3.0"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.1.6"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2019-05-29T21:35:25.470Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/gogdl-1551633194886?view=CONSUMER_VIEW  
+ 
+[debug] [2019-05-29T21:35:25.473Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/gogdl-1551633194886?view=CONSUMER_VIEW  
+ 
+[debug] [2019-05-29T21:35:26.420Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-29T21:35:26.449Z] <<< HTTP RESPONSE 200
+[info] +  functions: all necessary APIs are enabled
+[debug] [2019-05-29T21:35:26.452Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/gogdl-1551633194886  
+ 
+[debug] [2019-05-29T21:35:26.824Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-29T21:35:26.826Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/3751525980:getServerAppConfig  
+ 
+[debug] [2019-05-29T21:35:27.119Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-29T21:35:27.127Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/gogdl-1551633194886/versions  
+
