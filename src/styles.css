@@ -153,3 +153,12 @@ agm-map {
     display: inline-block;
     margin-left: 30px;
 }
+
+.notificacion {
+    background-color: #b80f22;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
