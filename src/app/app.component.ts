@@ -12,7 +12,8 @@ export class AppComponent {
   loggedIn = false;
   loggedUser:any = null;
   usuarioDB:any = {};
-  message:any = {};
+  message;
+  mostrarNotificacion:Boolean = false;
   constructor(private autorizacionService:AutorizacionService, 
     private afDB: AngularFireDatabase,
     public msgService: MessagingService){
@@ -37,6 +38,9 @@ export class AppComponent {
     this.msgService.getPermission();
     this.msgService.receiveMessage();
     this.message = this.msgService.currentMessage;
+    setTimeout(() => {
+      
+    }, 10000);
   }
   logout(){
     this.autorizacionService.logout();

@@ -92,10 +92,8 @@
     </ul>
   </div>
 </nav>
-<div>
 <div class="notificacion">
-  <h1>{{ (message | async)?.notification.title }}</h1>
-  <img [src]="(message | async)?.notification.icon" alt="No hay notificaciones" width="100px"/>
+  <h4>{{ (message | async)?.notification.title }}</h4>
   <p>{{ (message | async)?.notification.body }}</p>
 </div>
 <router-outlet></router-outlet>

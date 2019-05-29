@@ -17,9 +17,9 @@ exports.fcmSend = functions.database.ref("/articulos/{articuloId}").onCreate((sn
             let lugarNombre = snapshot.val().nombre;
             let payload = {
               notification : {
-                title: `Hay un nuevo evento/promocion en ${lugarNombre}`,
-                body: `Ve y hechale un vistaso en https://gogdl-1551633194886.firebaseapp.com/detalle/${lugarId}`,
-                icon: 'https://www.armytimes.com/resizer/EMlsFi9L9EXZkrjnDO5GMwcpWHo=/1200x0/filters:quality(100)/arc-anglerfish-arc2-prod-mco.s3.amazonaws.com/public/5RAPSCITXBGULPO7VZSOXJGWI4.jpg'
+                title: `Hay un nuevo evento/promocion de ${articuloData.titulo}`,
+                body: `Ve y hechale un vistaso a tu lugar favorito ${lugarNombre}`,
+                icon: 'https://firebasestorage.googleapis.com/v0/b/gogdl-1551633194886.appspot.com/o/favicon.ico?alt=media&token=f2da3426-7f04-49cb-9a30-cdc4f17f48b5'
               }
             };
             admin.database().ref(`/fcmTokens/${usuarioId}`).once('value')
