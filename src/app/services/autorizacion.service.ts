@@ -68,6 +68,7 @@ export class AutorizacionService {
           "Revisa tu bandeja de entrada y sigue los pasos del correo recibido",
           "success"
         );
+        this.router.navigate(["inicio"]);
       })
       .catch((error) => {
         swal.fire("Error", "No se enviar el correo de verificacion", "error");
