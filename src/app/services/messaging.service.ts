@@ -41,6 +41,9 @@ export class MessagingService {
     this.messaging.onMessage((payload) => {
       console.log("Message received.", payload);
       this.currentMessage.next(payload)
+      setTimeout(() => {
+          this.currentMessage.next(null);
+      }, 120000);
     });
   }
 }

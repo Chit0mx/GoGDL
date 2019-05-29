@@ -38,10 +38,8 @@ export class AppComponent {
     this.msgService.getPermission();
     this.msgService.receiveMessage();
     this.message = this.msgService.currentMessage;
-    setTimeout(() => {
-      
-    }, 10000);
   }
+
   logout(){
     this.autorizacionService.logout();
   }
