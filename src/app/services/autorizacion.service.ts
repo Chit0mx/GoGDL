@@ -18,9 +18,19 @@ export class AutorizacionService {
     this.angularFireAuth.auth
       .signInWithEmailAndPassword(email, password)
       .then(response => {
-        swal.fire("Iniciaste sesión!", "", "success");
-        console.log(response);
-        this.router.navigate(["inicio"]);
+        this.revisarVerficacion();
+        let ver = this.revisarVerficacion();
+        if (ver == true) {
+          swal.fire("Iniciaste sesión!", "", "success");
+          console.log(response);
+          this.router.navigate(["inicio"]);
+        } else {
+          swal.fire(
+            "No puedes acceder",
+            "Verifica tu correo electronico",
+            "error"
+          );
+        }
       })
       .catch(error => {
         swal.fire("Oops..", "Ocurrio un error al iniciar sesion", "error");
@@ -43,15 +53,15 @@ export class AutorizacionService {
       .then(response => {
         const id = this.angularFireAuth.auth.currentUser.uid;
         this.afDB.database.ref(`/users/${id}`).set({
-            Nombre: nombre,
-            Apellido: apellido,
-            Email: email,
-            Empresario: false
-          });
-        swal.fire("Creaste una cuenta!", "Hora de explorar GoGDL", "success");
+          Nombre: nombre,
+          Apellido: apellido,
+          Email: email,
+          Empresario: false
+        });
         console.log(response);
         this.send_verification();
         this.router.navigate(["inicio"]);
+        this.logout();
       })
       .catch(error => {
         swal.fire("Error", "No se pudo crear la cuenta", "warning");
@@ -61,33 +71,43 @@ export class AutorizacionService {
 
   public send_verification() {
     let user = this.angularFireAuth.auth.currentUser;
-    user.sendEmailVerification()
+    user
+      .sendEmailVerification()
       .then(() => {
         swal.fire(
           "Se envio un correo de verificacion",
-          "Revisa tu bandeja de entrada y sigue los pasos del correo recibido",
+          "Revisa tu bandeja de entrada y sigue los pasos del correo recibido para poder acceder a tu cuenta",
           "success"
         );
         this.router.navigate(["inicio"]);
       })
-      .catch((error) => {
+      .catch(error => {
         swal.fire("Error", "No se enviar el correo de verificacion", "error");
       });
   }
-
+  public revisarVerficacion() {
+    return this.angularFireAuth.auth.currentUser.emailVerified;
+  }
   public bajaUsuario() {
     const id = this.angularFireAuth.auth.currentUser.uid;
     let user = this.angularFireAuth.auth.currentUser;
-    user.delete().then(() => {
-      this.afDB.database.ref(`/users/${id}`).remove();
-      swal.fire(
-        "Se ha eliminado tu cuenta",
-        "Ojalá regreses a GoGDL pronto",
-        "warning"
-      );
-    }).catch((error) => {
-      swal.fire("Error", "No se pudo eliminar tu cuenta , intentalo más tarde", "error");
-    })
+    user
+      .delete()
+      .then(() => {
+        this.afDB.database.ref(`/users/${id}`).remove();
+        swal.fire(
+          "Se ha eliminado tu cuenta",
+          "Ojalá regreses a GoGDL pronto",
+          "warning"
+        );
+      })
+      .catch(error => {
+        swal.fire(
+          "Error",
+          "No se pudo eliminar tu cuenta , intentalo más tarde",
+          "error"
+        );
+      });
   }
 
   public obtenerUsuario() {
