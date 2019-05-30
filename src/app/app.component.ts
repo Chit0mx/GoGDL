@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener } from '@angular/core';
 import { AutorizacionService } from './services/autorizacion.service';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { MessagingService } from './services/messaging.service';
+import { LugaresService } from './services/lugares.service';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ export class AppComponent {
   mostrarNotificacion:Boolean = false;
   constructor(private autorizacionService:AutorizacionService, 
     private afDB: AngularFireDatabase,
+    private lugaresService: LugaresService,
     public msgService: MessagingService){
     this.autorizacionService.isLogged()
     .subscribe((result) => {
@@ -35,6 +37,7 @@ export class AppComponent {
     }, (error) => {
       this.loggedIn = false;
     })
+    this.revisarEstadoUsuarios();
     this.msgService.getPermission();
     this.msgService.receiveMessage();
     this.message = this.msgService.currentMessage;
@@ -42,5 +45,14 @@ export class AppComponent {
 
   logout(){
     this.autorizacionService.logout();
+  }
+
+  public revisarEstadoUsuarios() {
+    let hoy = new Date().getDate();
+    if (hoy == 28) {
+      this.autorizacionService.hacerUsuariosInactivos();
+    } else if (hoy == 10) {
+      this.lugaresService.ocultarAtraccionesUsuariosInactivos();
+    }
   }
 }
