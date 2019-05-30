@@ -214,6 +214,8 @@ export class DetalleComponent {
     }).then((result) => {
       if (result.value) {
         this.lugaresService.borrarLugar(this.id);
+        const filePath = `atracciones/${this.id}`;
+        this.storage.ref(filePath).delete();
         this.router.navigate(["/destacados"]);
         swal.fire(
           "Atraccion eliminada",

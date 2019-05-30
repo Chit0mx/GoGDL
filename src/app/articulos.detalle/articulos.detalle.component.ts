@@ -54,8 +54,11 @@ export class ArticuloDetalleComponent {
         this.loggedIn = false;
         })
     }
+
     public eliminarAtraccion() {
         this.articulosService.borrarArticulo(this.id);
+        const filePath = `articulos/${this.id}`;
+        this.storage.ref(filePath).delete();
         this.router.navigate(["/detalle/" + this.idLugar]);
         swal.fire(
             "Evento/promocion eliminado",
