@@ -29,18 +29,34 @@
 
   <div class="collapse navbar-collapse " id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
+      <li
+        class="nav-item"
+        data-toggle="collapse"
+        data-target=".navbar-collapse.show"
+      >
         <a class="nav-link" routerLink="/inicio">Inicio</a>
       </li>
-      <li class="nav-item">
+      <li
+        class="nav-item"
+        data-toggle="collapse"
+        data-target=".navbar-collapse.show"
+      >
         <a class="nav-link" routerLink="/destacados"
           >Destacado<span class="sr-only">(current)</span></a
         >
       </li>
-      <li class="nav-item">
+      <li
+        class="nav-item"
+        data-toggle="collapse"
+        data-target=".navbar-collapse.show"
+      >
         <a class="nav-link" routerLink="/lugares">Cercano</a>
       </li>
-      <li class="nav-item dropdown">
+      <li
+        class="nav-item dropdown"
+        data-toggle="collapse"
+        data-target=".navbar-collapse.show"
+      >
         <a
           class="nav-link dropdown-toggle linkprod"
           id="navbarDropdownMenuLink"
@@ -64,29 +80,51 @@
           <a class="dropdown-item " routerLink="/plazas">Plazas</a>
         </div>
       </li>
-      <li class="nav-item">
+      <li
+        class="nav-item"
+        data-toggle="collapse"
+        data-target=".navbar-collapse.show"
+      >
         <a
           class="nav-link"
           routerLink="/crear/new"
-          *ngIf="usuarioDB.Empresario && loggedIn">
-          Crear Nueva Atraccion</a>
+          *ngIf="usuarioDB.Empresario && loggedIn"
+        >
+          Crear Nueva Atraccion</a
+        >
       </li>
     </ul>
     <!--Sing in - Log in-->
     <ul class="nav navbar-nav navbar-right" *ngIf="!loggedIn">
-      <li class="nav-item">
+      <li
+        class="nav-item"
+        data-toggle="collapse"
+        data-target=".navbar-collapse.show"
+      >
         <a class="nav-link" routerLink="/inicio-sesion">Iniciar sesión</a>
       </li>
-      <li class="nav-item">
+      <li
+        class="nav-item"
+        data-toggle="collapse"
+        data-target=".navbar-collapse.show"
+      >
         <a class="nav-link" routerLink="/registro">Registrar</a>
       </li>
     </ul>
     <!--Sing in - Log in-->
     <ul class="nav navbar-nav navbar-right" *ngIf="loggedIn">
-      <li class="nav-item">
+      <li
+        class="nav-item"
+        data-toggle="collapse"
+        data-target=".navbar-collapse.show"
+      >
         <a class="nav-link" routerLink="/usuario">{{ usuarioDB.Nombre }}</a>
       </li>
-      <li class="nav-item">
+      <li
+        class="nav-item"
+        data-toggle="collapse"
+        data-target=".navbar-collapse.show"
+      >
         <a class="nav-link" (click)="logout()">Cerrar sesión</a>
       </li>
     </ul>
