@@ -5,7 +5,7 @@
       <hr />
       <div *ngIf="!usuarioDB.Empresario">
         <a
-          style="cursor: pointer"
+          style="cursor: pointer ;background-color: #b80f22; color: white "
           class="botonLS p-2"
           (click)="hacerEmpresario()"
           >Convertirme en empresario</a
@@ -152,8 +152,15 @@
       <br />
       <h2>Ubicación actual</h2>
       <br />
-      <agm-map [zoom]="17" [latitude]="currentLocation.coords.latitude" [longitude]="currentLocation.coords.longitude">
-        <agm-marker [latitude]="currentLocation.coords.latitude" [longitude]="currentLocation.coords.longitude"></agm-marker>
+      <agm-map
+        [zoom]="17"
+        [latitude]="currentLocation.coords.latitude"
+        [longitude]="currentLocation.coords.longitude"
+      >
+        <agm-marker
+          [latitude]="currentLocation.coords.latitude"
+          [longitude]="currentLocation.coords.longitude"
+        ></agm-marker>
       </agm-map>
       <br />
     </div>
