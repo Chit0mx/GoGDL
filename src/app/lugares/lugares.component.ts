@@ -1,7 +1,6 @@
 import { Component, ChangeDetectorRef } from "@angular/core";
 import { LugaresService } from "../services/lugares.service";
 import { ArticulosService } from "../services/articulos.service";
-import { AutorizacionService } from "../services/autorizacion.service";
 import { GeoLocationService } from '../services/geolocation.service';
 
 
@@ -12,8 +11,8 @@ import { GeoLocationService } from '../services/geolocation.service';
 export class LugaresComponent {
   title = "GoGdl";
   constante = 0.003;
-  lat: number = 20.6430428;
-  lng: number = -103.3703034;
+  lat: number;
+  lng: number;
   lugares = null;
   loggedUser: any = null;
   usuario: any = {};
@@ -21,6 +20,7 @@ export class LugaresComponent {
   articulos: any = {};
   mC: Boolean = false;
   mV: Boolean = false;
+  mP: Boolean = false;
   listaCalificacion: any = [];
   listaVistas: any = [];
   lVisto = 0;
@@ -28,10 +28,15 @@ export class LugaresComponent {
   listaCreada: Boolean = false;
   errorMsg: string; 
   currentLocation: any = null;
+  mostrarFormUbicacion: Boolean = false;
+  ubicacion = {
+    calle: null,
+    pais: null,
+    ciudad: null,
+  };
 
   constructor(
     private lugaresService: LugaresService,
-    private autorizacionService: AutorizacionService,
     private articulosService: ArticulosService,
     private ref: ChangeDetectorRef,
     private geoLocationService: GeoLocationService
@@ -95,12 +100,14 @@ export class LugaresComponent {
 
   public mayorCalificacion() {
     this.mV = false;
+    this.mP = false;
     this.mC = !this.mC;
     this.listaCreada = true;
   }
 
   public mostrarListaVistas() {
     this.mC = false;
+    this.mP = false;
     this.mV = !this.mV;
     this.listaCreada = true;
   }
@@ -137,5 +144,22 @@ export class LugaresComponent {
       self.errorMsg = error;
       self.ref.detectChanges(); 
     } );
+  }
+
+  public mostrarUbicaPersonalisada() {
+    this.mostrarFormUbicacion = !this.mostrarFormUbicacion;
+  }
+
+  public traerUbicacion() {
+    this.mostrarFormUbicacion = false;
+    this.mV = false;
+    this.mC = false;
+    var direccion = this.ubicacion.calle + "," + this.ubicacion.ciudad + "," + this.ubicacion.pais;
+    console.log(direccion);
+    this.lugaresService.obtenerGeoData(direccion).subscribe((result: any) => {
+      this.lat = result.results[0].geometry.location.lat;
+      this.lng = result.results[0].geometry.location.lng;
+    });
+    this.mP = true;
   }
 }

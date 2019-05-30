@@ -1,8 +1,7 @@
 <agm-map
   [zoom]="10"
   [latitude]="currentLocation.coords.latitude"
-  [longitude]="currentLocation.coords.longitude"
->
+  [longitude]="currentLocation.coords.longitude">
   <agm-marker
     *ngFor="let lugar of lugares"
     [latitude]="lugar.lat"
@@ -37,6 +36,40 @@
         >Mayor Calificación</a
       >
       <br />
+      <br/>
+      <a
+        class="botonLS btn btn-primary mx-3"
+        (click)="mostrarUbicaPersonalisada()"
+        style="background-color: #b80f22; color: white ">
+        Usar una dirección personalizada
+      </a>
+      <br/>
+      <br/>
+      <div *ngIf="mostrarFormUbicacion">
+        <h3>Datos de direccion</h3>
+        <label>Calle y número</label>
+        <input type="text" class="form-control" [(ngModel)]="ubicacion.calle" />
+        <br />
+        <label>Ciudad</label>
+        <input type="text" class="form-control" [(ngModel)]="ubicacion.ciudad" />
+        <br />
+        <label>Pais</label>
+        <input type="text" class="form-control" [(ngModel)]="ubicacion.pais" />
+        <br />
+        <div with="100px">
+          <a
+            class="botonLS btn btn-primary"
+            (click)="traerUbicacion()"
+            style="background-color: #b80f22; color: white ">
+            Usar ubicación
+          </a>
+          <a
+            class="btn btn-default botonCancel mx-3"
+            (click)="mostrarUbicaPersonalisada()">
+            Cancelar
+          </a>
+        </div>
+      </div>
     </div>
     <div class="col-md-8">
       <h2>Lugares Cercanos</h2>
@@ -51,7 +84,7 @@
         *ngIf="!mC && !mV"
       />
       <br />
-      <ul class="list-group" *ngIf="!mC && !mV">
+      <ul class="list-group" *ngIf="!mC && !mV && !mP">
         <h2>Lista de lugares cercanos</h2>
         <ng-container *ngFor="let lugar of lugares | filter: filterLugar">
           <span
@@ -109,8 +142,8 @@
                   </div>
                 </div>
               </div>
-            </li></a
-          >
+            </li>
+          </a>
         </ng-container>
       </ul>
       <ul class="list-group" *ngIf="mV">
@@ -132,8 +165,33 @@
                   </div>
                 </div>
               </div>
-            </li></a
-          >
+            </li>
+          </a>
+        </ng-container>
+      </ul>
+      <ul class="list-group" *ngIf="mP">
+        <h2>Lista de lugares cercanos a la ubicación personalizada</h2>
+        <ng-container *ngFor="let lugar of lugares | filter: filterLugar">
+          <a
+            routerLink="/detalle/{{ lugar.id }}"
+            *ngIf="
+              lugar.lat <= lat + constante &&
+              lugar.lat >= lat - constante &&
+              lugar.lng <= lng + constante &&
+              lugar.lng >= lng - constante">
+            <li class="list-group-item">
+              <div *ngIf="lugar.AtraccionPrincipal">
+                Sucursal {{ lugar.calle }}
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-5">{{ lugar.nombre }}</div>
+                  <div class="col-md-3">Vistas :{{ lugar.visto }}</div>
+                  <div class="col-md-3">Calificación :{{ lugar.promedio }}</div>
+                </div>
+              </div>
+            </li>
+          </a>
         </ng-container>
       </ul>
       <br />

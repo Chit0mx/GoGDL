@@ -206,15 +206,13 @@
       <div *ngIf="mostarListaDeFotos">
         <br />
         <p>
-          Elimina la foto que no te agrade, el conteo empieza con la segunda que
-          se muestra, ya que la primera foto es la que se ingreso al crearse la
-          Atraccion
+          Pulsa sorbre la imagen para eliminar la que no te agrade
         </p>
         <ul class="list-group">
           <ng-container *ngFor="let f of range(0, fotos.length, 1)">
             <a (click)="eliminarImagen(fotos[f].id)"
               ><li class="list-group-item" style="cursor: pointer;">
-                Imagen numero {{ f + 1 }}
+                <img class="d-block" width="100px" height="auto" [src]="arrayF[f] | async" />
               </li></a
             >
           </ng-container>
@@ -252,11 +250,9 @@
             >Agregar</a
           >
           <a
-            style="cursor: pointer;"
-            class="btn btn-default  mx-3"
+            class="btn btn-default botonCancel mx-3"
             (click)="mostrarAF()"
             *ngIf="loggedIn"
-            style="background-color: #b80f22; color: white "
             >Cancelar</a
           >
         </div>
