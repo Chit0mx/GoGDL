@@ -53,9 +53,9 @@ import { ReporteAtraccionComponent } from "./reporte.atraccion/reporte.atraccion
 import { ForgotComponent } from "./forgot/forgot.component";
 import { CrearSucursalComponent } from "./crear.sucursal/crear.sucursal.component";
 import { ContraComponent } from "./cambiar.contraseña/cambiar.component";
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { GeoLocationService } from './services/geolocation.service';
-import { MessagingService } from './services/messaging.service';
+import { ServiceWorkerModule } from "@angular/service-worker";
+import { GeoLocationService } from "./services/geolocation.service";
+import { MessagingService } from "./services/messaging.service";
 
 const appRoutes: Routes = [
   {
