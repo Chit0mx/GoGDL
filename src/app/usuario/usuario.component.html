@@ -105,7 +105,9 @@
       <h2 *ngIf="usuarioDB.Empresario">Mis atracciones ocultas</h2>
       <ul class="list-group" *ngIf="usuarioDB.Empresario">
         <ng-container *ngFor="let lugarO of lugaresOcultos">
-          <a style="cursor: pointer" (click)="desocultar(lugarO, usuarioDB.Activo)"
+          <a
+            style="cursor: pointer"
+            (click)="desocultar(lugarO, usuarioDB.Activo)"
             ><li class="list-group-item">
               <div *ngIf="lugarO.AtraccionPrincipal">
                 Sucursal de
@@ -139,14 +141,17 @@
         class="botonLS btn btn-primary"
         style="background-color: #b80f22; color: white "
         routerLink="/cambiarContra"
-        >Cambiar Contraseña</a>
+        >Cambiar Contraseña</a
+      >
       <br />
       <br />
       <a
         class="botonLS btn btn-primary"
         style="background-color: #b80f22; color: white "
-        (click)="bajaUser()">
-        Eliminar Cuenta</a>
+        (click)="bajaUser()"
+      >
+        Eliminar Cuenta</a
+      >
       <br />
       <br />
       <a
@@ -154,8 +159,9 @@
         style="background-color: #b80f22; color: white "
         *ngIf="!usuarioDB.Activo"
         (click)="Activar()"
-        >
-        Seguir Activo</a>
+      >
+        Seguir Activo</a
+      >
       <br />
       <h2>Ubicación actual</h2>
       <br />
