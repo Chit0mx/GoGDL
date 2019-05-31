@@ -50,6 +50,7 @@ export class AppComponent {
   public revisarEstadoUsuarios() {
     let hoy = new Date().getDate();
     if (hoy == 28) {
+      this.autorizacionService.mailEstadistica();
       this.autorizacionService.hacerUsuariosInactivos();
     } else if (hoy == 10) {
       this.lugaresService.ocultarAtraccionesUsuariosInactivos();

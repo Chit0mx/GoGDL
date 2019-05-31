@@ -247,4 +247,20 @@ export class AutorizacionService {
       });
     });
   }
+
+  public mailEstadistica() {
+    this.afDB.database.ref(`/users`).once('value').then(snapshot => {
+      snapshot.forEach(U => {
+        let usuarioId = U.key;
+        let usuario = U.val();
+        if (usuario.Empresario) {
+          setTimeout(() => {            
+            let hoy = new Date().toISOString();
+            this.afDB.database.ref(`/users/${usuarioId}`).update({eviarEmail: hoy});
+          }, 5000);
+        }
+      });
+    });
+  }
+
 }

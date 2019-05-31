@@ -48,6 +48,43 @@ exports.fcmSend = functions.database.ref("/articulos/{articuloId}").onCreate((sn
   });
 });
 
+const SENDGRID_API_KEY = functions.config().sengrid.key;
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(SENDGRID_API_KEY);
+
+exports.enviarMail = functions.database.ref("/users/{userId}/eviarEmail").onUpdate((event, context) => {
+  let userId = context.params.userId;
+  admin.database().ref(`/users/${userId}`).once('value').then(snapshot => {
+      let usuarioId = snapshot.key;
+      let usuario = snapshot.val();
+      admin.database().ref(`/lugares`).once('value').then(snapshot => {
+        snapshot.forEach(l => {
+          let lugarId = l.key;
+          let lugar = l.val();
+          if (lugar.propietario == usuarioId) {
+            let promedio = Math.round((5 * lugar.calificacion[5] + 4 * lugar.calificacion[4] + 3 * lugar.calificacion[3] + 2 * lugar.calificacion[2] + 1 * lugar.calificacion[1]) / (lugar.calificacion[5] + lugar.calificacion[4] + lugar.calificacion[3] + lugar.calificacion[2] + lugar.calificacion[1])*1000)/1000;
+            const msg = {
+              to: usuario.Email,
+              from: 'biosh0KEd@gmail.com',
+              
+              templateId: 'd-29e3917a6a87433698c2c726f199b78c',
+              setSubstitutionWrappers: ['{{' , '}}'],
+              dynamic_template_data: {
+                name: usuario.Nombre,
+                idLugar: lugarId,
+                apellido: usuario.Apellido,
+                namelugar: lugar.nombre,
+                subject: 'Estadisticas en GoGDL',
+                body: `Cantidad de estoy aqui: ${lugar.estoyaqui}\nCantidad de vistas a la pagina de la atracción: ${lugar.visto}\nCalificacion del lugar: ${promedio}\n`,
+              }
+            };
+            sgMail.send(msg).then(res => console.log("Mail enviado")).catch(erro => console.log("No se pudo enviar el mail"));
+          } else {return;}
+        });
+      }).then(res => console.log("se pudo traer al lugar")).catch(err => console.log("no se pudo traer al lugar"));
+  }).then(res => console.log("se pudo traer al usuario")).catch(err => console.log("no se pudo traer al usuario"));
+});
+
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
