@@ -26,6 +26,13 @@ export class LugaresService{
     return this.afDB.object('lugares/'+ id);
   }
   public borrarLugar(id){
+    this.afDB.database.ref("/users").once('value').then(snapshot => { 
+      snapshot.forEach(datos => {
+        let usuarioId = datos.key;
+        let usuario = datos.val();
+        this.afDB.database.ref(`/users/${usuarioId}/${id}`).remove();
+      });
+    });
     return this.afDB.database.ref('lugares/' + id).remove();
   }
   
@@ -42,10 +49,21 @@ export class LugaresService{
     this.afDB.database.ref(`users/${id}/lugaresOcultos/${lugar.id}`).remove();
   }
 
+  public desocultarLugares(idUsr) {
+    this.afDB.database.ref(`users/${idUsr}/lugaresOcultos/`).once('value').then(snapshot => {
+      snapshot.forEach(datos => {
+        let lugarId = datos.key;
+        let lugar = datos.val();
+        this.guardarLugar(lugar);
+        this.afDB.database.ref(`users/${idUsr}/lugaresOcultos/${lugarId}`).remove();
+      });
+    });
+  }
+
   public ocultarLugar(lugar){
     const id = this.angularFireAuth.auth.currentUser.uid;
     this.afDB.database.ref(`users/${id}/lugaresOcultos/${lugar.id}`).set(lugar);
-    this.borrarLugar(lugar.id);
+    this.afDB.database.ref('lugares/' + lugar.id).remove();
   }
   
   public getLugaresOcultos(){
@@ -120,6 +138,27 @@ export class LugaresService{
     .ref.transaction(visto => {
        return visto + 1;
     })
+  }
+
+  public ocultarAtraccionesUsuariosInactivos(){
+   this.afDB.database.ref("/users").once('value').then(snapshot => {
+      snapshot.forEach(datos => {
+        let usuarioId = datos.key;
+        let usuario = datos.val();
+        if (!usuario.Activo) {
+          this.afDB.database.ref("/lugares").once('value').then(snapshot => {
+            snapshot.forEach(datos => {
+              let lugarId = datos.key;
+              let lugar = datos.val();
+              if (usuarioId == lugar.propietario) {
+                this.afDB.database.ref(`users/${usuarioId}/lugaresOcultos/${lugarId}`).set(lugar);
+                this.afDB.database.ref('lugares/' + lugarId).remove();
+              }
+            });
+          });
+        } 
+      });
+    });
   }
 }
 

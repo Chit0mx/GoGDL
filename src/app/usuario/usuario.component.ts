@@ -69,28 +69,36 @@ export class UsuarioComponent {
     this.autorizacionService.hacerEmpresario();
   }
 
-  public desocultar(lugar) {
-    swal
-      .fire({
-        title: "¿Esta seguro que desea dejar de ocultar esta atracción?",
-        text: "Volvera a estar disponible para todos los usuarios de GoGDL",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Si, dejar de ocultar"
-      })
-      .then(result => {
-        if (result.value) {
-          this.lugaresService.desocultarLugar(lugar);
-          this.router.navigate([`/detalle/${lugar.id}`]);
-          swal.fire(
-            "La atracción ya no esta oculta",
-            "Ahora esta disponible para todos los usuarios",
-            "info"
-          );
-        }
-      });
+  public desocultar(lugar, Activo) {
+    if (Activo) {
+      swal
+        .fire({
+          title: "¿Esta seguro que desea dejar de ocultar esta atracción?",
+          text: "Volvera a estar disponible para todos los usuarios de GoGDL",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Si, dejar de ocultar"
+        })
+        .then(result => {
+          if (result.value) {
+            this.lugaresService.desocultarLugar(lugar);
+            this.router.navigate([`/detalle/${lugar.id}`]);
+            swal.fire(
+              "La atracción ya no esta oculta",
+              "Ahora esta disponible para todos los usuarios",
+              "info"
+            );
+          }
+        });
+    } else {
+      swal.fire(
+        "No puede desocultar el lugar",
+        "Su usuario esta inactivo, debe hacerse un usuario activo para desocultar el lugar",
+        "info"
+      );
+    }
   }
 
   public mostrarCal(n1, n2, n3, n4, n5) {
@@ -139,5 +147,10 @@ export class UsuarioComponent {
         self.ref.detectChanges();
       }
     );
+  }
+
+  public Activar() {
+    this.autorizacionService.hacerUsuarioActivo();
+    this.lugaresService.desocultarLugares(this.loggedUser);
   }
 }

@@ -56,7 +56,8 @@ export class AutorizacionService {
           Nombre: nombre,
           Apellido: apellido,
           Email: email,
-          Empresario: false
+          Empresario: false,
+          Activo: true
         });
         console.log(response);
         this.send_verification();
@@ -220,5 +221,30 @@ export class AutorizacionService {
       calificacion: 0
     });
     this.router.navigate(["/detalle/" + idA]);
+  }
+
+  public hacerUsuarioActivo() {
+    const $id = this.angularFireAuth.auth.currentUser.uid;
+    let usuario = this.afDB.object("/users/" + $id);
+    usuario.update({
+      Activo: true
+    });
+    swal.fire("Exelente!", "Gracias por seguir utilizando la plataforma GoGdl", "success");
+    this.router.navigate(["/inicio"]);
+  }
+
+  public hacerUsuariosInactivos(){
+    let usuarios = this.afDB.database.ref("/users");
+    usuarios.once('value').then(snapshot => {
+      snapshot.forEach(datos => {
+        let usuarioId = datos.key;
+        let usuario = datos.val();
+        if (usuario.Empresario){
+          this.afDB.object("/users/" + usuarioId).update({
+            Activo: false
+          });
+        }
+      });
+    });
   }
 }
