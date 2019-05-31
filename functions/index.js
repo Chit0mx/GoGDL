@@ -9,7 +9,6 @@ exports.fcmSend = functions.database.ref("/articulos/{articuloId}").onCreate((sn
     snapshot.forEach(datos => {
       let usuarioId = datos.key;
       let usuario = datos.val();
-      console.log(usuario);
       if (usuario[lugarId]){
         let lugar = usuario[lugarId]
         if (lugar.favorito) {

@@ -49,7 +49,7 @@ export class AppComponent {
 
   public revisarEstadoUsuarios() {
     let hoy = new Date().getDate();
-    if (hoy == 28) {
+    if (hoy == 31) {
       this.autorizacionService.mailEstadistica();
       this.autorizacionService.hacerUsuariosInactivos();
     } else if (hoy == 10) {
