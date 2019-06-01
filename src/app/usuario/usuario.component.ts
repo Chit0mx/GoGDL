@@ -138,7 +138,7 @@ export class UsuarioComponent {
     const accuracy = { enableHighAccuracy: true };
     self.geoLocationService.getLocation(accuracy).subscribe(
       position => {
-        console.log(position);
+        //console.log(position);
         self.currentLocation = position;
         self.ref.detectChanges();
       },
