@@ -1,8 +1,7 @@
 import { Component, ChangeDetectorRef } from "@angular/core";
 import { LugaresService } from "../services/lugares.service";
 import { ArticulosService } from "../services/articulos.service";
-import { GeoLocationService } from '../services/geolocation.service';
-
+import { GeoLocationService } from "../services/geolocation.service";
 
 @Component({
   selector: "app-lugares",
@@ -26,13 +25,13 @@ export class LugaresComponent {
   lVisto = 0;
   lPromedio = 0;
   listaCreada: Boolean = false;
-  errorMsg: string; 
+  errorMsg: string;
   currentLocation: any = null;
   mostrarFormUbicacion: Boolean = false;
   ubicacion = {
     calle: null,
     pais: null,
-    ciudad: null,
+    ciudad: null
   };
 
   constructor(
@@ -53,11 +52,10 @@ export class LugaresComponent {
       .subscribe(articulos => {
         this.articulos = articulos;
       });
-      this.searchByCurrent();
+    this.searchByCurrent();
   }
   filtroArt = "";
   filterLugar = "";
-
 
   public mostrarCal(n1, n2, n3, n4, n5, lugar) {
     if (this.listaCreada == false) {
@@ -134,16 +132,20 @@ export class LugaresComponent {
     return result;
   }
 
-  searchByCurrent() { let self = this;
-    const accuracy = { enableHighAccuracy: true }; 
-    self.geoLocationService.getLocation(accuracy).subscribe((position) => {
-    console.log(position);
-    self.currentLocation = position; 
-    self.ref.detectChanges();
-    }, (error) => { 
-      self.errorMsg = error;
-      self.ref.detectChanges(); 
-    } );
+  searchByCurrent() {
+    let self = this;
+    const accuracy = { enableHighAccuracy: true };
+    self.geoLocationService.getLocation(accuracy).subscribe(
+      position => {
+        //console.log(position);
+        self.currentLocation = position;
+        self.ref.detectChanges();
+      },
+      error => {
+        self.errorMsg = error;
+        self.ref.detectChanges();
+      }
+    );
   }
 
   public mostrarUbicaPersonalisada() {
@@ -154,8 +156,13 @@ export class LugaresComponent {
     this.mostrarFormUbicacion = false;
     this.mV = false;
     this.mC = false;
-    var direccion = this.ubicacion.calle + "," + this.ubicacion.ciudad + "," + this.ubicacion.pais;
-    console.log(direccion);
+    var direccion =
+      this.ubicacion.calle +
+      "," +
+      this.ubicacion.ciudad +
+      "," +
+      this.ubicacion.pais;
+    //console.log(direccion);
     this.lugaresService.obtenerGeoData(direccion).subscribe((result: any) => {
       this.lat = result.results[0].geometry.location.lat;
       this.lng = result.results[0].geometry.location.lng;

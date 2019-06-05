@@ -1,14 +1,14 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute, Router} from '@angular/router';
+import { Component, ChangeDetectorRef } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { LugaresService } from "../services/lugares.service";
-import { Observable } from 'rxjs';
-import { AngularFireStorage } from 'angularfire2/storage';
-import { AutorizacionService } from '../services/autorizacion.service';
-import { ArticulosService } from '../services/articulos.service';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { faStar, faDollarSign } from '@fortawesome/free-solid-svg-icons';
+import { Observable } from "rxjs";
+import { AngularFireStorage } from "angularfire2/storage";
+import { AutorizacionService } from "../services/autorizacion.service";
+import { ArticulosService } from "../services/articulos.service";
+import { AngularFireAuth } from "angularfire2/auth";
+import { faStar, faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import swal from "sweetalert2";
-import { GeoLocationService } from '../services/geolocation.service';
+import { GeoLocationService } from "../services/geolocation.service";
 
 @Component({
   selector: "app-detalle",
@@ -17,120 +17,133 @@ import { GeoLocationService } from '../services/geolocation.service';
 export class DetalleComponent {
   id = null;
   lugar: any = {};
-  lugares:any = {};
+  lugares: any = {};
   articulos: any = {};
   nombre = null;
   profileUrl: Observable<string | null>;
-  loggedUser:any = null;
-  usuariolat:any;
-  usuariolng:any;
+  loggedUser: any = null;
+  usuariolat: any;
+  usuariolng: any;
   loggedIn = false;
-  imgsArt:any = {};
-  usuarioDB:any = {};
-  lugarUsr:any = {};
+  imgsArt: any = {};
+  usuarioDB: any = {};
+  lugarUsr: any = {};
   resenia: any = {};
   reseniaAutor: any = {};
   resenias: any = {};
   faStar = faStar;
   faDollarSign = faDollarSign;
-  cal:any = {};
+  cal: any = {};
   promedio = 0;
-  mostrarAgregarF:boolean = false; 
-  ImagenNueva:any;
+  mostrarAgregarF: boolean = false;
+  ImagenNueva: any;
   FotoLugar: Observable<string[] | null>;
   arrayF: any = [];
-  fotos:any;
-  mostarListaDeFotos:Boolean = false;
-  LugarAbierto:Boolean = false;
-  errorMsg: string; 
+  fotos: any;
+  mostarListaDeFotos: Boolean = false;
+  LugarAbierto: Boolean = false;
+  errorMsg: string;
   currentLocation: any = null;
   constante = 0.0003;
-  constructor (private autorizacionService:AutorizacionService, 
-    private storage: AngularFireStorage, 
-    private route:ActivatedRoute, 
-    private lugaresService:LugaresService, 
-    private articuloService:ArticulosService, 
+  constructor(
+    private autorizacionService: AutorizacionService,
+    private storage: AngularFireStorage,
+    private route: ActivatedRoute,
+    private lugaresService: LugaresService,
+    private articuloService: ArticulosService,
     private angularFireAuth: AngularFireAuth,
     private router: Router,
     private refG: ChangeDetectorRef,
     private geoLocationService: GeoLocationService
-    ){
-    this.id = this.route.snapshot.params['id'];
-    const ref = this.storage.ref('atracciones/' + this.id);
+  ) {
+    this.id = this.route.snapshot.params["id"];
+    const ref = this.storage.ref("atracciones/" + this.id);
     this.profileUrl = ref.getDownloadURL();
     lugaresService
-    .getLugares()
-    .valueChanges()
-    .subscribe(lugares => {
-      this.lugares = lugares;
-    });
-    this.lugaresService.buscarlugar(this.id).
-    valueChanges().
-    subscribe(lugar => {
-      this.lugar = lugar;
-    });
-    this.articuloService.getArticulos().
-    valueChanges().
-    subscribe(articulos => {
-      this.articulos = articulos;
-    });
-    this.lugaresService.obtenerResenias(this.id).
-    valueChanges().
-    subscribe(resenias => {
-      this.resenias = resenias;
-    });
-    this.lugaresService.getImagenes(this.id).
-    valueChanges().
-    subscribe(fotos => {
-      this.fotos = fotos;
-    });
-    this.autorizacionService.isLogged()
-    .subscribe((result) => {
-      if(result && result.uid){
-        this.loggedIn = true;
-        setTimeout(() => {
-          this.loggedUser = this.autorizacionService.getUser().currentUser.uid;
-          this.autorizacionService.obtenerUsuario()
-          .valueChanges().
-          subscribe(usuarioDB => {
-            this.usuarioDB = usuarioDB;
-          });
-        }, 500);
-        this.autorizacionService.obtenerLugarUsr(this.id)
-          .valueChanges().
-          subscribe((lugarUsr) => {
-            if (lugarUsr != null) {
-              this.lugarUsr = lugarUsr;
-            } else {
-              this.autorizacionService.quitarFavorito(this.id);
-              this.autorizacionService.rehacerResenia(this.id);
-              this.autorizacionService.quitarEstoyAqui(this.id);
-              this.autorizacionService.noCalificado(this.id);
-              this.lugarUsr = lugarUsr;
-              this.lugaresService.agregarVisto(this.id);
-            }
-          });
-      } else {
+      .getLugares()
+      .valueChanges()
+      .subscribe(lugares => {
+        this.lugares = lugares;
+      });
+    this.lugaresService
+      .buscarlugar(this.id)
+      .valueChanges()
+      .subscribe(lugar => {
+        this.lugar = lugar;
+      });
+    this.articuloService
+      .getArticulos()
+      .valueChanges()
+      .subscribe(articulos => {
+        this.articulos = articulos;
+      });
+    this.lugaresService
+      .obtenerResenias(this.id)
+      .valueChanges()
+      .subscribe(resenias => {
+        this.resenias = resenias;
+      });
+    this.lugaresService
+      .getImagenes(this.id)
+      .valueChanges()
+      .subscribe(fotos => {
+        this.fotos = fotos;
+      });
+    this.autorizacionService.isLogged().subscribe(
+      result => {
+        if (result && result.uid) {
+          this.loggedIn = true;
+          setTimeout(() => {
+            this.loggedUser = this.autorizacionService.getUser().currentUser.uid;
+            this.autorizacionService
+              .obtenerUsuario()
+              .valueChanges()
+              .subscribe(usuarioDB => {
+                this.usuarioDB = usuarioDB;
+              });
+          }, 500);
+          this.autorizacionService
+            .obtenerLugarUsr(this.id)
+            .valueChanges()
+            .subscribe(lugarUsr => {
+              if (lugarUsr != null) {
+                this.lugarUsr = lugarUsr;
+              } else {
+                this.autorizacionService.quitarFavorito(this.id);
+                this.autorizacionService.rehacerResenia(this.id);
+                this.autorizacionService.quitarEstoyAqui(this.id);
+                this.autorizacionService.noCalificado(this.id);
+                this.lugarUsr = lugarUsr;
+                this.lugaresService.agregarVisto(this.id);
+              }
+            });
+        } else {
+          this.loggedIn = false;
+        }
+      },
+      error => {
         this.loggedIn = false;
       }
-    }, (error) => {
-      this.loggedIn = false;
-    })
+    );
     this.searchByCurrent();
   }
 
-  searchByCurrent() { let self = this;
-    const accuracy = { enableHighAccuracy: true }; 
-    self.geoLocationService.getLocation(accuracy).subscribe((position) => {
-    self.currentLocation = position; 
-    self.refG.detectChanges();
-    }, (error) => { 
-      self.errorMsg = error;
-      self.refG.detectChanges(); 
-    } );
+  searchByCurrent() {
+    let self = this;
+    const accuracy = { enableHighAccuracy: true };
+    self.geoLocationService.getLocation(accuracy).subscribe(
+      position => {
+        self.currentLocation = position;
+        self.refG.detectChanges();
+      },
+      error => {
+        self.errorMsg = error;
+        self.refG.detectChanges();
+      }
+    );
   }
 
-  public favorita(){
+  public favorita() {
     this.autorizacionService.agregarFavorito(this.id);
     swal.fire(
       "Atraccion Favorita",
@@ -148,23 +161,15 @@ export class DetalleComponent {
     );
   }
 
-  public estoyAqui(){
+  public estoyAqui() {
     this.lugaresService.agregarEstoyAqui(this.id);
-    swal.fire(
-      "Atraccion visitada",
-      "A visitado la atracción",
-      "success"
-    );
+    swal.fire("Atraccion visitada", "A visitado la atracción", "success");
   }
 
   public guardarResenia() {
-      this.resenia.id = this.angularFireAuth.auth.currentUser.uid;
-      this.lugaresService.guardarResenia(this.resenia, this.lugar);
-      swal.fire(
-        "Reseña creada con exito",
-        "Se a creado una reseña",
-        "success"
-      );
+    this.resenia.id = this.angularFireAuth.auth.currentUser.uid;
+    this.lugaresService.guardarResenia(this.resenia, this.lugar);
+    swal.fire("Reseña creada con exito", "Se a creado una reseña", "success");
   }
 
   public rehacerResenia(idUsr) {
@@ -180,11 +185,11 @@ export class DetalleComponent {
     return this.autorizacionService.obtenerUsuarioEspecifico(id);
   }
 
-  public calificar(n){
+  public calificar(n) {
     this.lugaresService.calificar(this.id, n);
   }
 
-  public reCalificar(n){
+  public reCalificar(n) {
     this.lugaresService.reCalificar(this.id, n);
     swal.fire(
       "Ya se puede calificar el lugar",
@@ -194,7 +199,12 @@ export class DetalleComponent {
   }
 
   public mostrarCal(n1, n2, n3, n4, n5, n) {
-    this.promedio = Math.round((5 * n5 + 4 * n4 + 3 * n3 + 2 * n2 + 1 * n1) / (n5 + n4 + n3 + n2 + n1)*1000)/1000;
+    this.promedio =
+      Math.round(
+        ((5 * n5 + 4 * n4 + 3 * n3 + 2 * n2 + 1 * n1) /
+          (n5 + n4 + n3 + n2 + n1)) *
+          1000
+      ) / 1000;
     if (n <= this.promedio) {
       this.cal[n] = true;
     } else {
@@ -203,27 +213,30 @@ export class DetalleComponent {
   }
 
   public eliminarAtraccion() {
-    swal.fire({
-      title: '¿Esta seguro que desea eliminar su atacción?',
-      text: "No podra deshacer esto, su atraccion ya no estara disponible en GoGDL",
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, eliminar la atracción'
-    }).then((result) => {
-      if (result.value) {
-        this.lugaresService.borrarLugar(this.id);
-        const filePath = `atracciones/${this.id}`;
-        this.storage.ref(filePath).delete();
-        this.router.navigate(["/destacados"]);
-        swal.fire(
-          "Atraccion eliminada",
-          "Sea eliminado la atraccion con exito",
-          "info"
-        );
-      }
-    })
+    swal
+      .fire({
+        title: "¿Esta seguro que desea eliminar su atacción?",
+        text:
+          "No podra deshacer esto, su atraccion ya no estara disponible en GoGDL",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, eliminar la atracción"
+      })
+      .then(result => {
+        if (result.value) {
+          this.lugaresService.borrarLugar(this.id);
+          const filePath = `atracciones/${this.id}`;
+          this.storage.ref(filePath).delete();
+          this.router.navigate(["/destacados"]);
+          swal.fire(
+            "Atraccion eliminada",
+            "Sea eliminado la atraccion con exito",
+            "info"
+          );
+        }
+      });
   }
 
   public eliminarArticuloAutomaticamente(idA, dia) {
@@ -254,10 +267,9 @@ export class DetalleComponent {
   }
 
   public mostrarAF() {
-    this.mostrarAgregarF = !(this.mostrarAgregarF);
+    this.mostrarAgregarF = !this.mostrarAgregarF;
     this.ImagenNueva = null;
   }
-
 
   public uploadFile(event) {
     this.ImagenNueva = event.target.files[0];
@@ -278,45 +290,63 @@ export class DetalleComponent {
     this.router.navigate([`/destacados`]);
   }
 
-  public bajarImagen(idFoto){
+  public bajarImagen(idFoto) {
     const ref = this.storage.ref(`${this.id}/Imagenes/${idFoto}`);
     this.FotoLugar = ref.getDownloadURL();
     this.arrayF.push(this.FotoLugar);
   }
 
-  public mostrarListaEliminar(){
-    this.mostarListaDeFotos = !(this.mostarListaDeFotos);
+  public mostrarListaEliminar() {
+    this.mostarListaDeFotos = !this.mostarListaDeFotos;
   }
 
   public eliminarImagen(idI) {
-    swal.fire({
-      title: '¿Esta seguro de que desea eliminar la imagen?',
-      text: "No podra deshacer esto, la imagen ya no estara disponible en su atracción",
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, eliminar la imagen'
-    }).then((result) => {
-      if (result.value) {
-        this.lugaresService.borrarImagen(this.id, idI);
-        const filePath = `${this.id}/Imagenes/${idI}`;
-        this.storage.ref(filePath).delete();
-        this.router.navigate(["/destacados"]);
-        swal.fire(
-          "Imagen eliminada",
-          "Se a eliminado la imagen con exito",
-          "info"
-        );
-      }
-    })
+    swal
+      .fire({
+        title: "¿Esta seguro de que desea eliminar la imagen?",
+        text:
+          "No podra deshacer esto, la imagen ya no estara disponible en su atracción",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, eliminar la imagen"
+      })
+      .then(result => {
+        if (result.value) {
+          this.lugaresService.borrarImagen(this.id, idI);
+          const filePath = `${this.id}/Imagenes/${idI}`;
+          this.storage.ref(filePath).delete();
+          this.router.navigate(["/destacados"]);
+          swal.fire(
+            "Imagen eliminada",
+            "Se a eliminado la imagen con exito",
+            "info"
+          );
+        }
+      });
   }
-  
-  public calcularEstado(la, lc, ma, mc, mia, mic, ja, jc, va, vc, sa, sc, da, dc) {
+
+  public calcularEstado(
+    la,
+    lc,
+    ma,
+    mc,
+    mia,
+    mic,
+    ja,
+    jc,
+    va,
+    vc,
+    sa,
+    sc,
+    da,
+    dc
+  ) {
     let dia = new Date().getDay();
     let hora = new Date().getHours();
-    switch(dia) {
-      case 1: 
+    switch (dia) {
+      case 1:
         let timeLA = la.split(":");
         let hourLA = timeLA[0];
         let timeLC = lc.split(":");
@@ -325,8 +355,8 @@ export class DetalleComponent {
           this.LugarAbierto = true;
         } else {
           this.LugarAbierto = false;
-        } 
-      break
+        }
+        break;
       case 2:
         let timeMA = ma.split(":");
         let hourMA = timeMA[0];
@@ -336,8 +366,8 @@ export class DetalleComponent {
           this.LugarAbierto = true;
         } else {
           this.LugarAbierto = false;
-        } 
-      break
+        }
+        break;
       case 3:
         let timeMIA = mia.split(":");
         let hourMIA = timeMIA[0];
@@ -347,9 +377,9 @@ export class DetalleComponent {
           this.LugarAbierto = true;
         } else {
           this.LugarAbierto = false;
-        }  
-      break
-        case 4: 
+        }
+        break;
+      case 4:
         let timeJA = ja.split(":");
         let hourJA = timeJA[0];
         let timeJC = jc.split(":");
@@ -358,9 +388,9 @@ export class DetalleComponent {
           this.LugarAbierto = true;
         } else {
           this.LugarAbierto = false;
-        } 
-      break
-      case 5: 
+        }
+        break;
+      case 5:
         let timeVA = va.split(":");
         let hourVA = timeVA[0];
         let timeVC = vc.split(":");
@@ -369,9 +399,9 @@ export class DetalleComponent {
           this.LugarAbierto = true;
         } else {
           this.LugarAbierto = false;
-        } 
-      break
-      case 6: 
+        }
+        break;
+      case 6:
         let timeSA = sa.split(":");
         let hourSA = timeSA[0];
         let timeSC = sc.split(":");
@@ -380,8 +410,8 @@ export class DetalleComponent {
           this.LugarAbierto = true;
         } else {
           this.LugarAbierto = false;
-        } 
-      break
+        }
+        break;
       case 7:
         let timeDA = da.split(":");
         let hourDA = timeDA[0];
@@ -391,43 +421,90 @@ export class DetalleComponent {
           this.LugarAbierto = true;
         } else {
           this.LugarAbierto = false;
-        } 
-      break
+        }
+        break;
       default:
-        console.log("Error en calcular el dia");
-    } 
+      // console.log("Error en calcular el dia");
+    }
   }
 
   public range(start, stop, step) {
-    if (typeof stop == 'undefined') {
-        stop = start;
-        start = 0;
+    if (typeof stop == "undefined") {
+      stop = start;
+      start = 0;
     }
 
-    if (typeof step == 'undefined') {
-        step = 1;
+    if (typeof step == "undefined") {
+      step = 1;
     }
 
     if ((step > 0 && start >= stop) || (step < 0 && start <= stop)) {
-        return [];
+      return [];
     }
 
     var result = [];
     for (var i = start; step > 0 ? i < stop : i > stop; i += step) {
-        result.push(i);
+      result.push(i);
     }
 
     return result;
   }
 
-  public botFiltro(){
-    var grocerias = ["puta","puto","marica","mierda","chingadera","chinga","puteria","mamada","chupala","alv","chupala","verga","pendejo","chingar","mamar","mamando","puteria","chingado","culo","culero","estupido","idiota","baboso","cabron","pito","tarado","tonto","cagas","joto","prostituta","golfa","malparida","malparido","ano","pene","vagina","tetas","chichis","bubis","jodido","madrazo","castra","pinche","emputado","encabronado","bastardo"];
+  public botFiltro() {
+    var grocerias = [
+      "puta",
+      "puto",
+      "marica",
+      "mierda",
+      "chingadera",
+      "chinga",
+      "puteria",
+      "mamada",
+      "chupala",
+      "alv",
+      "chupala",
+      "verga",
+      "pendejo",
+      "chingar",
+      "mamar",
+      "mamando",
+      "puteria",
+      "chingado",
+      "culo",
+      "culero",
+      "estupido",
+      "idiota",
+      "baboso",
+      "cabron",
+      "pito",
+      "tarado",
+      "tonto",
+      "cagas",
+      "joto",
+      "prostituta",
+      "golfa",
+      "malparida",
+      "malparido",
+      "ano",
+      "pene",
+      "vagina",
+      "tetas",
+      "chichis",
+      "bubis",
+      "jodido",
+      "madrazo",
+      "castra",
+      "pinche",
+      "emputado",
+      "encabronado",
+      "bastardo"
+    ];
 
-    var nodo = (document.getElementById("desc") as any);
+    var nodo = document.getElementById("desc") as any;
     var textarea = nodo.value.toLowerCase();
-    for(var i = 0; i < grocerias.length; i++){
-        const regex = new RegExp("(^|\\s)"+grocerias[i]+"($|(?=\\s))","gi");
-        textarea = textarea.replace(regex, "!@$$#;");
+    for (var i = 0; i < grocerias.length; i++) {
+      const regex = new RegExp("(^|\\s)" + grocerias[i] + "($|(?=\\s))", "gi");
+      textarea = textarea.replace(regex, "!@$$#;");
     }
     nodo.value = textarea;
     this.resenia.descripcion = nodo.value;
@@ -435,7 +512,8 @@ export class DetalleComponent {
   }
 
   public irASucursal(id) {
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-    this.router.navigate([`/detalle/${id}`])); 
+    this.router
+      .navigateByUrl("/", { skipLocationChange: true })
+      .then(() => this.router.navigate([`/detalle/${id}`]));
   }
 }

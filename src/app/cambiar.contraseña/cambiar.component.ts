@@ -20,7 +20,7 @@ export class ContraComponent {
         this.display = true;
       })
       .catch(err => {
-        console.log("Algo fue mal:", err.message);
+        //console.log("Algo fue mal:", err.message);
         this.msg = err.message;
         this.display = true;
       });
