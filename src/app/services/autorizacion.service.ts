@@ -23,6 +23,7 @@ export class AutorizacionService {
         if (ver == true) {
           swal.fire("Iniciaste sesión!", "", "success");
           console.log(response);
+          this.hacerUsuarioActivo();
           this.router.navigate(["inicio"]);
         } else {
           swal.fire(
@@ -125,7 +126,6 @@ export class AutorizacionService {
   }
   public logout() {
     this.angularFireAuth.auth.signOut();
-    swal.fire("Cerraste sesión", "", "warning");
     this.router.navigate(["inicio"]);
   }
   public getUser() {

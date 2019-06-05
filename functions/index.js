@@ -84,6 +84,31 @@ exports.enviarMail = functions.database.ref("/users/{userId}/eviarEmail").onUpda
   }).then(res => console.log("se pudo traer al usuario")).catch(err => console.log("no se pudo traer al usuario"));
 });
 
+
+exports.enviarMailInactivo = functions.database.ref("/users/{userId}/Activo").onUpdate((event, context) => {
+  let userId = context.params.userId;
+  console.log(userId);
+  admin.database().ref(`/users/${userId}`).once('value').then(snapshot => {
+    let usuario = snapshot.val();
+    console.log(usuario.Nombre);
+    if (usuario.Empresario == true && usuario.Activo == false) {
+      const msg = {
+        to: usuario.Email,
+        from: 'biosh0KEd@gmail.com',
+        
+        templateId: 'd-9e6987cece7b498cbc5ad27ca964a247',
+        setSubstitutionWrappers: ['{{' , '}}'],
+        dynamic_template_data: {
+          name: usuario.Nombre,
+          apellido: usuario.Apellido,
+          subject: 'Su estado en la plataforma GoGDL'
+        }
+      }
+      sgMail.send(msg).then(res => console.log("Mail enviado")).catch(erro => console.log("No se pudo enviar el mail"));
+    } else {return 0;}
+  }).catch(Error => console.log("No se pudo traer al usuario", Error))
+});
+
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //

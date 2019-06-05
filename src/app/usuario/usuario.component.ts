@@ -65,6 +65,7 @@ export class UsuarioComponent {
     this.autorizacionService.bajaUsuario();
     this.router.navigate([`/inicio`]);
   }
+  
   public hacerEmpresario() {
     this.autorizacionService.hacerEmpresario();
   }
@@ -147,10 +148,5 @@ export class UsuarioComponent {
         self.ref.detectChanges();
       }
     );
-  }
-
-  public Activar() {
-    this.autorizacionService.hacerUsuarioActivo();
-    this.lugaresService.desocultarLugares(this.loggedUser);
   }
 }

@@ -3,6 +3,7 @@ import { AutorizacionService } from './services/autorizacion.service';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { MessagingService } from './services/messaging.service';
 import { LugaresService } from './services/lugares.service';
+import swal from "sweetalert2";
 
 @Component({
   selector: 'app-root',
@@ -45,15 +46,23 @@ export class AppComponent {
 
   logout(){
     this.autorizacionService.logout();
+    swal.fire("Cerraste sesión", "", "warning");
   }
 
   public revisarEstadoUsuarios() {
-    let hoy = new Date().getDate();
-    if (hoy == 31) {
+    let hoy = new Date();
+    let dia = hoy.getDate();
+    let mes = hoy.getMonth() + 1;
+    console.log(mes);
+    if (dia == 28) {
       this.autorizacionService.mailEstadistica();
-      this.autorizacionService.hacerUsuariosInactivos();
-    } else if (hoy == 10) {
-      this.lugaresService.ocultarAtraccionesUsuariosInactivos();
+    } else if (dia == 1) {
+      if (mes == 6) {
+        this.autorizacionService.hacerUsuariosInactivos();
+      } else if (mes == 7) {
+        this.lugaresService.ocultarAtraccionesUsuariosInactivos();
+      } 
     }
+    
   }
 }

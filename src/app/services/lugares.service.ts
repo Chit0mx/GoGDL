@@ -49,17 +49,6 @@ export class LugaresService{
     this.afDB.database.ref(`users/${id}/lugaresOcultos/${lugar.id}`).remove();
   }
 
-  public desocultarLugares(idUsr) {
-    this.afDB.database.ref(`users/${idUsr}/lugaresOcultos/`).once('value').then(snapshot => {
-      snapshot.forEach(datos => {
-        let lugarId = datos.key;
-        let lugar = datos.val();
-        this.guardarLugar(lugar);
-        this.afDB.database.ref(`users/${idUsr}/lugaresOcultos/${lugarId}`).remove();
-      });
-    });
-  }
-
   public ocultarLugar(lugar){
     const id = this.angularFireAuth.auth.currentUser.uid;
     this.afDB.database.ref(`users/${id}/lugaresOcultos/${lugar.id}`).set(lugar);
